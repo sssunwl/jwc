@@ -107,16 +107,24 @@
   @media (max-width:640px){ .modal-body{padding:28px 22px 32px;} .modal-hero{height:220px;} }
   .modal-gallery{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0;}
   .modal-gallery img{width:140px;height:100px;object-fit:cover;border-radius:4px;}
-  .story-gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:20px 0;}
-  .story-gallery img{width:100%;height:110px;object-fit:cover;border-radius:3px;cursor:zoom-in;transition:opacity .15s ease;}
+  .story-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:96px;gap:8px;margin:20px 0;}
+  .story-gallery img{width:100%;height:100%;object-fit:cover;border-radius:3px;cursor:zoom-in;transition:opacity .15s ease;display:block;}
   .story-gallery img:hover{opacity:0.82;}
-  @media (max-width:640px){ .story-gallery{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  .story-gallery img:nth-child(1){grid-column:span 2;grid-row:span 2;}
+  .story-gallery img:nth-child(6){grid-column:span 2;}
+  @media (max-width:640px){ .story-gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:120px;} .story-gallery img:nth-child(6){grid-column:span 1;} }
   .story-gallery-note{font-size:11px;color:var(--ink-soft);margin-top:-10px;margin-bottom:24px;}
   .modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
   .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.9);z-index:220;display:flex;align-items:center;justify-content:center;padding:30px;}
   .lightbox-overlay[hidden]{display:none;}
   .lightbox-overlay img{max-width:100%;max-height:90vh;border-radius:4px;}
-  .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:28px;line-height:1;}
+  .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:28px;line-height:1;z-index:2;}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:52px;height:52px;border-radius:999px;font-size:22px;display:flex;align-items:center;justify-content:center;}
+  .lightbox-nav:hover{background:rgba(255,255,255,0.25);}
+  .lightbox-prev{left:16px;}
+  .lightbox-next{right:16px;}
+  .lightbox-counter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.75);font-size:12px;letter-spacing:0.08em;}
+  @media (max-width:640px){ .lightbox-nav{width:42px;height:42px;font-size:18px;} .lightbox-prev{left:6px;} .lightbox-next{right:6px;} }
   /* PPT outline */
   .ppt-section{background:#EDEAE2;padding:100px 0 120px;border-top:1px solid var(--line);}
   .slide-card{background:var(--white);border-radius:6px;padding:28px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);height:100%;scroll-margin-top:90px;}
@@ -217,8 +225,8 @@
     </div>
 
     <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:44px;">
-      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightbox('https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg')"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
-      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightbox('https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg')"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 1)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 2)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
     </div>
     <div style="text-align:center;"><a href="#inquire" class="btn btn-solid">CHECK AVAILABILITY</a></div>
   </div>
@@ -440,7 +448,10 @@
 <!-- Lightbox -->
 <div class="lightbox-overlay" id="lightbox" hidden onclick="closeLightbox(event)">
   <button type="button" class="lightbox-close" onclick="closeLightbox(event)" aria-label="關閉">✕</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev-btn" onclick="lightboxPrev(event)" aria-label="上一張">‹</button>
   <img id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next-btn" onclick="lightboxNext(event)" aria-label="下一張">›</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
 </div>
 
 <script>
@@ -755,7 +766,7 @@ function openWeddingStory(id){
       '<div style="color:var(--ink-soft);font-size:13px;margin-bottom:22px;">'+chapel.name_en+' · '+w.dateDisplay+'</div>' +
       '<div style="color:var(--ink-soft);font-size:14px;line-height:1.9;margin-bottom:22px;">'+weddingStoryText(w, chapel)+'</div>' +
       '<div class="eyebrow" style="margin-bottom:10px;">The Day — 婚禮花絮</div>' +
-      '<div class="story-gallery">' + w.gallery.map(function(img){ return '<img src="'+img+'" alt="" loading="lazy" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>' +
+      '<div class="story-gallery">' + w.gallery.map(function(img, i){ return '<img src="'+img+'" alt="" loading="lazy" onclick="openLightboxAt(byWeddingId(\''+w.id+'\').gallery, '+i+')">'; }).join('') + '</div>' +
       '<div class="story-gallery-note">精選 '+w.gallery.length+' 張 · 完整婚攝相冊共 '+w.galleryTotal+' 張</div>' +
       '<div class="spec-box" style="margin-bottom:22px;">' +
         '<div class="spec-row"><span>婚禮日期</span><span style="color:var(--ink);">'+w.dateDisplay+'</span></div>' +
@@ -812,7 +823,7 @@ function openModal(slug){
         '<div class="spec-row"><span>宴會廳</span><span style="color:var(--ink);">'+c.banquet+'</span></div>' +
         '<div class="spec-row"><span>鄰近酒店</span><span style="color:var(--ink);">'+c.hotel+'</span></div>' +
       '</div>' +
-      (c.images.length>1 ? '<div class="modal-gallery">' + c.images.slice(1).map(function(img){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>' : '') +
+      (c.images.length>1 ? '<div class="modal-gallery">' + c.images.slice(1).map(function(img, i){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightboxAt(byslug(\''+c.slug+'\').images, '+(i+1)+')">'; }).join('') + '</div>' : '') +
       '<div class="modal-actions" id="modal-actions"></div>' +
     '</div>';
   renderModalActions(slug);
@@ -823,11 +834,25 @@ function closeModal(){
   document.getElementById("modal").hidden = true;
   document.body.style.overflow = "";
 }
-function openLightbox(src){
-  document.getElementById("lightbox-img").src = src;
+var lightboxImages = [];
+var lightboxIndex = 0;
+function openLightbox(src){ openLightboxAt([src], 0); }
+function openLightboxAt(images, idx){
+  lightboxImages = images;
+  lightboxIndex = idx;
+  renderLightbox();
   document.getElementById("lightbox").hidden = false;
   document.body.style.overflow = "hidden";
 }
+function renderLightbox(){
+  document.getElementById("lightbox-img").src = lightboxImages[lightboxIndex];
+  var multi = lightboxImages.length > 1;
+  document.getElementById("lightbox-prev-btn").style.display = multi ? "flex" : "none";
+  document.getElementById("lightbox-next-btn").style.display = multi ? "flex" : "none";
+  document.getElementById("lightbox-counter").textContent = multi ? (lightboxIndex+1) + " / " + lightboxImages.length : "";
+}
+function lightboxPrev(e){ if(e) e.stopPropagation(); lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length; renderLightbox(); }
+function lightboxNext(e){ if(e) e.stopPropagation(); lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; renderLightbox(); }
 function closeLightbox(e){
   if(e) e.stopPropagation();
   document.getElementById("lightbox").hidden = true;
@@ -835,6 +860,10 @@ function closeLightbox(e){
 }
 document.addEventListener("keydown", function(e){
   if(e.key==="Escape"){ closeModal(); closeLightbox(); }
+  if(!document.getElementById("lightbox").hidden){
+    if(e.key==="ArrowLeft") lightboxPrev();
+    if(e.key==="ArrowRight") lightboxNext();
+  }
 });
 document.getElementById("modal").addEventListener("click", function(e){
   if(e.target.id==="modal") closeModal();
