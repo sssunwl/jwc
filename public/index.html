@@ -235,7 +235,7 @@
     <div style="text-align:center;margin-bottom:48px;">
       <div class="eyebrow" style="color:var(--sand);">Real Weddings</div>
       <h2 style="font-size:32px;color:#fff;margin-top:12px;">真實婚禮 Portfolio</h2>
-      <div style="color:rgba(255,255,255,0.55);font-size:12px;margin-top:10px;">點照片放大檢視</div>
+      <div style="color:rgba(255,255,255,0.55);font-size:12px;margin-top:10px;">點進去看完整婚禮故事</div>
     </div>
     <div class="grid-4" id="rw-grid"></div>
     <div style="text-align:center;color:rgba(255,255,255,0.5);font-size:11px;margin-top:36px;">Photographed by Vision Wedding</div>
@@ -531,10 +531,38 @@ var CHAPELS = [
 ];
 
 var REAL_WEDDINGS = [
-  {couple:"Tan & Barry", note:"Monterey Lumer · Jan 2026", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg"},
-  {couple:"Tobey & John", note:"Lazor Siele · Dec 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg"},
-  {couple:"Stella & Murray", note:"Monterey Lumer · Dec 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"},
-  {couple:"Tiffany & Waris", note:"Lazor Garden · Nov 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg"}
+  {
+    id:"tan-barry", couple:"Tan & Barry", note:"Monterey Lumer · Jan 2026",
+    img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg",
+    chapelSlug:"monterey-lumer-chapel", dateDisplay:"2026年1月4日", exitHotel:"Monterey Hotel & Spa",
+    reception:null, photoSpot:null,
+    vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel"},
+    sourceUrl:"https://www.japanweddingchapel.com/tan-barry-monterey-lumer-chapel-wedding/"
+  },
+  {
+    id:"tobey-john", couple:"Tobey & John", note:"Lazor Siele · Dec 2025",
+    img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg",
+    chapelSlug:"lazor-siele-chapel", dateDisplay:"2025年12月22日", exitHotel:"Lazor Sea Resort",
+    reception:null, photoSpot:"殘波岬燈塔",
+    vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel"},
+    sourceUrl:"https://www.japanweddingchapel.com/tobey-john-lazor-siele-chapel/"
+  },
+  {
+    id:"stella-murray", couple:"Stella & Murray", note:"Monterey Lumer · Dec 2025",
+    img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg",
+    chapelSlug:"monterey-lumer-chapel", dateDisplay:"2025年12月4日", exitHotel:"Monterey Hotel & Spa",
+    reception:"北谷海景西餐廳（約40人）", photoSpot:null,
+    vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel（含宴會佈置）"},
+    sourceUrl:"https://www.japanweddingchapel.com/monterey-lumer%e6%95%99%e5%a0%82%e5%a9%9a%e7%a6%ae%e5%8f%8a%e6%b2%96%e7%b9%a9%e6%99%9a%e5%ae%b4/"
+  },
+  {
+    id:"tiffany-waris", couple:"Tiffany & Waris", note:"Lazor Garden · Nov 2025",
+    img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg",
+    chapelSlug:"lazor-garden-alivila", dateDisplay:"2025年11月17日", exitHotel:"Nikko Alivila",
+    reception:"讀谷海景西餐廳（約40人）", photoSpot:null,
+    vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel（含宴會佈置）"},
+    sourceUrl:"https://www.japanweddingchapel.com/%e6%b2%96%e7%b9%a9lazor-garden%e6%95%99%e5%a0%82%e5%a9%9a%e7%a6%ae%e5%8f%8a%e6%b5%b7%e6%99%af%e9%a4%90%e5%bb%b3%e5%8c%85%e5%a0%b4%e5%ae%b4%e6%9c%83/"
+  }
 ];
 
 var AREA_LABELS = [
@@ -686,12 +714,62 @@ function seedCompare(){
 function renderRealWeddings(){
   var grid = document.getElementById("rw-grid");
   grid.innerHTML = REAL_WEDDINGS.map(function(w){
-    return '<button type="button" class="rw-card" onclick="openLightbox(\''+w.img+'\')">' +
+    return '<button type="button" class="rw-card" onclick="openWeddingStory(\''+w.id+'\')">' +
       '<img src="'+w.img+'" alt="'+w.couple+'">' +
       '<div style="color:#fff;font-size:16px;font-family:\'Cormorant Garamond\',serif;">'+w.couple+'</div>' +
       '<div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">'+w.note+'</div>' +
     '</button>';
   }).join("");
+}
+
+function byWeddingId(id){ return REAL_WEDDINGS.filter(function(w){return w.id===id;})[0]; }
+
+function weddingStoryText(w, chapel){
+  var parts = [];
+  parts.push('新人於'+w.dateDisplay+'在'+chapel.name_zh+'（'+chapel.name_en+'）舉行教堂婚禮，由 '+w.exitHotel+' 出門。');
+  if(w.photoSpot){ parts.push('當日外影地點選在'+w.photoSpot+'，留下海岸線的紀念畫面。'); }
+  if(w.reception){ parts.push('婚禮後於'+w.reception+'舉行晚宴。'); }
+  return parts.join('');
+}
+
+function openWeddingStory(id){
+  var w = byWeddingId(id);
+  if(!w) return;
+  var chapel = byslug(w.chapelSlug);
+  var content = document.getElementById("modal-content");
+  content.dataset.slug = "";
+  var refGallery = chapel.images.filter(function(src){ return src!==w.img; }).slice(0,3);
+  content.innerHTML =
+    '<div class="modal-hero"><img src="'+w.img+'" alt="'+w.couple+'"></div>' +
+    '<div class="modal-body">' +
+      '<div class="eyebrow" style="margin-bottom:8px;">Real Wedding</div>' +
+      '<h2 style="font-size:30px;margin-bottom:4px;">'+w.couple+'</h2>' +
+      '<div style="color:var(--ink-soft);font-size:13px;margin-bottom:22px;">'+chapel.name_en+' · '+w.dateDisplay+'</div>' +
+      '<div style="color:var(--ink-soft);font-size:14px;line-height:1.9;margin-bottom:22px;">'+weddingStoryText(w, chapel)+'</div>' +
+      '<div class="spec-box" style="margin-bottom:22px;">' +
+        '<div class="spec-row"><span>婚禮日期</span><span style="color:var(--ink);">'+w.dateDisplay+'</span></div>' +
+        '<div class="spec-row"><span>教堂</span><span style="color:var(--ink);">'+chapel.name_en+'（'+chapel.name_zh+'）</span></div>' +
+        '<div class="spec-row"><span>出門酒店</span><span style="color:var(--ink);">'+w.exitHotel+'</span></div>' +
+        (w.photoSpot ? '<div class="spec-row"><span>外影地點</span><span style="color:var(--ink);">'+w.photoSpot+'</span></div>' : '') +
+        (w.reception ? '<div class="spec-row"><span>晚宴場地</span><span style="color:var(--ink);">'+w.reception+'</span></div>' : '') +
+      '</div>' +
+      '<div class="eyebrow" style="margin-bottom:10px;">Vendor Credits</div>' +
+      '<div class="spec-box" style="margin-bottom:22px;">' +
+        '<div class="spec-row"><span>婚攝</span><span style="color:var(--ink);">'+w.vendors.photo+'</span></div>' +
+        '<div class="spec-row"><span>新娘化妝</span><span style="color:var(--ink);">'+w.vendors.makeup+'</span></div>' +
+        '<div class="spec-row"><span>婚禮策劃</span><span style="color:var(--ink);">'+w.vendors.planner+'</span></div>' +
+      '</div>' +
+      (refGallery.length ? (
+        '<div class="eyebrow" style="margin-bottom:10px;">'+chapel.name_en+' — 場地環境參考</div>' +
+        '<div class="modal-gallery">' + refGallery.map(function(img){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>'
+      ) : '') +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn" onclick="openModal(\''+w.chapelSlug+'\')">查看 '+chapel.name_en+' 教堂詳情</button>' +
+        '<a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP 洽詢</a>' +
+      '</div>' +
+    '</div>';
+  document.getElementById("modal").hidden = false;
+  document.body.style.overflow = "hidden";
 }
 
 function renderModalActions(slug){
