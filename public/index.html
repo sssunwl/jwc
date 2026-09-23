@@ -107,6 +107,11 @@
   @media (max-width:640px){ .modal-body{padding:28px 22px 32px;} .modal-hero{height:220px;} }
   .modal-gallery{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0;}
   .modal-gallery img{width:140px;height:100px;object-fit:cover;border-radius:4px;}
+  .story-gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:20px 0;}
+  .story-gallery img{width:100%;height:110px;object-fit:cover;border-radius:3px;cursor:zoom-in;transition:opacity .15s ease;}
+  .story-gallery img:hover{opacity:0.82;}
+  @media (max-width:640px){ .story-gallery{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  .story-gallery-note{font-size:11px;color:var(--ink-soft);margin-top:-10px;margin-bottom:24px;}
   .modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
   .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.9);z-index:220;display:flex;align-items:center;justify-content:center;padding:30px;}
   .lightbox-overlay[hidden]{display:none;}
@@ -535,7 +540,8 @@ var REAL_WEDDINGS = [
     id:"tan-barry", couple:"Tan & Barry", note:"Monterey Lumer · Jan 2026",
     img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg",
     chapelSlug:"monterey-lumer-chapel", dateDisplay:"2026年1月4日", exitHotel:"Monterey Hotel & Spa",
-    reception:null, photoSpot:null,
+    reception:null, photoSpot:null, galleryTotal:41,
+    gallery:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0005.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0010.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0014.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0019.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0023.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0028.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0037.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0041.jpg"],
     vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel"},
     sourceUrl:"https://www.japanweddingchapel.com/tan-barry-monterey-lumer-chapel-wedding/"
   },
@@ -543,7 +549,8 @@ var REAL_WEDDINGS = [
     id:"tobey-john", couple:"Tobey & John", note:"Lazor Siele · Dec 2025",
     img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg",
     chapelSlug:"lazor-siele-chapel", dateDisplay:"2025年12月22日", exitHotel:"Lazor Sea Resort",
-    reception:null, photoSpot:"殘波岬燈塔",
+    reception:null, photoSpot:"殘波岬燈塔", galleryTotal:31,
+    gallery:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0008.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0011.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0014.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0018.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0021.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0024.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0028.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0031.jpg"],
     vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel"},
     sourceUrl:"https://www.japanweddingchapel.com/tobey-john-lazor-siele-chapel/"
   },
@@ -551,7 +558,8 @@ var REAL_WEDDINGS = [
     id:"stella-murray", couple:"Stella & Murray", note:"Monterey Lumer · Dec 2025",
     img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg",
     chapelSlug:"monterey-lumer-chapel", dateDisplay:"2025年12月4日", exitHotel:"Monterey Hotel & Spa",
-    reception:"北谷海景西餐廳（約40人）", photoSpot:null,
+    reception:"北谷海景西餐廳（約40人）", photoSpot:null, galleryTotal:35,
+    gallery:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0005.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0009.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0012.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0016.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0020.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0024.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0031.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0035.jpg"],
     vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel（含宴會佈置）"},
     sourceUrl:"https://www.japanweddingchapel.com/monterey-lumer%e6%95%99%e5%a0%82%e5%a9%9a%e7%a6%ae%e5%8f%8a%e6%b2%96%e7%b9%a9%e6%99%9a%e5%ae%b4/"
   },
@@ -559,7 +567,8 @@ var REAL_WEDDINGS = [
     id:"tiffany-waris", couple:"Tiffany & Waris", note:"Lazor Garden · Nov 2025",
     img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg",
     chapelSlug:"lazor-garden-alivila", dateDisplay:"2025年11月17日", exitHotel:"Nikko Alivila",
-    reception:"讀谷海景西餐廳（約40人）", photoSpot:null,
+    reception:"讀谷海景西餐廳（約40人）", photoSpot:null, galleryTotal:40,
+    gallery:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0005.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0010.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0014.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0018.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0023.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0027.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0031.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0040.jpg"],
     vendors:{photo:"Vision Wedding", makeup:"Miki@Mikin.smakeup", planner:"Japan Wedding Chapel（含宴會佈置）"},
     sourceUrl:"https://www.japanweddingchapel.com/%e6%b2%96%e7%b9%a9lazor-garden%e6%95%99%e5%a0%82%e5%a9%9a%e7%a6%ae%e5%8f%8a%e6%b5%b7%e6%99%af%e9%a4%90%e5%bb%b3%e5%8c%85%e5%a0%b4%e5%ae%b4%e6%9c%83/"
   }
@@ -738,7 +747,6 @@ function openWeddingStory(id){
   var chapel = byslug(w.chapelSlug);
   var content = document.getElementById("modal-content");
   content.dataset.slug = "";
-  var refGallery = chapel.images.filter(function(src){ return src!==w.img; }).slice(0,3);
   content.innerHTML =
     '<div class="modal-hero"><img src="'+w.img+'" alt="'+w.couple+'"></div>' +
     '<div class="modal-body">' +
@@ -746,6 +754,9 @@ function openWeddingStory(id){
       '<h2 style="font-size:30px;margin-bottom:4px;">'+w.couple+'</h2>' +
       '<div style="color:var(--ink-soft);font-size:13px;margin-bottom:22px;">'+chapel.name_en+' · '+w.dateDisplay+'</div>' +
       '<div style="color:var(--ink-soft);font-size:14px;line-height:1.9;margin-bottom:22px;">'+weddingStoryText(w, chapel)+'</div>' +
+      '<div class="eyebrow" style="margin-bottom:10px;">The Day — 婚禮花絮</div>' +
+      '<div class="story-gallery">' + w.gallery.map(function(img){ return '<img src="'+img+'" alt="" loading="lazy" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>' +
+      '<div class="story-gallery-note">精選 '+w.gallery.length+' 張 · 完整婚攝相冊共 '+w.galleryTotal+' 張</div>' +
       '<div class="spec-box" style="margin-bottom:22px;">' +
         '<div class="spec-row"><span>婚禮日期</span><span style="color:var(--ink);">'+w.dateDisplay+'</span></div>' +
         '<div class="spec-row"><span>教堂</span><span style="color:var(--ink);">'+chapel.name_en+'（'+chapel.name_zh+'）</span></div>' +
@@ -759,10 +770,6 @@ function openWeddingStory(id){
         '<div class="spec-row"><span>新娘化妝</span><span style="color:var(--ink);">'+w.vendors.makeup+'</span></div>' +
         '<div class="spec-row"><span>婚禮策劃</span><span style="color:var(--ink);">'+w.vendors.planner+'</span></div>' +
       '</div>' +
-      (refGallery.length ? (
-        '<div class="eyebrow" style="margin-bottom:10px;">'+chapel.name_en+' — 場地環境參考</div>' +
-        '<div class="modal-gallery">' + refGallery.map(function(img){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>'
-      ) : '') +
       '<div class="modal-actions">' +
         '<button type="button" class="btn" onclick="openModal(\''+w.chapelSlug+'\')">查看 '+chapel.name_en+' 教堂詳情</button>' +
         '<a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP 洽詢</a>' +
