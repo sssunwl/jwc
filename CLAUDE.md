@@ -12,8 +12,14 @@
 - 這資料夾本身**不是可部署的代碼庫**,實作最終落在客戶的 WordPress。這裡放規格、資料、視覺 Demo/Prototype
 - 已知資料錯誤:`data/chapels.json` 裡 Monterey Lumer 和 Renaissance Ribera 的地址有 `address_flag` 標記,網站內部本身資料就有矛盾(部分文章寫恩納村、教堂頁寫読谷村),重做CMS前務必跟客戶核實,不要照抄現有任一方
 
+## Repo / Demo 網址
+- repo:https://github.com/sssunwl/VisionWedding(public,GitHub Actions 部署 Pages,來源資料夾 `public/`)
+- Demo/簡報頁(公開連結,可直接發給客戶):https://sssunwl.github.io/VisionWedding/
+  - 首頁 = 視覺 Demo(真實照片重建),頁底 = 12頁簡報大綱,方便跟客戶口頭溝通改版重點
+  - 改 `public/index.html` 後 push 到 main 會自動重新部署(`.github/workflows/deploy-pages.yml`)
+- claude.ai 上原本的 Design 版 Demo(私人連結,備用):https://claude.ai/artifact/3w2hqc2Nqv1D8YCuRyYE5d
+
 ## 待辦
-- [ ] 視覺 Demo 給客戶看效果(2026-09-23 已發第一版:https://claude.ai/artifact/3w2hqc2Nqv1D8YCuRyYE5d ,私人連結需手動分享)
-- [ ] 客戶確認方向後 → 寫 `docs/SPEC.md`(CPT/ACF欄位表、Elementor Theme Builder結構、Finder+Compare custom plugin規格)
+- [ ] 客戶確認方向後 → 補完整 `docs/SPEC.md`(CPT/ACF欄位表、Elementor Theme Builder結構、Finder+Compare custom plugin規格)
 - [ ] 跟客戶核對 Monterey / Renaissance Ribera 正確地址
-- [ ] repo public/private 待客戶談妥後決定(比照 ryukyusurfbase 客戶專案模式,憑證/客戶資料絕不進repo)
+- [ ] 客戶正式簽約後,實際改版工程要不要另開 repo 或沿用這個,到時再決定
