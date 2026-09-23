@@ -1,0 +1,206 @@
+{
+  "_meta": {
+    "source": "抓取自 https://www.japanweddingchapel.com/okinawa-wedding-chapel/ 及各教堂子頁,2026-09-23",
+    "purpose": "唯一真相來源。wedding/ 資料夾的教堂資料是這份的唯讀副本,之後客戶WP後台改了資料要回頭同步這裡。",
+    "note": "capacity/aisle/banquet/cuisine/address 全部逐字取自官網頁面內文,非估算。image_urls 是官網 wp-content/uploads 原圖網址(直連,未搬移)。"
+  },
+  "chapels": [
+    {
+      "slug": "lazor-siele-chapel",
+      "name_en": "Lazor Siele Chapel",
+      "name_zh": "沖繩希艾爾教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村都屋45-1",
+      "capacity": "48(官方)／40(實際現場)",
+      "aisle_m": 12,
+      "banquet_rooms": [30, 50, 130],
+      "cuisine": "精緻法式料理",
+      "nearby_hotel": "Lazor Sea Resort(徒步2分鐘)",
+      "ocean_view": true,
+      "opened": "2025年2月",
+      "source_url": "https://www.japanweddingchapel.com/lazor-siele-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg"
+      ]
+    },
+    {
+      "slug": "lazor-garden-alivila",
+      "name_en": "Lazor Garden Alivila Chapel",
+      "name_zh": "克麗絲蒂教堂 / 沖繩海之翼教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村儀間614",
+      "capacity": 60,
+      "aisle_m": 12,
+      "banquet_rooms": ["6-30", "31-150"],
+      "cuisine": "精緻法式料理",
+      "nearby_hotel": "Hotel Nikko Alivila(徒步5分鐘)／虹夕諾雅沖繩 Hoshino Resort(徒步5分鐘)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/lazor-garden-alivila/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/03/20241202_sde-0001-1.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/09/20250920_SS_LazorGarden-0045.avif"
+      ]
+    },
+    {
+      "slug": "eines-villa-di-nozze-okinawa",
+      "name_en": "Eines Villa di Nozze Okinawa",
+      "name_zh": "五感教堂 / 艾妮絲公主教堂 / 艾尼斯維拉教堂",
+      "area": "名護市 Nago",
+      "address": "〒905-0008 Okinawa, Nago, Yamanoha, 潮平川原361",
+      "capacity": 40,
+      "aisle_m": 10,
+      "banquet_rooms": ["2-56"],
+      "cuisine": "法式料理 / 沖繩料理",
+      "nearby_hotel": "Hotel Resonex Nago(徒步5分鐘)",
+      "ocean_view": false,
+      "source_url": "https://www.japanweddingchapel.com/eines-villa-di-nozze-okinawa/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"
+      ]
+    },
+    {
+      "slug": "aquagrace-wedding-chapel",
+      "name_en": "Aquagrace Wedding Chapel",
+      "name_zh": "艾葵雅教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村宇座675",
+      "capacity": 60,
+      "aisle_m": 13,
+      "banquet_rooms": [35, 60],
+      "cuisine": "精緻法式或和式料理",
+      "nearby_hotel": "Grand Mercure Okinawa Cape Zanpa Resort(徒步4分鐘)／The Uza Terrace Beach Club Villas(徒步5分鐘)",
+      "ocean_view": false,
+      "source_url": "https://www.japanweddingchapel.com/aquagrace-wedding-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"
+      ]
+    },
+    {
+      "slug": "grand-bleu-chapel",
+      "name_en": "Grand Bleu Chapel",
+      "name_zh": "藍色海洋教堂 / 海藍教堂",
+      "area": "名護市 Nago(卡努佳度假村內)",
+      "address": "〒905-2263 沖縄県名護市安部156-2",
+      "capacity": "40(官方網頁標示)",
+      "aisle_m": 10,
+      "banquet_rooms": ["室內最大56", "花園派對24"],
+      "cuisine": "法式料理／BBQ",
+      "nearby_hotel": "Kanucha Bay Resort(教堂所在地點)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/grand-bleu-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"
+      ]
+    },
+    {
+      "slug": "monterey-lumer-chapel",
+      "name_en": "Monterey Lumer Chapel",
+      "name_zh": "露梅爾教堂 / 沖繩海之光教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村冨着1635",
+      "address_flag": "⚠ 網站他處(第三方資料/舊行銷素材)出現過恩納村的寫法,跟Renaissance Ribera同樣的錯置模式,重做時要跟客戶當面核對正確地址再寫入CMS",
+      "capacity": 70,
+      "aisle_m": 16,
+      "banquet_rooms": [14, 58, 100],
+      "cuisine": "精緻法式料理",
+      "nearby_hotel": "Hotel Monterey Okinawa Spa & Resort(徒步2分鐘)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/monterey-lumer-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_003.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"
+      ]
+    },
+    {
+      "slug": "kouri-island-celeste-chapel",
+      "name_en": "Kouri Island Celeste Chapel",
+      "name_zh": "古宇利島天空教堂",
+      "area": "今帰仁村 Nakijin",
+      "address": "沖縄県国頭郡今帰仁村古宇利588番地",
+      "capacity": 40,
+      "aisle_m": 9,
+      "banquet_rooms": ["7個宴會廳／最大44"],
+      "cuisine": "BBQ或精緻法式",
+      "nearby_hotel": "One Suite THE TERRACE(車程3分鐘)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/kouri-island-celeste-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"
+      ]
+    },
+    {
+      "slug": "diamond-ocean-chapel",
+      "name_en": "Diamond Ocean Chapel",
+      "name_zh": "鑽石海洋教堂",
+      "area": "恩納村 Onna",
+      "address": "沖縄県国頭郡恩納村名嘉真ヤーシ原2591-1",
+      "capacity": 60,
+      "aisle_m": 8,
+      "banquet_rooms": [22, 66],
+      "cuisine": "精緻和洋料理",
+      "nearby_hotel": "喜璃癒志海灘渡假飯店(徒步1分鐘)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/diamond-ocean-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"
+      ]
+    },
+    {
+      "slug": "renaissance-ribera-church",
+      "name_en": "Renaissance Ribera Church",
+      "name_zh": "海之心教堂 / 沖繩麗貝菈教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村山田3425-2",
+      "address_flag": "⚠ 已確認網站內部矛盾:教堂資料頁寫読谷村,但站內另一篇婚禮故事文章寫『恩納村的Renaissance Ribera Chapel』。重做CMS時務必跟客戶核實正確行政區再寫入,不要照抄現有任一方",
+      "capacity": 48,
+      "aisle_m": 12,
+      "banquet_rooms": [50, 100],
+      "cuisine": "精緻法式料理",
+      "nearby_hotel": "Renaissance Okinawa Resort(徒步5分鐘)",
+      "ocean_view": false,
+      "source_url": "https://www.japanweddingchapel.com/renaissance-ribera-church/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"
+      ]
+    },
+    {
+      "slug": "alivila-glory-church",
+      "name_en": "Alivila Glory Chapel",
+      "name_zh": "沖繩海之耀教堂 / 葛洛麗教堂",
+      "area": "読谷村 Yomitan",
+      "address": "沖縄県中頭郡読谷村儀間600",
+      "capacity": 100,
+      "aisle_m": 14,
+      "banquet_rooms": [40, 60, 80],
+      "cuisine": "精緻和洋料理",
+      "nearby_hotel": "Hotel Nikko Alivila(徒步3分鐘)",
+      "ocean_view": true,
+      "source_url": "https://www.japanweddingchapel.com/alivila-glory-church/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"
+      ]
+    },
+    {
+      "slug": "centlegenda-chapel",
+      "name_en": "Centlegenda Chapel",
+      "name_zh": "聖陶芮塔教堂",
+      "area": "北谷町 Chatan",
+      "address": "沖縄県中頭郡北谷町美浜49番",
+      "capacity": 95,
+      "aisle_m": 9,
+      "banquet_rooms": [24, 29, 90],
+      "cuisine": "精緻法式料理",
+      "nearby_hotel": "Hilton Okinawa Chatan Resort(徒步3分鐘)",
+      "ocean_view": false,
+      "note": "主選單未列出,但頁面仍在且2026年有官方Bridal Fair,重做CMS要一併收錄",
+      "source_url": "https://www.japanweddingchapel.com/centlegenda-chapel/",
+      "image_urls": [
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"
+      ]
+    }
+  ]
+}

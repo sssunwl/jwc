@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japan Wedding Chapel — Redesign Demo</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Noto+Serif+TC:wght@500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F5F0;
+    --ink:#232323;
+    --ink-soft:#5B5650;
+    --sand:#D8CABC;
+    --ocean:#46697A;
+    --champagne:#EFE3D0;
+    --line: rgba(35,35,35,0.14);
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ivory);font-family:'Noto Sans TC',sans-serif;color:var(--ink);}
+  h1,h2,h3{font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:500;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+  .wrap-narrow{max-width:1000px;margin:0 auto;padding:0 24px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--ink);border-radius:2px;}
+  .btn-light{border-color:rgba(255,255,255,0.85);color:#fff;}
+  .btn-solid{background:var(--ink);color:var(--ivory);}
+  .eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ocean);font-weight:600;}
+  .chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink-soft);background:var(--white);white-space:nowrap;}
+  .chip.active{background:var(--ink);color:var(--ivory);border-color:var(--ink);}
+  .card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);}
+  .stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;}
+  @media (max-width:900px){ .grid-3{grid-template-columns:repeat(2,minmax(0,1fr));} .grid-4{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:560px){ .grid-3{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr;} }
+  .section{padding:88px 0;}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(247,245,240,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;}
+  .nav-links{display:flex;gap:28px;font-size:12px;color:var(--ink-soft);}
+  @media (max-width:800px){ .nav-links{display:none;} }
+  .hero{position:relative;width:100%;height:78vh;min-height:480px;overflow:hidden;}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,20,18,0.15) 0%, rgba(20,20,18,0.10) 45%, rgba(20,20,18,0.55) 100%);}
+  .hero-content{position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;padding:0 20px;}
+  .hero-content h1{color:#fff;font-size:clamp(34px,6vw,60px);line-height:1.15;max-width:780px;}
+  .spot-hero{position:relative;width:100%;height:60vh;min-height:380px;}
+  .spot-hero img{width:100%;height:100%;object-fit:cover;}
+  .spot-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(20,20,18,0.55) 0%, rgba(20,20,18,0) 55%);}
+  .spot-caption{position:absolute;left:0;right:0;bottom:40px;text-align:center;color:#fff;}
+  .stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line);padding:36px 0;text-align:center;}
+  @media (max-width:600px){ .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px;} }
+  .two-col{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;padding:44px 0;}
+  @media (max-width:800px){ .two-col{grid-template-columns:1fr;} }
+  .spec-box{display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--ink-soft);background:var(--ivory);border-radius:4px;padding:24px;}
+  .spec-row{display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--line);gap:16px;}
+  .spec-row:last-child{border-bottom:none;padding-bottom:0;}
+  .compare-table{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);width:100%;border-collapse:collapse;font-size:13px;}
+  .compare-table th,.compare-table td{padding:16px 18px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);text-align:center;}
+  .compare-table th:first-child,.compare-table td:first-child{border-left:none;text-align:left;color:var(--ink-soft);}
+  .compare-table th{font-weight:500;font-size:14px;}
+  .dark{background:var(--ink);color:#fff;}
+  .rw-card img{width:100%;height:280px;object-fit:cover;border-radius:4px;margin-bottom:14px;}
+  footer{background:var(--champagne);padding:56px 0 36px;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  /* PPT outline */
+  .ppt-section{background:#EDEAE2;padding:100px 0 120px;border-top:1px solid var(--line);}
+  .slide-card{background:var(--white);border-radius:6px;padding:28px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);height:100%;}
+  .slide-num{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ocean);margin-bottom:10px;}
+  .slide-title{font-size:19px;margin-bottom:12px;line-height:1.3;}
+  .slide-card ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-soft);line-height:1.8;}
+  .slide-card li{margin-bottom:2px;}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="wrap nav-inner">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;">Japan Wedding Chapel</div>
+    <div class="nav-links"><span>CHAPELS</span><span>REAL WEDDINGS</span><span>PLANNING</span><span>JOURNAL</span><span>ABOUT</span></div>
+    <div class="btn" style="padding:9px 20px;font-size:10px;">INQUIRE</div>
+  </div>
+</div>
+
+<div class="hero">
+  <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" alt="Lazor Siele Chapel">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#fff;opacity:0.85;">Okinawa · Destination Wedding Atelier</div>
+    <h1>Your Wedding,<br>Somewhere Beautiful.</h1>
+    <div style="color:#fff;font-size:14px;letter-spacing:0.05em;opacity:0.92;">沖繩婚禮策劃・教堂婚禮・Destination Wedding</div>
+    <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;justify-content:center;">
+      <div class="btn btn-light">EXPLORE CHAPELS</div>
+      <div class="btn" style="background:#fff;color:var(--ink);border-color:#fff;">START PLANNING</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:48px;">
+      <div class="eyebrow">Chapel Finder</div>
+      <h2 style="font-size:36px;">找到適合你們的沖繩教堂</h2>
+      <div style="color:var(--ink-soft);font-size:14px;max-width:480px;">11 間精選沖繩教堂，按地區、人數、風格與海景篩選，一眼比較差異。</div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;">
+      <div class="chip active">全部地區</div>
+      <div class="chip">讀谷村</div>
+      <div class="chip">恩納村</div>
+      <div class="chip">名護市</div>
+      <div class="chip">北谷町</div>
+      <div class="chip">今帰仁村</div>
+      <div class="chip">海景 Ocean View</div>
+    </div>
+
+    <div class="grid-3" id="chapel-grid"></div>
+  </div>
+</div>
+
+<div class="section" style="background:var(--white);padding-top:0;">
+  <div class="spot-hero">
+    <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg" alt="Lazor Siele Chapel">
+    <div class="spot-overlay"></div>
+    <div class="spot-caption">
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.85;margin-bottom:10px;">Chapel Spotlight</div>
+      <h2 style="font-size:44px;margin-bottom:6px;">Lazor Siele Chapel</h2>
+      <div style="font-size:13px;letter-spacing:0.08em;opacity:0.9;">沖繩希艾爾教堂 · 読谷村 · Yomitan, Okinawa</div>
+    </div>
+  </div>
+
+  <div class="wrap-narrow">
+    <div class="stat-row">
+      <div><div class="stat-num">40–48</div><div class="stat-label">Guests</div></div>
+      <div><div class="stat-num">12m</div><div class="stat-label">Aisle</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">Banquet Rooms</div></div>
+      <div><div class="stat-num">French</div><div class="stat-label">Cuisine</div></div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px;">Why We Love It</div>
+        <h3 style="font-size:24px;margin-bottom:16px;line-height:1.3;">鏡面天井 · 千米白沙灘 · 180° 全景海洋</h3>
+        <div style="color:var(--ink-soft);font-size:14px;line-height:1.9;">2025 年最新落成的教堂，座落在珍貴天然形成的千米白沙灘「天浜」之上，俯瞰清澈的東海，擁有 180 度全景視野。教堂最獨特之處是鏡面天井，將落地玻璃外的海色與白砂倒映於教堂上方，日落時刻尤其攝人。</div>
+      </div>
+      <div class="spec-box">
+        <div class="spec-row"><span>地址</span><span style="color:var(--ink);">読谷村都屋45-1</span></div>
+        <div class="spec-row"><span>座位數</span><span style="color:var(--ink);">官方 48 ／實際現場 40</span></div>
+        <div class="spec-row"><span>宴會廳</span><span style="color:var(--ink);">30 ／ 50 ／ 130 名</span></div>
+        <div class="spec-row"><span>鄰近酒店</span><span style="color:var(--ink);">Lazor Sea Resort（徒步2分鐘）</span></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:44px;">
+      <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="width:100%;height:340px;object-fit:cover;border-radius:4px;">
+      <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="width:100%;height:340px;object-fit:cover;border-radius:4px;">
+    </div>
+    <div style="text-align:center;"><div class="btn btn-solid">CHECK AVAILABILITY</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap-narrow">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="eyebrow" style="margin-bottom:12px;">Compare</div>
+      <h2 style="font-size:32px;">已收藏教堂比一比</h2>
+    </div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <tr><th></th><th>Lazor Garden</th><th>Monterey Lumer</th><th>Aquagrace</th></tr>
+      <tr><td>Area</td><td>読谷村</td><td>読谷村</td><td>読谷村</td></tr>
+      <tr><td>Guests</td><td>60</td><td>70</td><td>60</td></tr>
+      <tr><td>Aisle</td><td>12m</td><td>16m</td><td>13m</td></tr>
+      <tr><td>Banquet Rooms</td><td>4</td><td>3</td><td>2</td></tr>
+      <tr><td>Cuisine</td><td>French</td><td>French</td><td>French / Japanese</td></tr>
+      <tr><td>Nearby Hotel</td><td>Hotel Nikko Alivila</td><td>Hotel Monterey Okinawa</td><td>Grand Mercure Cape Zanpa</td></tr>
+    </table>
+    </div>
+    <div style="text-align:center;margin-top:32px;"><div class="btn">ASK OUR PLANNER WHICH CHAPEL SUITS US</div></div>
+  </div>
+</div>
+
+<div class="section dark">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="eyebrow" style="color:var(--sand);">Real Weddings</div>
+      <h2 style="font-size:32px;color:#fff;margin-top:12px;">真實婚禮 Portfolio</h2>
+    </div>
+    <div class="grid-4">
+      <div class="rw-card">
+        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg">
+        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tan &amp; Barry</div>
+        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Monterey Lumer · Jan 2026</div>
+      </div>
+      <div class="rw-card">
+        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg">
+        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tobey &amp; John</div>
+        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Lazor Siele · Dec 2025</div>
+      </div>
+      <div class="rw-card">
+        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg">
+        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Stella &amp; Murray</div>
+        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Monterey Lumer · Dec 2025</div>
+      </div>
+      <div class="rw-card">
+        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg">
+        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tiffany &amp; Waris</div>
+        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Lazor Garden · Nov 2025</div>
+      </div>
+    </div>
+    <div style="text-align:center;color:rgba(255,255,255,0.5);font-size:11px;margin-top:36px;">Photographed by Vision Wedding</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap-narrow" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:12px;">Client CMS</div>
+      <h2 style="font-size:28px;line-height:1.35;margin-bottom:16px;">新增一間教堂，<br>網站自動生成漂亮頁面</h2>
+      <div style="color:var(--ink-soft);font-size:14px;line-height:1.85;">底層仍是 WordPress，但登入後只看到簡化過的專用後台：教堂、真實婚禮、雜誌、網站設定。填資料、按 Publish，Finder／Compare／教堂頁全部自動更新，完全不用碰 Elementor。</div>
+    </div>
+    <div class="card" style="padding:24px;border:1px solid var(--line);">
+      <div style="font-size:12px;color:var(--ink-soft);margin-bottom:16px;letter-spacing:0.05em;">JAPAN WEDDING CMS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">11</div><div class="stat-label">Chapels</div></div>
+        <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">84</div><div class="stat-label">Real Weddings</div></div>
+        <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">32</div><div class="stat-label">Journal Posts</div></div>
+        <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">3</div><div class="stat-label">Languages</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:19px;margin-bottom:8px;">Japan Wedding Chapel</div>
+      <div style="font-size:11px;color:var(--ink-soft);">Your Okinawa Wedding Planner</div>
+    </div>
+    <div style="display:flex;gap:36px;font-size:11px;color:var(--ink-soft);flex-wrap:wrap;">
+      <div>+852 616-88-328</div>
+      <div>love@japanweddingchapel.com</div>
+      <div>@japanweddingchapel</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ PPT 簡報大綱 ============ -->
+<div class="ppt-section">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:16px;">
+      <div class="eyebrow">Client Presentation</div>
+    </div>
+    <h2 style="text-align:center;font-size:34px;margin-bottom:10px;">簡報大綱 — 網站改版提案</h2>
+    <div style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:56px;">共 12 頁，跟客戶溝通用，每頁列出重點方便口頭補充</div>
+
+    <div class="grid-3" style="gap:20px;">
+
+      <div class="slide-card">
+        <div class="slide-num">01</div>
+        <div class="slide-title">現況與洞察</div>
+        <ul>
+          <li>內容資產已經很強：11間教堂、大量真實婚禮照片</li>
+          <li>問題不是缺內容，是缺「重新策展」</li>
+          <li>現況偏向傳統 Blog 呈現，沒發揮照片價值</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">02</div>
+        <div class="slide-title">新定位</div>
+        <ul>
+          <li>Okinawa Destination Wedding Atelier</li>
+          <li>+ Chapel Finder</li>
+          <li>+ Real Wedding Portfolio</li>
+          <li>+ Okinawa Wedding Magazine</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">03</div>
+        <div class="slide-title">視覺方向</div>
+        <ul>
+          <li>Japanese Editorial × Resort Wedding × Luxury Minimal</li>
+          <li>不用大量玫瑰金／粉紅／金框</li>
+          <li>讓照片本身的白紗、海景、夕陽說話</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">04</div>
+        <div class="slide-title">首頁全新動線</div>
+        <ul>
+          <li>Hero → Find Your Chapel → Spotlight</li>
+          <li>→ Compare → Real Weddings → Journal</li>
+          <li>從「文章列表」變成「婚禮旅程」</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">05</div>
+        <div class="slide-title">Chapel Finder（新功能）</div>
+        <ul>
+          <li>按地區／人數／風格／海景篩選</li>
+          <li>11 間教堂一眼比較差異</li>
+          <li>直接產生詢問意願，不用逐篇看文章</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">06</div>
+        <div class="slide-title">教堂頁重新設計</div>
+        <ul>
+          <li>資料先行：人數／聖潔之路／宴會廳／料理</li>
+          <li>再進 Editorial 敘事＋大圖 Gallery</li>
+          <li>頁尾直接導向 Check Availability</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">07</div>
+        <div class="slide-title">Compare Chapels</div>
+        <ul>
+          <li>收藏教堂並排比較（Area／人數／宴會／料理）</li>
+          <li>降低新人選擇障礙</li>
+          <li>比較頁直接導向「請顧問建議」</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">08</div>
+        <div class="slide-title">Real Weddings → Portfolio</div>
+        <ul>
+          <li>不再是「01/02 · 尚無留言」的 Blog 排版</li>
+          <li>改成雜誌式：Preparation → Ceremony → Reception</li>
+          <li>標註 Photographed by Vision Wedding，雙品牌互導流</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">09</div>
+        <div class="slide-title">客戶專屬 CMS 後台</div>
+        <ul>
+          <li>底層維持 WordPress，介面大幅簡化</li>
+          <li>只留 Chapels／Real Weddings／Journal／設定</li>
+          <li>新增教堂＝填資料，網站自動生成頁面</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">10</div>
+        <div class="slide-title">技術架構</div>
+        <ul>
+          <li>保留 WordPress + Elementor + WPML，不轉平台</li>
+          <li>教堂／婚禮／雜誌改 CPT + ACF Pro</li>
+          <li>Finder／Compare 走 Custom Plugin，資料同源</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">11</div>
+        <div class="slide-title">沖繩結婚雜誌（延伸產品）</div>
+        <ul>
+          <li>教堂資料庫可直接延伸成獨立內容媒體</li>
+          <li>Chapel Guide／Planning／Real Weddings／Stay</li>
+          <li>持續累積 SEO，不必每週硬寫一篇</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">12</div>
+        <div class="slide-title">時程與下一步</div>
+        <ul>
+          <li>Staging 網站先行，URL／SEO 盡量保留</li>
+          <li>三大交付：官網改版／Chapel Finder+CMS／Wedding Journal</li>
+          <li>確認方向後排出分期時程與報價</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var chapels = [
+    {en:"Lazor Siele Chapel", zh:"沖繩希艾爾教堂", area:"読谷村 · Yomitan", spec:"40–48 人 · 聖潔之路 12m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg"},
+    {en:"Lazor Garden Alivila", zh:"克麗絲蒂教堂 · 海之翼教堂", area:"読谷村 · Yomitan", spec:"60 人 · 聖潔之路 12m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg"},
+    {en:"Monterey Lumer Chapel", zh:"露梅爾教堂 · 海之光教堂", area:"読谷村 · Yomitan", spec:"70 人 · 聖潔之路 16m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg"},
+    {en:"Aquagrace Chapel", zh:"艾葵雅教堂", area:"読谷村 · Yomitan", spec:"60 人 · 聖潔之路 13m · 近海岸", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"},
+    {en:"Alivila Glory Church", zh:"海之耀教堂 · 葛洛麗教堂", area:"読谷村 · Yomitan", spec:"100 人 · 聖潔之路 14m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"},
+    {en:"Diamond Ocean Chapel", zh:"鑽石海洋教堂", area:"恩納村 · Onna", spec:"60 人 · 聖潔之路 8m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"},
+    {en:"Renaissance Ribera", zh:"海之心教堂 · 麗貝菈教堂", area:"読谷村 · Yomitan", spec:"48 人 · 聖潔之路 12m · 庭園", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"},
+    {en:"Grand Bleu Chapel", zh:"藍色海洋教堂 · 海藍教堂", area:"名護市 · Nago", spec:"40 人 · 聖潔之路 10m · 渡假村內", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"},
+    {en:"Eines Villa di Nozze", zh:"五感教堂 · 艾妮絲公主教堂", area:"名護市 · Nago", spec:"40 人 · 聖潔之路 10m · 庭園", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"},
+    {en:"Kouri Island Celeste", zh:"古宇利島天空教堂", area:"今帰仁村 · Nakijin", spec:"40 人 · 聖潔之路 9m · 離島海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"},
+    {en:"Centlegenda Chapel", zh:"聖陶芮塔教堂", area:"北谷町 · Chatan", spec:"95 人 · 聖潔之路 9m · 美濱鬧區", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"}
+  ];
+  var grid = document.getElementById('chapel-grid');
+  chapels.forEach(function(c){
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<div style="position:relative;height:230px;">' +
+        '<img src="' + c.img + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy">' +
+        '<div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.92);border-radius:999px;padding:4px 10px;font-size:10px;">♡ SAVE</div>' +
+      '</div>' +
+      '<div style="padding:20px;">' +
+        '<div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:6px;">' + c.area + '</div>' +
+        '<h3 style="font-size:19px;margin-bottom:4px;">' + c.en + '</h3>' +
+        '<div style="font-size:12px;color:var(--ink-soft);margin-bottom:12px;">' + c.zh + '</div>' +
+        '<div style="font-size:11px;color:var(--ink-soft);">' + c.spec + '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
