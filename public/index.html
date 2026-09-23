@@ -141,6 +141,13 @@
   .film-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:28px;line-height:1;z-index:2;}
   .film-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,0.2);}
   .film-progress-bar{height:100%;background:#fff;width:0%;}
+  /* Welcome loop mode */
+  .film-overlay.mode-welcome .film-slide img{animation-duration:9s;}
+  .film-overlay.mode-welcome .film-caption{bottom:0;width:100%;padding:34px 24px 30px;background:linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);box-sizing:border-box;}
+  .film-overlay.mode-welcome .film-caption h3{font-size:24px;margin-bottom:6px;}
+  .film-loop-badge{position:absolute;top:20px;left:24px;color:#fff;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;gap:7px;opacity:0.8;z-index:2;}
+  .film-loop-badge .dot{width:6px;height:6px;border-radius:999px;background:#8fd19e;animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
   .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.9);z-index:220;display:flex;align-items:center;justify-content:center;padding:30px;}
   .lightbox-overlay[hidden]{display:none;}
   .lightbox-overlay img{max-width:100%;max-height:90vh;border-radius:4px;}
@@ -483,6 +490,7 @@
 <!-- Photo Film (wedding recap slideshow) -->
 <div class="film-overlay" id="film" hidden>
   <button type="button" class="film-close" onclick="closeFilm()" aria-label="關閉">✕</button>
+  <div class="film-loop-badge" id="film-loop-badge"><span class="dot"></span> LOOP SCREEN PREVIEW · 迎賓循環播放</div>
   <div id="film-slides"></div>
   <div class="film-vignette"></div>
   <div class="film-caption" id="film-caption"></div>
@@ -847,8 +855,10 @@ function openWeddingStory(id){
         '<div class="spec-row"><span>新娘化妝</span><span style="color:var(--ink);">'+w.vendors.makeup+'</span></div>' +
         '<div class="spec-row"><span>婚禮策劃</span><span style="color:var(--ink);">'+w.vendors.planner+'</span></div>' +
       '</div>' +
+      '<div style="color:var(--ink-soft);font-size:12px;margin-bottom:12px;">用照片直接做成的兩種現場播放素材（不需要另外請錄影師）：</div>' +
       '<div class="modal-actions">' +
         '<button type="button" class="btn btn-solid" onclick="openFilm(\''+w.id+'\')">▶ 播放婚禮回顧影片</button>' +
+        '<button type="button" class="btn" onclick="openWelcomeLoop(\''+w.id+'\')">▶ 預覽迎賓Loop影片</button>' +
         '<button type="button" class="btn" onclick="openModal(\''+w.chapelSlug+'\')">查看 '+chapel.name_en+' 教堂詳情</button>' +
         '<a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP 洽詢</a>' +
       '</div>' +
@@ -872,37 +882,57 @@ function weddingLoveNotesHTML(w){
 
 var filmTimer = null;
 var filmIndex = 0;
-function openFilm(id){
+var filmMode = "recap";
+function openFilm(id, mode){
   var w = byWeddingId(id);
   if(!w) return;
+  filmMode = mode === "welcome" ? "welcome" : "recap";
   var slides = document.getElementById("film-slides");
   slides.innerHTML = w.gallery.map(function(img, i){
     return '<div class="film-slide '+(i%2? 'kb-b':'')+'" data-i="'+i+'"><img src="'+img+'" alt=""></div>';
   }).join('');
-  document.getElementById("film-caption").innerHTML = '<h3>'+w.couple+'</h3><div>'+byslug(w.chapelSlug).name_en+' · '+w.dateDisplay+'</div>';
+  var chapel = byslug(w.chapelSlug);
+  var caption = document.getElementById("film-caption");
+  if(filmMode === "welcome"){
+    caption.innerHTML = '<h3>Welcome to</h3><div>'+w.couple+'’s Wedding · '+chapel.name_en+' · '+w.dateDisplay+'</div>';
+  } else {
+    caption.innerHTML = '<h3>'+w.couple+'</h3><div>'+chapel.name_en+' · '+w.dateDisplay+'</div>';
+  }
+  document.getElementById("film").className = "film-overlay" + (filmMode === "welcome" ? " mode-welcome" : "");
+  document.getElementById("film-loop-badge").style.display = filmMode === "welcome" ? "flex" : "none";
+  document.getElementById("film").querySelector(".film-progress").style.display = filmMode === "welcome" ? "none" : "block";
   document.getElementById("film").hidden = false;
   document.body.style.overflow = "hidden";
   filmIndex = 0;
   playFilmSlide();
 }
+function openWelcomeLoop(id){ openFilm(id, "welcome"); }
 function playFilmSlide(){
   var slideEls = document.querySelectorAll("#film-slides .film-slide");
   if(!slideEls.length) return;
   slideEls.forEach(function(el, i){ el.classList.toggle("active", i===filmIndex); });
+  var duration = filmMode === "welcome" ? 6500 : 3400;
   var caption = document.getElementById("film-caption");
-  caption.style.transition = "opacity .8s ease";
-  caption.style.opacity = (filmIndex===0) ? "1" : "0";
-  var bar = document.getElementById("film-progress-bar");
-  bar.style.transition = "none"; bar.style.width = "0%";
-  requestAnimationFrame(function(){
-    bar.style.transition = "width 3.4s linear";
-    bar.style.width = "100%";
-  });
+  if(filmMode === "welcome"){
+    caption.style.transition = "none";
+    caption.style.opacity = "1";
+  } else {
+    caption.style.transition = "opacity .8s ease";
+    caption.style.opacity = (filmIndex===0) ? "1" : "0";
+  }
+  if(filmMode !== "welcome"){
+    var bar = document.getElementById("film-progress-bar");
+    bar.style.transition = "none"; bar.style.width = "0%";
+    requestAnimationFrame(function(){
+      bar.style.transition = "width " + (duration/1000) + "s linear";
+      bar.style.width = "100%";
+    });
+  }
   clearTimeout(filmTimer);
   filmTimer = setTimeout(function(){
     filmIndex = (filmIndex + 1) % slideEls.length;
     playFilmSlide();
-  }, 3400);
+  }, duration);
 }
 function closeFilm(){
   document.getElementById("film").hidden = true;
