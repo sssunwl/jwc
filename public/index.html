@@ -16,21 +16,35 @@
     --champagne:#EFE3D0;
     --line: rgba(35,35,35,0.14);
     --white:#FFFFFF;
+    --heart:#B45D4C;
   }
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{margin:0;background:var(--ivory);font-family:'Noto Sans TC',sans-serif;color:var(--ink);}
   h1,h2,h3{font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:500;margin:0;}
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
   .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
   .wrap-narrow{max-width:1000px;margin:0 auto;padding:0 24px;}
-  .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--ink);border-radius:2px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);transition:all .15s ease;}
+  .btn:hover{background:var(--ink);color:var(--ivory);}
   .btn-light{border-color:rgba(255,255,255,0.85);color:#fff;}
+  .btn-light:hover{background:#fff;color:var(--ink);}
   .btn-solid{background:var(--ink);color:var(--ivory);}
+  .btn-solid:hover{background:var(--ocean);border-color:var(--ocean);color:#fff;}
+  .btn[disabled]{opacity:0.35;cursor:not-allowed;}
+  .btn[disabled]:hover{background:transparent;color:var(--ink);}
   .eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ocean);font-weight:600;}
-  .chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink-soft);background:var(--white);white-space:nowrap;}
-  .chip.active{background:var(--ink);color:var(--ivory);border-color:var(--ink);}
-  .card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink-soft);background:var(--white);white-space:nowrap;transition:all .15s ease;}
+  .chip:hover{border-color:var(--ink);color:var(--ink);}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink);}
+  .card-wrap{position:relative;}
+  .card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);width:100%;padding:0;border:none;text-align:left;display:block;transition:box-shadow .2s ease, transform .2s ease;}
+  .card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.10);transform:translateY(-2px);}
+  .save-btn{position:absolute;top:14px;right:14px;z-index:2;background:rgba(255,255,255,0.92);border:none;border-radius:999px;padding:6px 12px;font-size:11px;letter-spacing:0.04em;display:flex;align-items:center;gap:4px;color:var(--ink-soft);}
+  .save-btn[aria-pressed="true"]{background:var(--heart);color:#fff;}
+  .save-btn:hover{background:var(--ink);color:#fff;}
   .stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);}
   .stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
   .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
@@ -39,9 +53,13 @@
   @media (max-width:560px){ .grid-3{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr;} }
   .section{padding:88px 0;}
   .nav{position:sticky;top:0;z-index:50;background:rgba(247,245,240,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;}
-  .nav-links{display:flex;gap:28px;font-size:12px;color:var(--ink-soft);}
-  @media (max-width:800px){ .nav-links{display:none;} }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;gap:16px;}
+  .nav-links{display:flex;gap:26px;font-size:12px;color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--ink);}
+  @media (max-width:820px){ .nav-links{display:none;} }
+  .nav-right{display:flex;align-items:center;gap:12px;}
+  .saved-pill{display:flex;align-items:center;gap:6px;font-size:12px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--white);color:var(--ink-soft);}
+  .saved-pill.has-items{border-color:var(--heart);color:var(--heart);}
   .hero{position:relative;width:100%;height:78vh;min-height:480px;overflow:hidden;}
   .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,20,18,0.15) 0%, rgba(20,20,18,0.10) 45%, rgba(20,20,18,0.55) 100%);}
@@ -59,20 +77,49 @@
   .spec-row{display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--line);gap:16px;}
   .spec-row:last-child{border-bottom:none;padding-bottom:0;}
   .compare-table{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);width:100%;border-collapse:collapse;font-size:13px;}
-  .compare-table th,.compare-table td{padding:16px 18px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);text-align:center;}
-  .compare-table th:first-child,.compare-table td:first-child{border-left:none;text-align:left;color:var(--ink-soft);}
-  .compare-table th{font-weight:500;font-size:14px;}
+  .compare-table th,.compare-table td{padding:14px 16px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);text-align:center;vertical-align:top;}
+  .compare-table th:first-child,.compare-table td:first-child{border-left:none;text-align:left;color:var(--ink-soft);white-space:nowrap;}
+  .compare-table th{font-weight:500;font-size:13px;}
+  .compare-remove{display:block;margin:0 auto 6px;background:none;border:none;color:var(--ink-soft);font-size:11px;letter-spacing:0.05em;}
+  .compare-remove:hover{color:var(--heart);}
+  .compare-empty{background:var(--white);border-radius:4px;padding:48px 24px;text-align:center;color:var(--ink-soft);font-size:14px;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .compare-note{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:14px;}
   .dark{background:var(--ink);color:#fff;}
-  .rw-card img{width:100%;height:280px;object-fit:cover;border-radius:4px;margin-bottom:14px;}
+  .rw-card{background:none;border:none;padding:0;text-align:left;width:100%;}
+  .rw-card img{width:100%;height:280px;object-fit:cover;border-radius:4px;margin-bottom:14px;transition:opacity .15s ease;}
+  .rw-card:hover img{opacity:0.85;}
   footer{background:var(--champagne);padding:56px 0 36px;}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  /* Inquire */
+  .inquire{background:var(--sand);padding:90px 0;text-align:center;}
+  .inquire-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+  /* Empty state */
+  .empty-state{grid-column:1 / -1;text-align:center;padding:60px 24px;color:var(--ink-soft);font-size:14px;background:var(--white);border-radius:4px;}
+  /* Modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(20,20,18,0.66);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;}
+  .modal-overlay[hidden]{display:none;}
+  .modal{background:var(--white);max-width:880px;width:100%;border-radius:6px;overflow:hidden;margin:auto;}
+  .modal-close{position:absolute;top:16px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:999px;width:36px;height:36px;font-size:16px;line-height:1;}
+  .modal-close:hover{background:var(--ink);color:#fff;}
+  .modal-hero{position:relative;height:340px;}
+  .modal-hero img{width:100%;height:100%;object-fit:cover;}
+  .modal-body{padding:36px 40px 40px;}
+  @media (max-width:640px){ .modal-body{padding:28px 22px 32px;} .modal-hero{height:220px;} }
+  .modal-gallery{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0;}
+  .modal-gallery img{width:140px;height:100px;object-fit:cover;border-radius:4px;}
+  .modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+  .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.9);z-index:220;display:flex;align-items:center;justify-content:center;padding:30px;}
+  .lightbox-overlay[hidden]{display:none;}
+  .lightbox-overlay img{max-width:100%;max-height:90vh;border-radius:4px;}
+  .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:28px;line-height:1;}
   /* PPT outline */
   .ppt-section{background:#EDEAE2;padding:100px 0 120px;border-top:1px solid var(--line);}
-  .slide-card{background:var(--white);border-radius:6px;padding:28px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);height:100%;}
+  .slide-card{background:var(--white);border-radius:6px;padding:28px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);height:100%;scroll-margin-top:90px;}
   .slide-num{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ocean);margin-bottom:10px;}
   .slide-title{font-size:19px;margin-bottom:12px;line-height:1.3;}
   .slide-card ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-soft);line-height:1.8;}
   .slide-card li{margin-bottom:2px;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -80,8 +127,19 @@
 <div class="nav">
   <div class="wrap nav-inner">
     <div style="font-family:'Cormorant Garamond',serif;font-size:20px;">Japan Wedding Chapel</div>
-    <div class="nav-links"><span>CHAPELS</span><span>REAL WEDDINGS</span><span>PLANNING</span><span>JOURNAL</span><span>ABOUT</span></div>
-    <div class="btn" style="padding:9px 20px;font-size:10px;">INQUIRE</div>
+    <div class="nav-links">
+      <a href="#finder">CHAPELS</a>
+      <a href="#realweddings">REAL WEDDINGS</a>
+      <a href="#inquire">PLANNING</a>
+      <a href="#slide-11">JOURNAL</a>
+      <a href="#site-footer">ABOUT</a>
+    </div>
+    <div class="nav-right">
+      <button type="button" class="saved-pill" id="saved-pill" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">
+        <span aria-hidden="true">♡</span> <span id="saved-count-label">已收藏 0</span>
+      </button>
+      <a href="#inquire" class="btn" style="padding:9px 20px;font-size:10px;">INQUIRE</a>
+    </div>
   </div>
 </div>
 
@@ -93,35 +151,34 @@
     <h1>Your Wedding,<br>Somewhere Beautiful.</h1>
     <div style="color:#fff;font-size:14px;letter-spacing:0.05em;opacity:0.92;">沖繩婚禮策劃・教堂婚禮・Destination Wedding</div>
     <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;justify-content:center;">
-      <div class="btn btn-light">EXPLORE CHAPELS</div>
-      <div class="btn" style="background:#fff;color:var(--ink);border-color:#fff;">START PLANNING</div>
+      <a href="#finder" class="btn btn-light">EXPLORE CHAPELS</a>
+      <a href="#inquire" class="btn" style="background:#fff;color:var(--ink);border-color:#fff;">START PLANNING</a>
     </div>
   </div>
 </div>
 
-<div class="section">
+<div class="section" id="finder">
   <div class="wrap">
     <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:48px;">
       <div class="eyebrow">Chapel Finder</div>
       <h2 style="font-size:36px;">找到適合你們的沖繩教堂</h2>
-      <div style="color:var(--ink-soft);font-size:14px;max-width:480px;">11 間精選沖繩教堂，按地區、人數、風格與海景篩選，一眼比較差異。</div>
+      <div style="color:var(--ink-soft);font-size:14px;max-width:480px;">11 間精選沖繩教堂，按地區、人數、海景篩選，一眼比較差異。按 ♡ 收藏就能加入下方比較表。</div>
     </div>
 
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;">
-      <div class="chip active">全部地區</div>
-      <div class="chip">讀谷村</div>
-      <div class="chip">恩納村</div>
-      <div class="chip">名護市</div>
-      <div class="chip">北谷町</div>
-      <div class="chip">今帰仁村</div>
-      <div class="chip">海景 Ocean View</div>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:center;margin-bottom:16px;">
+      <div id="area-chips" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div id="size-chips" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;"></div>
+        <button type="button" class="chip" id="ocean-chip" aria-pressed="false">海景 Ocean View</button>
+      </div>
     </div>
+    <div style="text-align:center;color:var(--ink-soft);font-size:12px;margin-bottom:36px;" id="result-count"></div>
 
     <div class="grid-3" id="chapel-grid"></div>
   </div>
 </div>
 
-<div class="section" style="background:var(--white);padding-top:0;">
+<div class="section" style="background:var(--white);padding-top:0;" id="spotlight">
   <div class="spot-hero">
     <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg" alt="Lazor Siele Chapel">
     <div class="spot-overlay"></div>
@@ -155,74 +212,44 @@
     </div>
 
     <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:44px;">
-      <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="width:100%;height:340px;object-fit:cover;border-radius:4px;">
-      <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="width:100%;height:340px;object-fit:cover;border-radius:4px;">
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightbox('https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg')"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightbox('https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg')"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
     </div>
-    <div style="text-align:center;"><div class="btn btn-solid">CHECK AVAILABILITY</div></div>
+    <div style="text-align:center;"><a href="#inquire" class="btn btn-solid">CHECK AVAILABILITY</a></div>
   </div>
 </div>
 
-<div class="section">
+<div class="section" id="compare">
   <div class="wrap-narrow">
     <div style="text-align:center;margin-bottom:40px;">
       <div class="eyebrow" style="margin-bottom:12px;">Compare</div>
       <h2 style="font-size:32px;">已收藏教堂比一比</h2>
+      <div style="color:var(--ink-soft);font-size:13px;margin-top:10px;">在上面 Chapel Finder 按 ♡ 收藏，這裡會自動更新（最多同時比較 4 間）</div>
     </div>
-    <div style="overflow-x:auto;">
-    <table class="compare-table">
-      <tr><th></th><th>Lazor Garden</th><th>Monterey Lumer</th><th>Aquagrace</th></tr>
-      <tr><td>Area</td><td>読谷村</td><td>読谷村</td><td>読谷村</td></tr>
-      <tr><td>Guests</td><td>60</td><td>70</td><td>60</td></tr>
-      <tr><td>Aisle</td><td>12m</td><td>16m</td><td>13m</td></tr>
-      <tr><td>Banquet Rooms</td><td>4</td><td>3</td><td>2</td></tr>
-      <tr><td>Cuisine</td><td>French</td><td>French</td><td>French / Japanese</td></tr>
-      <tr><td>Nearby Hotel</td><td>Hotel Nikko Alivila</td><td>Hotel Monterey Okinawa</td><td>Grand Mercure Cape Zanpa</td></tr>
-    </table>
-    </div>
-    <div style="text-align:center;margin-top:32px;"><div class="btn">ASK OUR PLANNER WHICH CHAPEL SUITS US</div></div>
+    <div id="compare-wrap"></div>
   </div>
 </div>
 
-<div class="section dark">
+<div class="section dark" id="realweddings">
   <div class="wrap">
     <div style="text-align:center;margin-bottom:48px;">
       <div class="eyebrow" style="color:var(--sand);">Real Weddings</div>
       <h2 style="font-size:32px;color:#fff;margin-top:12px;">真實婚禮 Portfolio</h2>
+      <div style="color:rgba(255,255,255,0.55);font-size:12px;margin-top:10px;">點照片放大檢視</div>
     </div>
-    <div class="grid-4">
-      <div class="rw-card">
-        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg">
-        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tan &amp; Barry</div>
-        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Monterey Lumer · Jan 2026</div>
-      </div>
-      <div class="rw-card">
-        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg">
-        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tobey &amp; John</div>
-        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Lazor Siele · Dec 2025</div>
-      </div>
-      <div class="rw-card">
-        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg">
-        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Stella &amp; Murray</div>
-        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Monterey Lumer · Dec 2025</div>
-      </div>
-      <div class="rw-card">
-        <img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg">
-        <div style="color:#fff;font-size:16px;font-family:'Cormorant Garamond',serif;">Tiffany &amp; Waris</div>
-        <div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">Lazor Garden · Nov 2025</div>
-      </div>
-    </div>
+    <div class="grid-4" id="rw-grid"></div>
     <div style="text-align:center;color:rgba(255,255,255,0.5);font-size:11px;margin-top:36px;">Photographed by Vision Wedding</div>
   </div>
 </div>
 
-<div class="section">
+<div class="section" id="cms">
   <div class="wrap-narrow" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
     <div>
       <div class="eyebrow" style="margin-bottom:12px;">Client CMS</div>
       <h2 style="font-size:28px;line-height:1.35;margin-bottom:16px;">新增一間教堂，<br>網站自動生成漂亮頁面</h2>
       <div style="color:var(--ink-soft);font-size:14px;line-height:1.85;">底層仍是 WordPress，但登入後只看到簡化過的專用後台：教堂、真實婚禮、雜誌、網站設定。填資料、按 Publish，Finder／Compare／教堂頁全部自動更新，完全不用碰 Elementor。</div>
     </div>
-    <div class="card" style="padding:24px;border:1px solid var(--line);">
+    <div style="padding:24px;border:1px solid var(--line);border-radius:4px;background:var(--white);">
       <div style="font-size:12px;color:var(--ink-soft);margin-bottom:16px;letter-spacing:0.05em;">JAPAN WEDDING CMS</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">11</div><div class="stat-label">Chapels</div></div>
@@ -234,16 +261,29 @@
   </div>
 </div>
 
-<footer>
+<div class="inquire" id="inquire">
+  <div class="wrap-narrow">
+    <div class="eyebrow" style="margin-bottom:14px;">Start Planning</div>
+    <h2 style="font-size:32px;margin-bottom:12px;">準備好規劃你們的沖繩婚禮了嗎？</h2>
+    <div style="color:var(--ink-soft);font-size:14px;">按下面任一方式直接聯絡我們，這些是真實的聯絡管道</div>
+    <div class="inquire-actions">
+      <a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP（HK +852 616-88-328）</a>
+      <a class="btn btn-solid" href="https://wa.me/8109082931688" target="_blank" rel="noopener">WHATSAPP（JP +81 90-8293-1688）</a>
+      <a class="btn" href="mailto:love@japanweddingchapel.com">EMAIL 我們</a>
+    </div>
+  </div>
+</div>
+
+<footer id="site-footer">
   <div class="wrap">
     <div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:19px;margin-bottom:8px;">Japan Wedding Chapel</div>
       <div style="font-size:11px;color:var(--ink-soft);">Your Okinawa Wedding Planner</div>
     </div>
     <div style="display:flex;gap:36px;font-size:11px;color:var(--ink-soft);flex-wrap:wrap;">
-      <div>+852 616-88-328</div>
-      <div>love@japanweddingchapel.com</div>
-      <div>@japanweddingchapel</div>
+      <a href="https://wa.me/85261688328" target="_blank" rel="noopener">+852 616-88-328</a>
+      <a href="mailto:love@japanweddingchapel.com">love@japanweddingchapel.com</a>
+      <a href="https://www.instagram.com/japanweddingchapel/" target="_blank" rel="noopener">@japanweddingchapel</a>
     </div>
   </div>
 </footer>
@@ -304,7 +344,7 @@
         <div class="slide-num">05</div>
         <div class="slide-title">Chapel Finder（新功能）</div>
         <ul>
-          <li>按地區／人數／風格／海景篩選</li>
+          <li>按地區／人數／海景篩選，即時更新結果</li>
           <li>11 間教堂一眼比較差異</li>
           <li>直接產生詢問意願，不用逐篇看文章</li>
         </ul>
@@ -360,7 +400,7 @@
         </ul>
       </div>
 
-      <div class="slide-card">
+      <div class="slide-card" id="slide-11">
         <div class="slide-num">11</div>
         <div class="slide-title">沖繩結婚雜誌（延伸產品）</div>
         <ul>
@@ -384,37 +424,342 @@
   </div>
 </div>
 
+<!-- Detail modal -->
+<div class="modal-overlay" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" id="modal-inner" style="position:relative;">
+    <button type="button" class="modal-close" onclick="closeModal()" aria-label="關閉">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" hidden onclick="closeLightbox(event)">
+  <button type="button" class="lightbox-close" onclick="closeLightbox(event)" aria-label="關閉">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script>
-  var chapels = [
-    {en:"Lazor Siele Chapel", zh:"沖繩希艾爾教堂", area:"読谷村 · Yomitan", spec:"40–48 人 · 聖潔之路 12m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg"},
-    {en:"Lazor Garden Alivila", zh:"克麗絲蒂教堂 · 海之翼教堂", area:"読谷村 · Yomitan", spec:"60 人 · 聖潔之路 12m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg"},
-    {en:"Monterey Lumer Chapel", zh:"露梅爾教堂 · 海之光教堂", area:"読谷村 · Yomitan", spec:"70 人 · 聖潔之路 16m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg"},
-    {en:"Aquagrace Chapel", zh:"艾葵雅教堂", area:"読谷村 · Yomitan", spec:"60 人 · 聖潔之路 13m · 近海岸", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"},
-    {en:"Alivila Glory Church", zh:"海之耀教堂 · 葛洛麗教堂", area:"読谷村 · Yomitan", spec:"100 人 · 聖潔之路 14m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"},
-    {en:"Diamond Ocean Chapel", zh:"鑽石海洋教堂", area:"恩納村 · Onna", spec:"60 人 · 聖潔之路 8m · 海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"},
-    {en:"Renaissance Ribera", zh:"海之心教堂 · 麗貝菈教堂", area:"読谷村 · Yomitan", spec:"48 人 · 聖潔之路 12m · 庭園", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"},
-    {en:"Grand Bleu Chapel", zh:"藍色海洋教堂 · 海藍教堂", area:"名護市 · Nago", spec:"40 人 · 聖潔之路 10m · 渡假村內", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"},
-    {en:"Eines Villa di Nozze", zh:"五感教堂 · 艾妮絲公主教堂", area:"名護市 · Nago", spec:"40 人 · 聖潔之路 10m · 庭園", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"},
-    {en:"Kouri Island Celeste", zh:"古宇利島天空教堂", area:"今帰仁村 · Nakijin", spec:"40 人 · 聖潔之路 9m · 離島海景", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"},
-    {en:"Centlegenda Chapel", zh:"聖陶芮塔教堂", area:"北谷町 · Chatan", spec:"95 人 · 聖潔之路 9m · 美濱鬧區", img:"https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"}
-  ];
-  var grid = document.getElementById('chapel-grid');
-  chapels.forEach(function(c){
-    var card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML =
-      '<div style="position:relative;height:230px;">' +
-        '<img src="' + c.img + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy">' +
-        '<div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.92);border-radius:999px;padding:4px 10px;font-size:10px;">♡ SAVE</div>' +
-      '</div>' +
-      '<div style="padding:20px;">' +
-        '<div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:6px;">' + c.area + '</div>' +
-        '<h3 style="font-size:19px;margin-bottom:4px;">' + c.en + '</h3>' +
-        '<div style="font-size:12px;color:var(--ink-soft);margin-bottom:12px;">' + c.zh + '</div>' +
-        '<div style="font-size:11px;color:var(--ink-soft);">' + c.spec + '</div>' +
-      '</div>';
-    grid.appendChild(card);
+var CHAPELS = [
+  {
+    slug:"lazor-siele-chapel", name_en:"Lazor Siele Chapel", name_zh:"沖繩希艾爾教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村都屋45-1",
+    capacity:48, capacityDisplay:"官方 48／實際 40", aisle:"12m", banquet:"30 ／ 50 ／ 130 名",
+    cuisine:"French", hotel:"Lazor Sea Resort（徒步2分鐘）", ocean:true,
+    desc:"2025年最新落成，座落於千米白沙灘「天浜」之上，180度全景東海視野，鏡面天井是最大特色。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg"]
+  },
+  {
+    slug:"lazor-garden-alivila", name_en:"Lazor Garden Alivila", name_zh:"克麗絲蒂教堂 · 海之翼教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村儀間614",
+    capacity:60, capacityDisplay:"60 名", aisle:"12m", banquet:"6-30 ／ 31-150 名",
+    cuisine:"French", hotel:"Hotel Nikko Alivila（徒步5分鐘）", ocean:true,
+    desc:"哥德式建築搭配水晶玻璃裝飾，緊鄰Hotel Nikko Alivila，教堂面朝大海，是沖繩最具人氣的教堂之一。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/03/20241202_sde-0001-1.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/09/20250920_SS_LazorGarden-0045.avif"]
+  },
+  {
+    slug:"monterey-lumer-chapel", name_en:"Monterey Lumer Chapel", name_zh:"露梅爾教堂 · 海之光教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村冨着1635",
+    capacity:70, capacityDisplay:"70 名", aisle:"16m", banquet:"14 ／ 58 ／ 100 名",
+    cuisine:"French", hotel:"Hotel Monterey Okinawa（徒步2分鐘）", ocean:true,
+    desc:"英式古典建築，尖拱頂配白色大理石與落地玻璃窗，背靠翡翠綠海，庭園有噴水池與四季花木。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_003.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"]
+  },
+  {
+    slug:"aquagrace-wedding-chapel", name_en:"Aquagrace Chapel", name_zh:"艾葵雅教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村宇座675",
+    capacity:60, capacityDisplay:"60 名", aisle:"13m", banquet:"35 ／ 60 名",
+    cuisine:"French / Japanese", hotel:"Grand Mercure Cape Zanpa（徒步4分鐘）", ocean:false,
+    desc:"鄰近Cape Zanpa海岬，提供法式或和式料理選擇，宴會廳規模較精巧，適合中小型婚禮。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"]
+  },
+  {
+    slug:"alivila-glory-church", name_en:"Alivila Glory Church", name_zh:"海之耀教堂 · 葛洛麗教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村儀間600",
+    capacity:100, capacityDisplay:"100 名", aisle:"14m", banquet:"40 ／ 60 ／ 80 名",
+    cuisine:"Japanese-Western", hotel:"Hotel Nikko Alivila（徒步3分鐘）", ocean:true,
+    desc:"沖繩教堂中規模最大，最多可容納100人，14米聖潔之路，提供精緻和洋料理。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"]
+  },
+  {
+    slug:"diamond-ocean-chapel", name_en:"Diamond Ocean Chapel", name_zh:"鑽石海洋教堂",
+    areaKey:"onna", area:"恩納村 · Onna", address:"沖縄県国頭郡恩納村名嘉真ヤーシ原2591-1",
+    capacity:60, capacityDisplay:"60 名", aisle:"8m", banquet:"22 ／ 66 名",
+    cuisine:"Japanese-Western", hotel:"喜璃癒志海灘渡假飯店（徒步1分鐘）", ocean:true,
+    desc:"恩納村海景教堂，鄰近喜璃癒志海灘渡假飯店，提供精緻和洋料理。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"]
+  },
+  {
+    slug:"renaissance-ribera-church", name_en:"Renaissance Ribera", name_zh:"海之心教堂 · 麗貝菈教堂",
+    areaKey:"yomitan", area:"読谷村 · Yomitan", address:"沖縄県中頭郡読谷村山田3425-2",
+    capacity:48, capacityDisplay:"48 名", aisle:"12m", banquet:"50 ／ 100 名",
+    cuisine:"French", hotel:"Renaissance Okinawa Resort（徒步5分鐘）", ocean:false,
+    desc:"鄰近Renaissance Okinawa Resort，庭園氛圍教堂，宴會廳最大可容納100人。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"]
+  },
+  {
+    slug:"grand-bleu-chapel", name_en:"Grand Bleu Chapel", name_zh:"藍色海洋教堂 · 海藍教堂",
+    areaKey:"nago", area:"名護市 · Nago", address:"沖縄県名護市安部156-2（Kanucha Bay Resort內）",
+    capacity:40, capacityDisplay:"40 名（官方標示）", aisle:"10m", banquet:"室內56 ／ 花園24",
+    cuisine:"French / BBQ", hotel:"Kanucha Bay Resort（教堂所在地點）", ocean:true,
+    desc:"座落於Kanucha Bay Resort渡假村內，可選室內宴會或戶外花園BBQ派對，氣氛較輕鬆度假。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"]
+  },
+  {
+    slug:"eines-villa-di-nozze-okinawa", name_en:"Eines Villa di Nozze", name_zh:"五感教堂 · 艾妮絲公主教堂",
+    areaKey:"nago", area:"名護市 · Nago", address:"沖縄県名護市潮平川原361",
+    capacity:40, capacityDisplay:"40 名", aisle:"10m", banquet:"2-56 名",
+    cuisine:"French / Okinawan", hotel:"Hotel Resonex Nago（徒步5分鐘）", ocean:false,
+    desc:"名護市的庭園型教堂，宴會廳容量彈性大（2–56人），提供法式或沖繩料理。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"]
+  },
+  {
+    slug:"kouri-island-celeste-chapel", name_en:"Kouri Island Celeste", name_zh:"古宇利島天空教堂",
+    areaKey:"nakijin", area:"今帰仁村 · Nakijin", address:"沖縄県国頭郡今帰仁村古宇利588番地",
+    capacity:40, capacityDisplay:"40 名", aisle:"9m", banquet:"7個宴會廳／最大44 名",
+    cuisine:"BBQ / French", hotel:"One Suite THE TERRACE（車程3分鐘）", ocean:true,
+    desc:"位於戀愛之島古宇利島，七個宴會廳選擇多元，適合BBQ或精緻法式風格的海島婚禮。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"]
+  },
+  {
+    slug:"centlegenda-chapel", name_en:"Centlegenda Chapel", name_zh:"聖陶芮塔教堂",
+    areaKey:"chatan", area:"北谷町 · Chatan", address:"沖縄県中頭郡北谷町美浜49番",
+    capacity:95, capacityDisplay:"95 名", aisle:"9m", banquet:"24 ／ 29 ／ 90 名",
+    cuisine:"French", hotel:"Hilton Okinawa Chatan Resort（徒步3分鐘）", ocean:false,
+    desc:"位於北谷町美浜鬧區，鄰近Hilton Okinawa Chatan Resort，交通生活機能最方便。",
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"]
+  }
+];
+
+var REAL_WEDDINGS = [
+  {couple:"Tan & Barry", note:"Monterey Lumer · Jan 2026", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg"},
+  {couple:"Tobey & John", note:"Lazor Siele · Dec 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg"},
+  {couple:"Stella & Murray", note:"Monterey Lumer · Dec 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"},
+  {couple:"Tiffany & Waris", note:"Lazor Garden · Nov 2025", img:"https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg"}
+];
+
+var AREA_LABELS = [
+  {key:"all", label:"全部地區"},
+  {key:"yomitan", label:"讀谷村"},
+  {key:"onna", label:"恩納村"},
+  {key:"nago", label:"名護市"},
+  {key:"chatan", label:"北谷町"},
+  {key:"nakijin", label:"今帰仁村"}
+];
+var SIZE_LABELS = [
+  {key:"all", label:"全部人數"},
+  {key:"small", label:"50人以下"},
+  {key:"medium", label:"51–80人"},
+  {key:"large", label:"80人以上"}
+];
+
+var state = { area:"all", size:"all", ocean:false };
+var saved = new Set();
+try{
+  var stored = JSON.parse(localStorage.getItem("jwc_saved") || "[]");
+  stored.forEach(function(s){ saved.add(s); });
+}catch(e){}
+
+function sizeBucket(cap){ if(cap<=50) return "small"; if(cap<=80) return "medium"; return "large"; }
+function persistSaved(){ try{ localStorage.setItem("jwc_saved", JSON.stringify(Array.from(saved))); }catch(e){} }
+function byslug(slug){ return CHAPELS.filter(function(c){return c.slug===slug;})[0]; }
+
+function toggleSave(slug){
+  if(saved.has(slug)) saved.delete(slug); else saved.add(slug);
+  persistSaved();
+  renderGrid();
+  renderCompare();
+  renderSavedPill();
+  if(document.getElementById("modal-content").dataset.slug===slug) renderModalActions(slug);
+}
+
+function renderSavedPill(){
+  var pill = document.getElementById("saved-pill");
+  document.getElementById("saved-count-label").textContent = "已收藏 " + saved.size;
+  pill.classList.toggle("has-items", saved.size>0);
+}
+
+function chapelCardHTML(c){
+  var isSaved = saved.has(c.slug);
+  return (
+    '<div class="card-wrap">' +
+      '<button type="button" class="save-btn" aria-pressed="'+isSaved+'" aria-label="收藏 '+c.name_en+'" onclick="event.stopPropagation();toggleSave(\''+c.slug+'\')">' +
+        (isSaved ? '♥ 已收藏' : '♡ SAVE') +
+      '</button>' +
+      '<button type="button" class="card" onclick="openModal(\''+c.slug+'\')">' +
+        '<div style="position:relative;height:230px;overflow:hidden;">' +
+          '<img src="'+c.images[0]+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" alt="'+c.name_en+'">' +
+        '</div>' +
+        '<div style="padding:20px;">' +
+          '<div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:6px;">'+c.area+'</div>' +
+          '<h3 style="font-size:19px;margin-bottom:4px;">'+c.name_en+'</h3>' +
+          '<div style="font-size:12px;color:var(--ink-soft);margin-bottom:12px;">'+c.name_zh+'</div>' +
+          '<div style="font-size:11px;color:var(--ink-soft);">'+c.capacity+' 人 · 聖潔之路 '+c.aisle+(c.ocean?' · 海景':'')+'</div>' +
+        '</div>' +
+      '</button>' +
+    '</div>'
+  );
+}
+
+function renderChips(){
+  var areaWrap = document.getElementById("area-chips");
+  areaWrap.innerHTML = "";
+  AREA_LABELS.forEach(function(a){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = a.label;
+    b.setAttribute("aria-pressed", state.area===a.key);
+    b.onclick = function(){ state.area = a.key; renderChips(); renderGrid(); };
+    areaWrap.appendChild(b);
   });
+  var sizeWrap = document.getElementById("size-chips");
+  sizeWrap.innerHTML = "";
+  SIZE_LABELS.forEach(function(s){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = s.label;
+    b.setAttribute("aria-pressed", state.size===s.key);
+    b.onclick = function(){ state.size = s.key; renderChips(); renderGrid(); };
+    sizeWrap.appendChild(b);
+  });
+  var oceanChip = document.getElementById("ocean-chip");
+  oceanChip.setAttribute("aria-pressed", state.ocean);
+  oceanChip.onclick = function(){ state.ocean = !state.ocean; renderChips(); renderGrid(); };
+}
+
+function filteredChapels(){
+  return CHAPELS.filter(function(c){
+    if(state.area!=="all" && c.areaKey!==state.area) return false;
+    if(state.size!=="all" && sizeBucket(c.capacity)!==state.size) return false;
+    if(state.ocean && !c.ocean) return false;
+    return true;
+  });
+}
+
+function renderGrid(){
+  var list = filteredChapels();
+  var grid = document.getElementById("chapel-grid");
+  document.getElementById("result-count").textContent = "顯示 " + list.length + " / " + CHAPELS.length + " 間教堂";
+  if(list.length===0){
+    grid.innerHTML = '<div class="empty-state">這個篩選組合目前沒有符合的教堂 — 試著換一個地區或取消海景篩選。</div>';
+    return;
+  }
+  grid.innerHTML = list.map(chapelCardHTML).join("");
+}
+
+function compareRow(label, getter){
+  return '<tr><td>'+label+'</td>' + savedList().map(function(c){ return '<td>'+getter(c)+'</td>'; }).join('') + '</tr>';
+}
+function savedList(){
+  return CHAPELS.filter(function(c){ return saved.has(c.slug); }).slice(0,4);
+}
+
+function renderCompare(){
+  var wrap = document.getElementById("compare-wrap");
+  var list = savedList();
+  if(list.length===0){
+    wrap.innerHTML =
+      '<div class="compare-empty">還沒有收藏任何教堂。到上面 Chapel Finder 按 ♡ 收藏，或直接看範例：' +
+      '<div style="margin-top:18px;"><button type="button" class="btn" onclick="seedCompare()">套用範例（Lazor Garden／Monterey／Aquagrace）</button></div></div>';
+    return;
+  }
+  var html = '<div style="overflow-x:auto;"><table class="compare-table"><tr><th></th>' +
+    list.map(function(c){ return '<th><button type="button" class="compare-remove" onclick="toggleSave(\''+c.slug+'\')">移除 ✕</button>'+c.name_en+'</th>'; }).join('') +
+    '</tr>' +
+    compareRow('Area', function(c){return c.area.split(' · ')[0];}) +
+    compareRow('Guests', function(c){return c.capacity;}) +
+    compareRow('Aisle', function(c){return c.aisle;}) +
+    compareRow('Banquet', function(c){return c.banquet;}) +
+    compareRow('Cuisine', function(c){return c.cuisine;}) +
+    compareRow('Ocean View', function(c){return c.ocean ? '✓' : '—';}) +
+    compareRow('Nearby Hotel', function(c){return c.hotel;}) +
+    '</table></div>';
+  wrap.innerHTML = html;
+  var saved5 = Array.from(saved);
+  if(saved5.length>4){
+    wrap.innerHTML += '<div class="compare-note">你收藏了 '+saved5.length+' 間，比較表最多同時顯示 4 間，其餘的移除幾間收藏即可換上。</div>';
+  }
+}
+
+function seedCompare(){
+  saved.add("lazor-garden-alivila"); saved.add("monterey-lumer-chapel"); saved.add("aquagrace-wedding-chapel");
+  persistSaved(); renderGrid(); renderCompare(); renderSavedPill();
+}
+
+function renderRealWeddings(){
+  var grid = document.getElementById("rw-grid");
+  grid.innerHTML = REAL_WEDDINGS.map(function(w){
+    return '<button type="button" class="rw-card" onclick="openLightbox(\''+w.img+'\')">' +
+      '<img src="'+w.img+'" alt="'+w.couple+'">' +
+      '<div style="color:#fff;font-size:16px;font-family:\'Cormorant Garamond\',serif;">'+w.couple+'</div>' +
+      '<div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">'+w.note+'</div>' +
+    '</button>';
+  }).join("");
+}
+
+function renderModalActions(slug){
+  var isSaved = saved.has(slug);
+  var el = document.getElementById("modal-actions");
+  if(!el) return;
+  el.innerHTML =
+    '<button type="button" class="btn'+(isSaved?' btn-solid':'')+'" onclick="toggleSave(\''+slug+'\')">'+(isSaved?'♥ 已加入比較清單':'♡ 加入比較清單')+'</button>' +
+    '<a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP 洽詢</a>';
+}
+
+function openModal(slug){
+  var c = byslug(slug);
+  if(!c) return;
+  var content = document.getElementById("modal-content");
+  content.dataset.slug = slug;
+  content.innerHTML =
+    '<div class="modal-hero"><img src="'+c.images[0]+'" alt="'+c.name_en+'"></div>' +
+    '<div class="modal-body">' +
+      '<div class="eyebrow" style="margin-bottom:8px;">'+c.area+'</div>' +
+      '<h2 style="font-size:30px;margin-bottom:4px;">'+c.name_en+'</h2>' +
+      '<div style="color:var(--ink-soft);font-size:13px;margin-bottom:22px;">'+c.name_zh+'</div>' +
+      '<div class="stat-row" style="padding:20px 0;">' +
+        '<div><div class="stat-num" style="font-size:22px;">'+c.capacity+'</div><div class="stat-label">Guests</div></div>' +
+        '<div><div class="stat-num" style="font-size:22px;">'+c.aisle+'</div><div class="stat-label">Aisle</div></div>' +
+        '<div><div class="stat-num" style="font-size:22px;">'+(c.ocean?'✓':'—')+'</div><div class="stat-label">Ocean View</div></div>' +
+        '<div><div class="stat-num" style="font-size:22px;">'+c.cuisine+'</div><div class="stat-label">Cuisine</div></div>' +
+      '</div>' +
+      '<div style="color:var(--ink-soft);font-size:14px;line-height:1.85;margin:18px 0;">'+c.desc+'</div>' +
+      '<div class="spec-box">' +
+        '<div class="spec-row"><span>地址</span><span style="color:var(--ink);">'+c.address+'</span></div>' +
+        '<div class="spec-row"><span>座位數</span><span style="color:var(--ink);">'+c.capacityDisplay+'</span></div>' +
+        '<div class="spec-row"><span>宴會廳</span><span style="color:var(--ink);">'+c.banquet+'</span></div>' +
+        '<div class="spec-row"><span>鄰近酒店</span><span style="color:var(--ink);">'+c.hotel+'</span></div>' +
+      '</div>' +
+      (c.images.length>1 ? '<div class="modal-gallery">' + c.images.slice(1).map(function(img){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightbox(\''+img+'\')">'; }).join('') + '</div>' : '') +
+      '<div class="modal-actions" id="modal-actions"></div>' +
+    '</div>';
+  renderModalActions(slug);
+  document.getElementById("modal").hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeModal(){
+  document.getElementById("modal").hidden = true;
+  document.body.style.overflow = "";
+}
+function openLightbox(src){
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox(e){
+  if(e) e.stopPropagation();
+  document.getElementById("lightbox").hidden = true;
+  if(document.getElementById("modal").hidden) document.body.style.overflow = "";
+}
+document.addEventListener("keydown", function(e){
+  if(e.key==="Escape"){ closeModal(); closeLightbox(); }
+});
+document.getElementById("modal").addEventListener("click", function(e){
+  if(e.target.id==="modal") closeModal();
+});
+
+renderChips();
+renderGrid();
+renderCompare();
+renderRealWeddings();
+renderSavedPill();
 </script>
 
 </body>

@@ -1,10 +1,10 @@
-# VisionWedding — Japan Wedding Chapel 改版提案
+# jwc — Japan Wedding Chapel 改版提案
 
 客戶 [Japan Wedding Chapel](https://www.japanweddingchapel.com/)(沖繩教堂婚禮策劃)官網改版提案。同客戶另有 IG [@visionwedding](https://www.instagram.com/visionwedding/)(婚攝品牌)。
 
 ## Demo / 簡報
 
-Pages 上線後:`https://sssunwl.github.io/VisionWedding/`
+Pages:`https://sssunwl.github.io/jwc/`
 
 首頁為視覺 Demo(用官網真實照片重新設計的首頁,含 Chapel Finder / Chapel Spotlight / Compare / Real Weddings),頁底附客戶簡報用的 12 頁大綱。
 
