@@ -185,7 +185,10 @@
   .lightbox-counter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.75);font-size:12px;letter-spacing:0.08em;}
   @media (max-width:640px){ .lightbox-nav{width:42px;height:42px;font-size:18px;} .lightbox-prev{left:6px;} .lightbox-next{right:6px;} }
   /* PPT outline */
-  .ppt-section{background:#EDEAE2;padding:100px 0 120px;border-top:1px solid var(--line);}
+  .ppt-section{position:fixed;inset:0;z-index:250;background:#EDEAE2;padding:80px 0 120px;overflow-y:auto;}
+  .ppt-section[hidden]{display:none;}
+  .presentation-close{position:fixed;top:20px;right:24px;z-index:2;background:var(--white);border:1px solid var(--line);color:var(--ink);width:40px;height:40px;border-radius:999px;font-size:16px;}
+  .presentation-close:hover{background:var(--ink);color:#fff;}
   .slide-card{background:var(--white);border-radius:6px;padding:28px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);height:100%;scroll-margin-top:90px;}
   .slide-num{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ocean);margin-bottom:10px;}
   .slide-title{font-size:19px;margin-bottom:12px;line-height:1.3;}
@@ -429,22 +432,26 @@
       <div style="font-family:'Cormorant Garamond',serif;font-size:19px;margin-bottom:8px;">Japan Wedding Chapel</div>
       <div style="font-size:11px;color:var(--ink-soft);">Your Okinawa Wedding Planner</div>
     </div>
-    <div style="display:flex;gap:36px;font-size:11px;color:var(--ink-soft);flex-wrap:wrap;">
+    <div style="display:flex;gap:24px;font-size:11px;color:var(--ink-soft);flex-wrap:wrap;align-items:center;">
       <a href="https://wa.me/85261688328" target="_blank" rel="noopener">+852 616-88-328</a>
       <a href="mailto:love@japanweddingchapel.com">love@japanweddingchapel.com</a>
       <a href="https://www.instagram.com/japanweddingchapel/" target="_blank" rel="noopener">@japanweddingchapel</a>
+      <span style="width:1px;height:14px;background:var(--line);display:inline-block;"></span>
+      <a href="#cms" style="color:var(--ink);font-weight:500;">CMS 預覽</a>
+      <button type="button" onclick="openPresentation()" style="background:none;border:none;color:var(--ink);font-weight:500;font-size:11px;cursor:pointer;padding:0;font-family:inherit;">簡報大綱 ▸</button>
     </div>
   </div>
 </footer>
 
-<!-- ============ PPT 簡報大綱 ============ -->
-<div class="ppt-section">
+<!-- ============ PPT 簡報大綱（獨立畫面，按頁尾按鈕開啟） ============ -->
+<div class="ppt-section" id="presentation" hidden>
+  <button type="button" class="presentation-close" onclick="closePresentation()" aria-label="關閉">✕</button>
   <div class="wrap">
     <div style="text-align:center;margin-bottom:16px;">
       <div class="eyebrow">Client Presentation</div>
     </div>
     <h2 style="text-align:center;font-size:34px;margin-bottom:10px;">簡報大綱 — 網站改版提案</h2>
-    <div style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:56px;">共 12 頁，跟客戶溝通用，每頁列出重點方便口頭補充</div>
+    <div style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:56px;">共 13 頁，跟客戶溝通用，每頁列出重點方便口頭補充</div>
 
     <div class="grid-3" style="gap:20px;">
 
@@ -483,9 +490,9 @@
         <div class="slide-num">04</div>
         <div class="slide-title">首頁全新動線</div>
         <ul>
-          <li>Hero → Find Your Chapel → Spotlight</li>
-          <li>→ Compare → Real Weddings → Journal</li>
-          <li>從「文章列表」變成「婚禮旅程」</li>
+          <li>Hero → Chapel Finder → Spotlight → Compare</li>
+          <li>→ Venues → Real Weddings → Media Options → CMS</li>
+          <li>一頁到底的「婚禮旅程」，不是分頁籤的文章列表</li>
         </ul>
       </div>
 
@@ -524,13 +531,23 @@
         <div class="slide-title">Real Weddings → Portfolio</div>
         <ul>
           <li>不再是「01/02 · 尚無留言」的 Blog 排版</li>
-          <li>改成雜誌式：Preparation → Ceremony → Reception</li>
+          <li>每對新人 30–40 張真實照片組成故事頁，不是只放 1 張首圖</li>
           <li>標註 Photographed by Vision Wedding，雙品牌互導流</li>
         </ul>
       </div>
 
       <div class="slide-card">
         <div class="slide-num">09</div>
+        <div class="slide-title">婚禮影音加值服務（新功能）</div>
+        <ul>
+          <li>回顧影片／電子相片書／迎賓Loop／新人介紹影片，4 種素材</li>
+          <li>全部用照片直接生成，不用另外請錄影師</li>
+          <li>新人依喜好搭配選款，未來可加價升級</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">10</div>
         <div class="slide-title">客戶專屬 CMS 後台</div>
         <ul>
           <li>底層維持 WordPress，介面大幅簡化</li>
@@ -540,7 +557,7 @@
       </div>
 
       <div class="slide-card">
-        <div class="slide-num">10</div>
+        <div class="slide-num">11</div>
         <div class="slide-title">技術架構</div>
         <ul>
           <li>保留 WordPress + Elementor + WPML，不轉平台</li>
@@ -549,8 +566,8 @@
         </ul>
       </div>
 
-      <div class="slide-card" id="slide-11">
-        <div class="slide-num">11</div>
+      <div class="slide-card">
+        <div class="slide-num">12</div>
         <div class="slide-title">沖繩結婚雜誌（延伸產品）</div>
         <ul>
           <li>教堂資料庫可直接延伸成獨立內容媒體</li>
@@ -560,7 +577,7 @@
       </div>
 
       <div class="slide-card">
-        <div class="slide-num">12</div>
+        <div class="slide-num">13</div>
         <div class="slide-title">時程與下一步</div>
         <ul>
           <li>Staging 網站先行，URL／SEO 盡量保留</li>
@@ -1110,6 +1127,16 @@ function closePhotobook(){
   document.body.style.overflow = modalHidden ? "" : "hidden";
 }
 
+function openPresentation(){
+  document.getElementById("presentation").hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("presentation").scrollTop = 0;
+}
+function closePresentation(){
+  document.getElementById("presentation").hidden = true;
+  document.body.style.overflow = "";
+}
+
 function renderModalActions(slug){
   var isSaved = saved.has(slug);
   var el = document.getElementById("modal-actions");
@@ -1179,7 +1206,7 @@ function closeLightbox(e){
   if(document.getElementById("modal").hidden) document.body.style.overflow = "";
 }
 document.addEventListener("keydown", function(e){
-  if(e.key==="Escape"){ closeModal(); closeLightbox(); closeFilm(); closePhotobook(); }
+  if(e.key==="Escape"){ closeModal(); closeLightbox(); closeFilm(); closePhotobook(); closePresentation(); }
   if(!document.getElementById("lightbox").hidden){
     if(e.key==="ArrowLeft") lightboxPrev();
     if(e.key==="ArrowRight") lightboxNext();
