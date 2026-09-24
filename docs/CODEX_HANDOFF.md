@@ -103,4 +103,4 @@ CEREMONY/RECEPTION 時間欄位（目前寫死 "CEREMONY 11:00" / "RECEPTION 12:
 - [x] 完成五項程式與內容更新
 - [x] 更新這份工單與資料唯一真相來源 `data/chapels.json`
 - [x] 本機桌面／手機版互動驗證
-- [ ] commit、push 到 `main`，確認 GitHub Actions 跑綠（完成後補記）
+- [x] commit（019e46f）、push 到 `main`，GitHub Actions 跑綠確認（run 35948551742, conclusion success, 2026-09-24 02:44 UTC）。線上 https://sssunwl.github.io/jwc/ 已用 curl 直接抓 HTML 核對，區塊順序／教堂112張照片／沖繩婚禮誌分類 chip 都跟本地一致，確定是真的上線了，不是還沒推
