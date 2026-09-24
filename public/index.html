@@ -56,7 +56,9 @@
   .section{padding:88px 0;}
   .reveal-init{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);}
   .reveal-init.revealed{opacity:1;transform:translateY(0);}
-  .nav{position:sticky;top:0;z-index:50;background:rgba(247,245,240,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(35,35,35,0.06);}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(247,245,240,0.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+  .nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg, transparent, rgba(35,35,35,0.14) 50%, transparent);}
+  .brand-mark[role="button"]{cursor:pointer;}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;gap:16px;}
   .nav-links{display:flex;gap:26px;font-size:12px;color:var(--ink-soft);}
   .nav-links a:hover{color:var(--ink);}
@@ -91,7 +93,7 @@
   .saved-pill.has-items{border-color:var(--heart);color:var(--heart);}
   .hero-content{opacity:0;animation:hero-content-in 1.2s ease forwards;animation-delay:.2s;}
   @keyframes hero-content-in{ from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
-  .hero{position:relative;width:100%;height:78vh;min-height:480px;overflow:hidden;}
+  .hero{position:relative;width:100%;height:100vh;height:100dvh;min-height:560px;overflow:hidden;}
   #hero-slides{position:absolute;inset:-16% 0;will-change:transform;}
   .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.8s ease;animation:hero-kenburns 14s ease-in-out forwards;}
   .hero-slide.active{opacity:1;}
@@ -143,6 +145,26 @@
   @media (max-width:640px){ .modal-body{padding:28px 22px 32px;} .modal-hero{height:220px;} }
   .modal-gallery{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0;}
   .modal-gallery img{width:140px;height:100px;object-fit:cover;border-radius:4px;}
+  .coverflow{position:relative;margin:26px -40px;padding:36px 0 44px;}
+  @media (max-width:640px){ .coverflow{margin:22px -22px;} }
+  .coverflow-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc(50% - 78px);-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .coverflow-track::-webkit-scrollbar{display:none;}
+  .coverflow-item{flex:0 0 auto;width:156px;height:196px;scroll-snap-align:center;border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 12px 28px rgba(20,20,18,0.18);transition:transform .28s cubic-bezier(.22,1,.36,1), opacity .28s ease, filter .28s ease;will-change:transform;}
+  .coverflow-item img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+  .coverflow-hint{text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:0.04em;margin-top:-8px;}
+  .ig-feed{padding:70px 0 88px;background:var(--ivory);overflow:hidden;}
+  .ig-feed-head{text-align:center;margin-bottom:32px;padding:0 20px;}
+  .ig-marquee{width:100%;overflow:hidden;}
+  .ig-marquee-track{display:flex;gap:10px;width:max-content;animation:ig-scroll 42s linear infinite;}
+  .ig-marquee:hover .ig-marquee-track{animation-play-state:paused;}
+  .ig-post{width:160px;height:160px;flex:0 0 auto;position:relative;border-radius:6px;overflow:hidden;background:var(--line);}
+  .ig-post img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ig-post-overlay{position:absolute;inset:0;background:rgba(20,20,18,0);display:flex;align-items:center;justify-content:center;color:#fff;opacity:0;transition:opacity .25s ease, background .25s ease;}
+  .ig-post:hover .ig-post-overlay{opacity:1;background:rgba(20,20,18,0.32);}
+  .ig-post-overlay svg{width:22px;height:22px;}
+  @media (max-width:640px){ .ig-post{width:118px;height:118px;} .ig-marquee-track{animation-duration:32s;} }
+  @media (prefers-reduced-motion: reduce){ .ig-marquee-track{animation:none;} }
+  @keyframes ig-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
   .venue-detail-section{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);}
   .venue-detail-section h3{font-size:21px;margin:7px 0 8px;}
   .venue-detail-meta{font-size:12px;color:var(--ocean);margin-bottom:8px;}
@@ -308,7 +330,7 @@
 
 <div class="nav">
   <div class="wrap nav-inner">
-    <div class="brand-mark" style="font-size:20px;">Japan Wedding Chapel</div>
+    <button type="button" class="brand-mark" role="button" style="font-size:20px;background:none;border:none;padding:0;text-align:left;font-weight:inherit;color:inherit;" onclick="window.scrollTo({top:0,behavior:'smooth'})">Japan Wedding Chapel</button>
     <div class="nav-links">
       <a href="#finder">CHAPELS</a>
       <a href="#realweddings">REAL WEDDINGS</a>
@@ -344,11 +366,11 @@
     <video autoplay muted playsinline preload="auto" id="hero-mood-video" poster="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg" aria-label="Okinawa wedding mood film">
       <source src="media/jwc-mood.mp4" type="video/mp4">
     </video>
-    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" alt="Lazor Siele Chapel">
-    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg" alt="Monterey Lumer Chapel">
-    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg" alt="Lazor Garden Alivila">
-    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg" alt="Alivila Glory Church">
-    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif" alt="Kouri Island Celeste Chapel">
+    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016-768x512.jpg" loading="eager" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg')" alt="Lazor Siele Chapel">
+    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032-768x512.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg')" alt="Monterey Lumer Chapel">
+    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036-768x512.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg')" alt="Lazor Garden Alivila">
+    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039-768x512.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg')" alt="Alivila Glory Church">
+    <img class="hero-slide" src="https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012-768x512.avif" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif')" alt="Kouri Island Celeste Chapel">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -390,7 +412,7 @@
     <div style="color:var(--ink-soft);font-size:13px;">上面 Chapel Finder 的 11 間教堂都會有自己的版本，這裡先用 Lazor Siele Chapel 示範</div>
   </div>
   <div class="spot-hero">
-    <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg" alt="Lazor Siele Chapel">
+    <img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004-768x512.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg')" alt="Lazor Siele Chapel">
     <div class="spot-overlay"></div>
     <div class="spot-caption">
       <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.85;margin-bottom:10px;">Chapel Spotlight</div>
@@ -422,8 +444,8 @@
     </div>
 
     <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:44px;">
-      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 1)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
-      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 2)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 1)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016-300x200.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg')" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
+      <button type="button" class="rw-card" style="cursor:zoom-in;" onclick="openLightboxAt(byslug('lazor-siele-chapel').images, 2)"><img src="https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1-768x512.jpg" loading="lazy" decoding="async" onerror="imgOnerror(this,'https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg')" style="height:340px;object-fit:cover;border-radius:4px;margin:0;"></button>
     </div>
     <div style="text-align:center;"><a href="#inquire" class="btn btn-solid">CHECK AVAILABILITY</a></div>
   </div>
@@ -586,6 +608,22 @@
       <a class="btn btn-solid" href="https://wa.me/8109082931688" target="_blank" rel="noopener">WHATSAPP（JP +81 90-8293-1688）</a>
       <a class="btn" href="mailto:love@japanweddingchapel.com">EMAIL 我們</a>
     </div>
+  </div>
+</div>
+
+<div class="ig-feed">
+  <div class="wrap">
+    <div class="ig-feed-head">
+      <div class="eyebrow" style="margin-bottom:10px;">Follow The Journey</div>
+      <h2 style="font-size:26px;">@japanweddingchapel</h2>
+      <div style="color:var(--ink-soft);font-size:12px;margin-top:8px;">下面用現有真實照片示意版位，正式上線可接 Instagram API 即時同步最新貼文</div>
+    </div>
+  </div>
+  <div class="ig-marquee">
+    <div class="ig-marquee-track" id="ig-marquee-track"></div>
+  </div>
+  <div class="wrap" style="text-align:center;margin-top:28px;">
+    <a class="btn" href="https://www.instagram.com/japanweddingchapel/" target="_blank" rel="noopener">在 Instagram 上關注我們</a>
   </div>
 </div>
 
@@ -1302,6 +1340,13 @@ function sizeBucket(cap){ if(cap<=50) return "small"; if(cap<=80) return "medium
 function persistSaved(){ try{ localStorage.setItem("jwc_saved", JSON.stringify(Array.from(saved))); }catch(e){} }
 function byslug(slug){ return CHAPELS.filter(function(c){return c.slug===slug;})[0]; }
 
+function wpImgSrc(url, size){
+  var m = url.match(/^(.*)\.(jpe?g|png|avif|webp)$/i);
+  if(!m) return url;
+  return m[1] + '-' + size + '.' + m[2];
+}
+function imgOnerror(el, fallback){ el.onerror = null; el.src = fallback; }
+
 function toggleSave(slug){
   if(saved.has(slug)) saved.delete(slug); else saved.add(slug);
   persistSaved();
@@ -1326,7 +1371,7 @@ function chapelCardHTML(c){
       '</button>' +
       '<button type="button" class="card" onclick="openModal(\''+c.slug+'\')">' +
         '<div style="position:relative;height:230px;overflow:hidden;">' +
-          '<img src="'+c.images[0]+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" alt="'+c.name_en+'">' +
+          '<img src="'+wpImgSrc(c.images[0],'768x512')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async" onerror="imgOnerror(this,\''+c.images[0]+'\')" alt="'+c.name_en+'">' +
         '</div>' +
         '<div style="padding:20px;">' +
           '<div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:6px;">'+c.area+'</div>' +
@@ -1422,11 +1467,23 @@ function seedCompare(){
   persistSaved(); renderGrid(); renderCompare(); renderSavedPill();
 }
 
+function renderIgFeed(){
+  var track = document.getElementById("ig-marquee-track");
+  if(!track) return;
+  var pics = CHAPELS.map(function(c){ return c.images[0]; })
+    .concat(REAL_WEDDINGS.map(function(w){ return w.img; }));
+  var doubled = pics.concat(pics);
+  track.innerHTML = doubled.map(function(img){
+    return '<div class="ig-post"><img src="'+wpImgSrc(img,'300x200')+'" loading="lazy" decoding="async" onerror="imgOnerror(this,\''+img+'\')" alt="">' +
+      '<div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.5 2 5 5.6 5c2 0 3.3 1 4.4 2.4C11.1 6 12.4 5 14.4 5 18 5 19.5 8.5 22 11.9 19.5 16.4 12 21 12 21z"/></svg></div>' +
+    '</div>';
+  }).join('');
+}
 function renderRealWeddings(){
   var grid = document.getElementById("rw-grid");
   grid.innerHTML = REAL_WEDDINGS.map(function(w){
     return '<button type="button" class="rw-card" onclick="openWeddingStory(\''+w.id+'\')">' +
-      '<img src="'+w.img+'" alt="'+w.couple+'">' +
+      '<img src="'+wpImgSrc(w.img,'768x512')+'" loading="lazy" decoding="async" onerror="imgOnerror(this,\''+w.img+'\')" alt="'+w.couple+'">' +
       '<div style="color:#fff;font-size:16px;font-family:\'Cormorant Garamond\',serif;">'+w.couple+'</div>' +
       '<div style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px;">'+w.note+'</div>' +
     '</button>';
@@ -1445,7 +1502,7 @@ function renderItemGrid(gridId, items, eyebrow, indexMap){
   grid.innerHTML = items.map(function(g, i){
     var realIndex = indexMap ? indexMap[i] : i;
     return '<button type="button" class="card" style="text-align:left;padding:0;border:none;width:100%;cursor:pointer;" onclick="openGuideItem(\''+gridId+'\', '+realIndex+', \''+eyebrow+'\')">' +
-      '<div style="height:180px;overflow:hidden;"><img src="'+g.images[0]+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>' +
+      '<div style="height:180px;overflow:hidden;"><img src="'+wpImgSrc(g.images[0],'768x512')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async" onerror="imgOnerror(this,\''+g.images[0]+'\')"></div>' +
       '<div style="padding:18px 20px;">' +
         (g.categoryLabel ? '<div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ocean);margin-bottom:6px;">'+g.categoryLabel+'</div>' : '') +
         '<h3 style="font-size:17px;">'+g.title+'</h3>'+(g.subtitle?'<div style="font-size:11px;color:var(--ink-soft);margin-top:4px;">'+g.subtitle+'</div>':'')+
@@ -1487,7 +1544,7 @@ function openGuideItem(gridId, i, eyebrow){
   var content = document.getElementById("modal-content");
   content.dataset.slug = "";
   content.innerHTML =
-    '<div class="modal-hero"><img src="'+g.images[0]+'" alt="'+g.title+'"></div>' +
+    '<div class="modal-hero"><img src="'+wpImgSrc(g.images[0],'768x512')+'" loading="eager" decoding="async" onerror="imgOnerror(this,\''+g.images[0]+'\')" alt="'+g.title+'"></div>' +
     '<div class="modal-body">' +
       '<div class="eyebrow" style="margin-bottom:8px;">'+eyebrow+'</div>' +
       '<h2 style="font-size:28px;margin-bottom:4px;">'+g.title+'</h2>' +
@@ -1496,7 +1553,7 @@ function openGuideItem(gridId, i, eyebrow){
       '<div class="spec-box" style="margin-bottom:24px;">' +
         g.facts.map(function(f){ return '<div class="spec-row"><span>'+f[0]+'</span><span style="color:var(--ink);text-align:right;">'+f[1]+'</span></div>'; }).join('') +
       '</div>' +
-      (g.images.length>1 ? '<div class="modal-gallery">' + g.images.slice(1).map(function(img, idx){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openGuideLightbox(\''+gridId+'\', '+i+', '+(idx+1)+')">'; }).join('') + '</div>' : '') +
+      (g.images.length>1 ? coverflowHTML(g.images, 1) : '') +
       (g.note ? '<div style="font-size:11px;color:var(--heart);margin:16px 0 0;line-height:1.6;">⚠ '+g.note+'</div>' : '') +
       '<div class="modal-actions" style="margin-top:24px;">' +
         '<a class="btn btn-solid" href="https://wa.me/85261688328" target="_blank" rel="noopener">WHATSAPP 洽詢</a>' +
@@ -1504,6 +1561,7 @@ function openGuideItem(gridId, i, eyebrow){
     '</div>';
   document.getElementById("modal").hidden = false;
   document.body.style.overflow = "hidden";
+  initAllCoverflows(content);
 }
 function openGuideLightbox(gridId, i, idx){
   var items = gridId === "venue-grid" ? VENUE_ITEMS : JOURNAL_ITEMS;
@@ -1769,7 +1827,7 @@ function renderModalActions(slug){
 function chapelEntityGalleryHTML(images, clickExpression){
   if(!images || !images.length) return '';
   return '<div class="venue-detail-gallery">' + images.map(function(img, i){
-    return '<button type="button" onclick="openLightboxAt('+clickExpression+', '+i+')" aria-label="查看照片 '+(i+1)+'"><img src="'+img+'" alt="" loading="lazy"></button>';
+    return '<button type="button" onclick="openLightboxAt('+clickExpression+', '+i+')" aria-label="查看照片 '+(i+1)+'"><img src="'+wpImgSrc(img,'300x200')+'" alt="" loading="lazy" decoding="async" onerror="imgOnerror(this,\''+img+'\')"></button>';
   }).join('') + '</div>';
 }
 
@@ -1801,7 +1859,7 @@ function openModal(slug){
   var content = document.getElementById("modal-content");
   content.dataset.slug = slug;
   content.innerHTML =
-    '<div class="modal-hero"><img src="'+c.images[0]+'" alt="'+c.name_en+'"></div>' +
+    '<div class="modal-hero"><img src="'+wpImgSrc(c.images[0],'768x512')+'" loading="eager" decoding="async" onerror="imgOnerror(this,\''+c.images[0]+'\')" alt="'+c.name_en+'"></div>' +
     '<div class="modal-body">' +
       '<div class="eyebrow" style="margin-bottom:8px;">'+c.area+'</div>' +
       '<h2 style="font-size:30px;margin-bottom:4px;">'+c.name_en+'</h2>' +
@@ -1820,12 +1878,13 @@ function openModal(slug){
         '<div class="spec-row"><span>鄰近酒店</span><span style="color:var(--ink);">'+c.hotel+'</span></div>' +
       '</div>' +
       chapelExtraSectionsHTML(c) +
-      (c.images.length>1 ? '<div class="modal-gallery">' + c.images.slice(1).map(function(img, i){ return '<img src="'+img+'" alt="" style="cursor:zoom-in;" onclick="openLightboxAt(byslug(\''+c.slug+'\').images, '+(i+1)+')">'; }).join('') + '</div>' : '') +
+      (c.images.length>1 ? coverflowHTML(c.images, 1) : '') +
       '<div class="modal-actions" id="modal-actions"></div>' +
     '</div>';
   renderModalActions(slug);
   document.getElementById("modal").hidden = false;
   document.body.style.overflow = "hidden";
+  initAllCoverflows(content);
 }
 function closeModal(){
   document.getElementById("modal").hidden = true;
@@ -1834,6 +1893,58 @@ function closeModal(){
 var lightboxImages = [];
 var lightboxIndex = 0;
 function openLightbox(src){ openLightboxAt([src], 0); }
+var coverflowRegistry = {};
+var coverflowSeq = 0;
+function coverflowHTML(images, offset){
+  var id = "cf-" + (++coverflowSeq);
+  coverflowRegistry[id] = images;
+  return '<div class="coverflow" id="'+id+'"><div class="coverflow-track">' +
+    images.map(function(img, i){
+      if(i < offset) return '';
+      var thumb = wpImgSrc(img, '768x512');
+      return '<div class="coverflow-item" onclick="coverflowClick(this, \''+id+'\', '+i+')"><img src="'+thumb+'" alt="" loading="lazy" decoding="async" onerror="imgOnerror(this, \''+img+'\')"></div>';
+    }).join('') +
+  '</div></div><div class="coverflow-hint">左右滑動瀏覽，點中間放大看</div>';
+}
+function initCoverflow(track){
+  function update(){
+    var rect = track.getBoundingClientRect();
+    if(rect.width===0) return;
+    var center = rect.left + rect.width/2;
+    Array.prototype.forEach.call(track.children, function(item){
+      var r = item.getBoundingClientRect();
+      var itemCenter = r.left + r.width/2;
+      var dist = (itemCenter - center) / (rect.width/2 || 1);
+      var abs = Math.min(Math.abs(dist), 1.5);
+      var scale = 1 - abs*0.32;
+      var rotate = dist * -24;
+      var opacity = 1 - abs*0.5;
+      item.style.transform = 'perspective(900px) scale('+scale+') rotateY('+rotate+'deg)';
+      item.style.opacity = String(Math.max(opacity, 0.35));
+      item.style.zIndex = String(200 - Math.round(abs*100));
+    });
+  }
+  var ticking = false;
+  track.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(function(){ update(); ticking=false; }); ticking = true; }
+  }, {passive:true});
+  requestAnimationFrame(update);
+}
+function initAllCoverflows(root){
+  (root||document).querySelectorAll('.coverflow-track').forEach(initCoverflow);
+}
+function coverflowClick(el, id, idx){
+  var track = el.parentElement;
+  var tr = track.getBoundingClientRect();
+  var ir = el.getBoundingClientRect();
+  var centered = Math.abs((ir.left+ir.width/2) - (tr.left+tr.width/2)) < ir.width*0.4;
+  if(centered){
+    var imgs = coverflowRegistry[id];
+    if(imgs) openLightboxAt(imgs, idx);
+  } else {
+    el.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+  }
+}
 function openLightboxAt(images, idx){
   lightboxImages = images;
   lightboxIndex = idx;
@@ -1967,6 +2078,7 @@ renderGrid();
 renderCompare();
 renderRealWeddings();
 renderGuideGrid();
+renderIgFeed();
 renderSavedPill();
 </script>
 
