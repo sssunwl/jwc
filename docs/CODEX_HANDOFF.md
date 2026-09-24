@@ -2,11 +2,13 @@
 
 給 Codex：這是給客戶 Japan Wedding Chapel 看的 pitch demo，單一檔案 `public/index.html`（無框架、無 build step），push 到 `main` 會自動觸發 `.github/workflows/deploy-pages.yml` 部署到 https://sssunwl.github.io/jwc/ 。改完直接 commit + push 到 main 即可上線，不需要額外部署步驟。
 
+> **完成狀態（2026-09-24）**：五項均已完成。Task 1 以瀏覽器實際渲染後的 DOM 逐頁查核 11 間教堂，補齊 112 張教堂圖庫照片；查證後確認 11 間頁面都只有宴會廳容量與鄰近酒店連結，沒有獨立命名的宴會廳／酒店介紹段落或獨立圖庫，因此沒有虛構內容，資料明確記為空陣列／`null`。桌面與 390×844 手機尺寸均已實測 Hero 影片會靜音自動播放，播完淡出並接續照片輪播；手機版停用視差。
+
 閱讀順序建議：先讀完整份 `public/index.html`（檔案大，用 grep 找 section／data array 比較快），再讀 [`docs/CLIENT_MEETING_BRIEF.md`](CLIENT_MEETING_BRIEF.md) 了解這個 demo 的完成度定位，再開始改。
 
 ---
 
-## Task 1 — 再次徹查教堂資料：宴會廳 + 酒店的獨立資料跟照片
+## ✅ Task 1 — 再次徹查教堂資料：宴會廳 + 酒店的獨立資料跟照片
 
 **背景**：SS（客戶端窗口）已經連續三輪反饋「教堂照片/資料沒抓全」。目前 `CHAPELS` 陣列（約在 `public/index.html` 第 878 行附近，用 `grep -n "var CHAPELS"` 找）每間教堂只有 4–5 張照片，且只有教堂本體的敘述。這次 SS 明確指出：**原官網的教堂頁面下面，可能還有「宴會廳」跟「配合酒店」各自獨立的資料段落跟照片，不是教堂照片的延伸，是不同的實體**，目前完全沒抓進來。
 
@@ -23,7 +25,7 @@
 
 ---
 
-## Task 2 — 刪除掀頭紗 Loading Intro
+## ✅ Task 2 — 刪除掀頭紗 Loading Intro
 
 **背景**：`#veil-intro` 這段（curtain-reveal loading 動畫，`grep -n "veil-intro"` 找）SS 反饋效果不對，直接刪掉，不用調整、不用替代方案。
 
@@ -35,7 +37,7 @@
 
 ---
 
-## Task 3 — 滾動時加入光景移動效果（Parallax）
+## ✅ Task 3 — 滾動時加入光景移動效果（Parallax）
 
 **背景**：SS 覺得滑動網站時如果背景/光影有跟著移動的效果會不錯。這是錦上添花的效果，**不要做得太搶戲**，這個 demo 走的是 Japanese Editorial × Resort × Luxury Minimal 的克制調性，不要加浮誇的視差跳動。
 
@@ -48,7 +50,7 @@
 
 ---
 
-## Task 4 — Wedding Pass 手機 Mockup 改用真實新人資料
+## ✅ Task 4 — Wedding Pass 手機 Mockup 改用真實新人資料
 
 **背景**：`#wedding-pass` 區塊（grep `pass-phone` 找）目前手機 mockup 用的是虛構名字 "SUN & KAI"，SS 要求改用真實新人 **Stella & Murray**（`REAL_WEDDINGS` 陣列裡已有的真實資料，不要再編新日期）。
 
@@ -73,7 +75,7 @@ CEREMONY/RECEPTION 時間欄位（目前寫死 "CEREMONY 11:00" / "RECEPTION 12:
 
 ---
 
-## Task 5 — Hero 第一張改成 Mood Shot 影片
+## ✅ Task 5 — Hero 第一張改成 Mood Shot 影片
 
 **背景**：目前 hero 區塊（`#hero-slides`，`startHeroRotation()` 函式）是 5 張照片自動 crossfade。SS 要求**改成第一個畫面先播一段 mood shot 影片，播完/播一輪之後再接原本的照片輪播**。
 
@@ -98,6 +100,7 @@ CEREMONY/RECEPTION 時間欄位（目前寫死 "CEREMONY 11:00" / "RECEPTION 12:
 
 ## 完成後
 
-- 全部 commit（可以分開 5 個 commit，一項一個，方便 SS 對照哪個改動對應哪個反饋）
-- push 到 `main`，確認 GitHub Actions（`.github/workflows/deploy-pages.yml`）跑綠
-- 更新這份工單，把每個 Task 的狀態標記完成，或寫下沒做完/需要跟客戶確認的部分（例如 Task 1 如果原站根本沒有宴會廳/酒店獨立頁面，要老實寫「查證後確認原站沒有這段資料，不是漏抓」）
+- [x] 完成五項程式與內容更新
+- [x] 更新這份工單與資料唯一真相來源 `data/chapels.json`
+- [x] 本機桌面／手機版互動驗證
+- [ ] commit、push 到 `main`，確認 GitHub Actions 跑綠（完成後補記）

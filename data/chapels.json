@@ -2,7 +2,7 @@
   "_meta": {
     "source": "抓取自 https://www.japanweddingchapel.com/okinawa-wedding-chapel/ 及各教堂子頁,2026-09-23",
     "purpose": "唯一真相來源。wedding/ 資料夾的教堂資料是這份的唯讀副本,之後客戶WP後台改了資料要回頭同步這裡。",
-    "note": "capacity/aisle/banquet/cuisine/address 全部逐字取自官網頁面內文,非估算。image_urls 是官網 wp-content/uploads 原圖網址(直連,未搬移)。"
+    "note": "capacity/aisle/banquet/cuisine/address 全部逐字取自官網頁面內文,非估算。image_urls 是逐頁檢查渲染後 Elementor Gallery DOM 所得的完整官網圖庫原圖網址(直連,未搬移)。11 個教堂頁均未提供獨立命名的宴會廳或酒店資料段落/圖庫，因此 banquet_halls 留空、hotel_info 為 null。"
   },
   "chapels": [
     {
@@ -16,13 +16,26 @@
       "banquet_rooms": [30, 50, 130],
       "cuisine": "精緻法式料理",
       "nearby_hotel": "Lazor Sea Resort(徒步2分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "opened": "2025年2月",
       "source_url": "https://www.japanweddingchapel.com/lazor-siele-chapel/",
       "image_urls": [
         "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0032.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0034.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0036-1.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0011.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0047.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0008.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0010.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0054.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0010.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250208_Highlight-0059.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250208_Highlight-0062.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250208_Highlight-0069.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250208_Highlight-0013.jpg"
       ]
     },
     {
@@ -36,12 +49,18 @@
       "banquet_rooms": ["6-30", "31-150"],
       "cuisine": "精緻法式料理",
       "nearby_hotel": "Hotel Nikko Alivila(徒步5分鐘)／虹夕諾雅沖繩 Hoshino Resort(徒步5分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/lazor-garden-alivila/",
       "image_urls": [
         "https://www.japanweddingchapel.com/wp-content/uploads/2025/03/20241202_sde-0001-1.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/09/20250920_SS_LazorGarden-0045.avif"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230118_Lazor-0009.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230118_Lazor-0003.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0002.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0003.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0004.jpg"
       ]
     },
     {
@@ -55,10 +74,20 @@
       "banquet_rooms": ["2-56"],
       "cuisine": "法式料理 / 沖繩料理",
       "nearby_hotel": "Hotel Resonex Nago(徒步5分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": false,
       "source_url": "https://www.japanweddingchapel.com/eines-villa-di-nozze-okinawa/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0002.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0003.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0007.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0008.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0009.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0010.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0006.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0005.avif"
       ]
     },
     {
@@ -72,10 +101,20 @@
       "banquet_rooms": [35, 60],
       "cuisine": "精緻法式或和式料理",
       "nearby_hotel": "Grand Mercure Okinawa Cape Zanpa Resort(徒步4分鐘)／The Uza Terrace Beach Club Villas(徒步5分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": false,
       "source_url": "https://www.japanweddingchapel.com/aquagrace-wedding-chapel/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0086.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0019.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0030.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0044.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0050.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0060.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0063.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0083.jpg"
       ]
     },
     {
@@ -89,10 +128,24 @@
       "banquet_rooms": ["室內最大56", "花園派對24"],
       "cuisine": "法式料理／BBQ",
       "nearby_hotel": "Kanucha Bay Resort(教堂所在地點)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/grand-bleu-chapel/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0018.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0024.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0028.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0013.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0025.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0040.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0042.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0017.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0010.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0005.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0048.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0046.jpg"
       ]
     },
     {
@@ -107,12 +160,19 @@
       "banquet_rooms": [14, 58, 100],
       "cuisine": "精緻法式料理",
       "nearby_hotel": "Hotel Monterey Okinawa Spa & Resort(徒步2分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/monterey-lumer-chapel/",
       "image_urls": [
         "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_003.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg",
-        "https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_002.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_004.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/04/20250228_Sde-0020.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/04/20250228_Sde-0017.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_004a-2.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_005-2.jpg"
       ]
     },
     {
@@ -126,10 +186,24 @@
       "banquet_rooms": ["7個宴會廳／最大44"],
       "cuisine": "BBQ或精緻法式",
       "nearby_hotel": "One Suite THE TERRACE(車程3分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/kouri-island-celeste-chapel/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0001.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0008.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0014.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0021.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0024.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0028.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0042.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0043.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0051.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0059.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0062.avif",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0067.avif"
       ]
     },
     {
@@ -143,10 +217,22 @@
       "banquet_rooms": [22, 66],
       "cuisine": "精緻和洋料理",
       "nearby_hotel": "喜璃癒志海灘渡假飯店(徒步1分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/diamond-ocean-chapel/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0050.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0014.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0024.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0044.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0152.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0097.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0111.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220921_WeddingPhoto-0064.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220921_WeddingPhoto-0069.jpg"
       ]
     },
     {
@@ -161,10 +247,19 @@
       "banquet_rooms": [50, 100],
       "cuisine": "精緻法式料理",
       "nearby_hotel": "Renaissance Okinawa Resort(徒步5分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": false,
       "source_url": "https://www.japanweddingchapel.com/renaissance-ribera-church/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0004.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0017.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0039.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0044.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0011.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0024.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0036.jpg"
       ]
     },
     {
@@ -178,10 +273,23 @@
       "banquet_rooms": [40, 60, 80],
       "cuisine": "精緻和洋料理",
       "nearby_hotel": "Hotel Nikko Alivila(徒步3分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": true,
       "source_url": "https://www.japanweddingchapel.com/alivila-glory-church/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0007.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0013.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0017.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0019.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0022.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0028.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0032.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0035.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0042.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0045.jpg"
       ]
     },
     {
@@ -195,11 +303,20 @@
       "banquet_rooms": [24, 29, 90],
       "cuisine": "精緻法式料理",
       "nearby_hotel": "Hilton Okinawa Chatan Resort(徒步3分鐘)",
+      "banquet_halls": [],
+      "hotel_info": null,
       "ocean_view": false,
       "note": "主選單未列出,但頁面仍在且2026年有官方Bridal Fair,重做CMS要一併收錄",
       "source_url": "https://www.japanweddingchapel.com/centlegenda-chapel/",
       "image_urls": [
-        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0001.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_7.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0003.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0004.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0010.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0011.jpg",
+        "https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0013.jpg"
       ]
     }
   ]
