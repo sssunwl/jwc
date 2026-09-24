@@ -79,7 +79,8 @@
   .social-icons a{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);}
   .social-icons a:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
   .social-icons svg{width:16px;height:16px;}
-  .saved-pill{display:flex;align-items:center;gap:6px;font-size:12px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--white);color:var(--ink-soft);}
+  .saved-pill{display:flex;align-items:center;gap:6px;font-size:12px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--white);color:var(--ink-soft);white-space:nowrap;flex-shrink:0;}
+  @media (max-width:520px){ .saved-pill{padding:9px 12px;} .saved-pill-text{display:none;} }
   .saved-pill.has-items{border-color:var(--heart);color:var(--heart);}
   /* Veil intro loader */
   .veil-intro{position:fixed;inset:0;z-index:400;}
@@ -311,7 +312,7 @@
     </div>
     <div class="nav-right">
       <button type="button" class="saved-pill" id="saved-pill" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">
-        <span aria-hidden="true">♡</span> <span id="saved-count-label">已收藏 0</span>
+        <span aria-hidden="true">♡</span> <span class="saved-pill-text">已收藏</span> <span id="saved-count-label">0</span>
       </button>
       <a href="#inquire" class="btn" style="padding:9px 20px;font-size:10px;">INQUIRE</a>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="選單">
@@ -453,8 +454,8 @@
 <div class="section" id="options">
   <div class="wrap">
     <div style="text-align:center;margin-bottom:16px;">
-      <div class="eyebrow" style="margin-bottom:12px;">Wedding Media Options</div>
-      <h2 style="font-size:34px;">婚禮影音加值服務</h2>
+      <div class="eyebrow" style="margin-bottom:12px;">Wedding Add-on Options</div>
+      <h2 style="font-size:34px;">婚禮加值服務</h2>
       <div style="color:var(--ink-soft);font-size:13px;margin-top:10px;max-width:580px;margin-left:auto;margin-right:auto;">未來可以做成不同款式讓新人挑選搭配。下面示範都用 Tan &amp; Barry 的真實照片示意風格，<b>不是他們本人實際選用的成品</b>，正式上線時每位新人會有自己選的版本。</div>
     </div>
 
@@ -462,29 +463,29 @@
     <div class="grid-4" style="gap:18px;margin-bottom:40px;">
       <div class="card" style="padding:24px 20px;">
         <div class="eyebrow" style="margin-bottom:10px;">新人入場前播放</div>
-        <h3 style="font-size:18px;margin-bottom:4px;">オープニングムービー</h3>
-        <div style="font-size:12px;color:var(--ocean);margin-bottom:10px;">Opening Movie</div>
+        <h3 style="font-size:19px;margin-bottom:6px;">開場電影</h3>
+        <div style="font-size:11px;color:var(--ocean);margin-bottom:10px;">オープニングムービー · Opening Movie</div>
         <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;">1–2分鐘電影感短片，倒數氣氛拉滿後新人登場，不講細節只做氣氛。</div>
         <button type="button" class="btn" style="width:100%;" onclick="openFilm('tan-barry','opening')">▶ 播放示範</button>
       </div>
       <div class="card" style="padding:24px 20px;">
         <div class="eyebrow" style="margin-bottom:10px;">婚宴開場播放</div>
-        <h3 style="font-size:18px;margin-bottom:4px;">プロフィールムービー</h3>
-        <div style="font-size:12px;color:var(--ocean);margin-bottom:10px;">Profile Movie（新人介紹影片）</div>
+        <h3 style="font-size:19px;margin-bottom:6px;">新人介紹影片</h3>
+        <div style="font-size:11px;color:var(--ocean);margin-bottom:10px;">プロフィールムービー · Profile Movie</div>
         <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;">照片穿插相識故事文字，開場先讓賓客認識這對新人。</div>
         <button type="button" class="btn" style="width:100%;" onclick="openFilm('tan-barry','intro')">▶ 播放示範</button>
       </div>
       <div class="card" style="padding:24px 20px;">
         <div class="eyebrow" style="margin-bottom:10px;">婚宴尾聲播放</div>
-        <h3 style="font-size:18px;margin-bottom:4px;">エンドロール</h3>
-        <div style="font-size:12px;color:var(--ocean);margin-bottom:10px;">Ending Roll（婚禮回顧影片）</div>
+        <h3 style="font-size:19px;margin-bottom:6px;">婚禮回顧影片</h3>
+        <div style="font-size:11px;color:var(--ocean);margin-bottom:10px;">エンドロール · Ending Roll</div>
         <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;">當天精選照片＋賓客祝福留言剪成短片，晚宴尾聲播放讓賓客回味。</div>
         <button type="button" class="btn" style="width:100%;" onclick="openFilm('tan-barry')">▶ 播放示範</button>
       </div>
       <div class="card" style="padding:24px 20px;">
         <div class="eyebrow" style="margin-bottom:10px;">賓客入場時</div>
-        <h3 style="font-size:18px;margin-bottom:4px;">迎賓 Loop 影片</h3>
-        <div style="font-size:12px;color:var(--ocean);margin-bottom:10px;">Lobby Screen</div>
+        <h3 style="font-size:19px;margin-bottom:6px;">迎賓 Loop 影片</h3>
+        <div style="font-size:11px;color:var(--ocean);margin-bottom:10px;">Lobby Screen</div>
         <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;">會場入口螢幕持續循環播放，字卡常駐不搶戲，營造迎賓氣氛。</div>
         <button type="button" class="btn" style="width:100%;" onclick="openWelcomeLoop('tan-barry')">▶ 播放示範</button>
       </div>
@@ -882,7 +883,7 @@ var CHAPELS = [
     capacity:48, capacityDisplay:"官方 48／實際 40", aisle:"12m", banquet:"30 ／ 50 ／ 130 名",
     cuisine:"French", hotel:"Lazor Sea Resort（徒步2分鐘）", ocean:true,
     desc:"2025年最新落成，座落於千米白沙灘「天浜」之上，180度全景東海視野，鏡面天井是最大特色。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/04/IMG-20250410-WA0031-1.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251222_LazorSiele_0016.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/06/20250613_LSC_Photo-0032.avif","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250211_LazorSiele_L-0011.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250208_Highlight-0059.jpg"]
   },
   {
     slug:"lazor-garden-alivila", name_en:"Lazor Garden Alivila", name_zh:"克麗絲蒂教堂 · 海之翼教堂",
@@ -890,7 +891,7 @@ var CHAPELS = [
     capacity:60, capacityDisplay:"60 名", aisle:"12m", banquet:"6-30 ／ 31-150 名",
     cuisine:"French", hotel:"Hotel Nikko Alivila（徒步5分鐘）", ocean:true,
     desc:"哥德式建築搭配水晶玻璃裝飾，緊鄰Hotel Nikko Alivila，教堂面朝大海，是沖繩最具人氣的教堂之一。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/03/20241202_sde-0001-1.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/09/20250920_SS_LazorGarden-0045.avif"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/03/20241202_sde-0001-1.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251117_LazorGarden_Wedding_0036.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230118_Lazor-0009.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20250519_LG-0003.jpg"]
   },
   {
     slug:"monterey-lumer-chapel", name_en:"Monterey Lumer Chapel", name_zh:"露梅爾教堂 · 海之光教堂",
@@ -898,7 +899,7 @@ var CHAPELS = [
     capacity:70, capacityDisplay:"70 名", aisle:"16m", banquet:"14 ／ 58 ／ 100 名",
     cuisine:"French", hotel:"Hotel Monterey Okinawa（徒步2分鐘）", ocean:true,
     desc:"英式古典建築，尖拱頂配白色大理石與落地玻璃窗，背靠翡翠綠海，庭園有噴水池與四季花木。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_003.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_003.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260104_MontereyLumer_0032.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20251204_MontereyLumer_0027.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241018_Monterey_001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/04/20250228_Sde-0020.jpg"]
   },
   {
     slug:"aquagrace-wedding-chapel", name_en:"Aquagrace Chapel", name_zh:"艾葵雅教堂",
@@ -906,7 +907,7 @@ var CHAPELS = [
     capacity:60, capacityDisplay:"60 名", aisle:"13m", banquet:"35 ／ 60 名",
     cuisine:"French / Japanese", hotel:"Grand Mercure Cape Zanpa（徒步4分鐘）", ocean:false,
     desc:"鄰近Cape Zanpa海岬，提供法式或和式料理選擇，宴會廳規模較精巧，適合中小型婚禮。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0047.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0086.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0019.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20241203_Aquagrace-0030.jpg"]
   },
   {
     slug:"alivila-glory-church", name_en:"Alivila Glory Church", name_zh:"海之耀教堂 · 葛洛麗教堂",
@@ -914,7 +915,7 @@ var CHAPELS = [
     capacity:100, capacityDisplay:"100 名", aisle:"14m", banquet:"40 ／ 60 ／ 80 名",
     cuisine:"Japanese-Western", hotel:"Hotel Nikko Alivila（徒步3分鐘）", ocean:true,
     desc:"沖繩教堂中規模最大，最多可容納100人，14米聖潔之路，提供精緻和洋料理。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0039.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0007.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0013.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_AGC-0017.jpg"]
   },
   {
     slug:"diamond-ocean-chapel", name_en:"Diamond Ocean Chapel", name_zh:"鑽石海洋教堂",
@@ -922,7 +923,7 @@ var CHAPELS = [
     capacity:60, capacityDisplay:"60 名", aisle:"8m", banquet:"22 ／ 66 名",
     cuisine:"Japanese-Western", hotel:"喜璃癒志海灘渡假飯店（徒步1分鐘）", ocean:true,
     desc:"恩納村海景教堂，鄰近喜璃癒志海灘渡假飯店，提供精緻和洋料理。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220919_WeddingPhoto-0106.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0050.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20220920_WeddingPhoto-0014.jpg"]
   },
   {
     slug:"renaissance-ribera-church", name_en:"Renaissance Ribera", name_zh:"海之心教堂 · 麗貝菈教堂",
@@ -930,7 +931,7 @@ var CHAPELS = [
     capacity:48, capacityDisplay:"48 名", aisle:"12m", banquet:"50 ／ 100 名",
     cuisine:"French", hotel:"Renaissance Okinawa Resort（徒步5分鐘）", ocean:false,
     desc:"鄰近Renaissance Okinawa Resort，庭園氛圍教堂，宴會廳最大可容納100人。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0017.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/20230217_RRC-0039.jpg"]
   },
   {
     slug:"grand-bleu-chapel", name_en:"Grand Bleu Chapel", name_zh:"藍色海洋教堂 · 海藍教堂",
@@ -938,7 +939,7 @@ var CHAPELS = [
     capacity:40, capacityDisplay:"40 名（官方標示）", aisle:"10m", banquet:"室內56 ／ 花園24",
     cuisine:"French / BBQ", hotel:"Kanucha Bay Resort（教堂所在地點）", ocean:true,
     desc:"座落於Kanucha Bay Resort渡假村內，可選室內宴會或戶外花園BBQ派對，氣氛較輕鬆度假。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0004.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0018.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0024.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2026/02/20260205_GrandBleuChapel_0013.jpg"]
   },
   {
     slug:"eines-villa-di-nozze-okinawa", name_en:"Eines Villa di Nozze", name_zh:"五感教堂 · 艾妮絲公主教堂",
@@ -946,7 +947,7 @@ var CHAPELS = [
     capacity:40, capacityDisplay:"40 名", aisle:"10m", banquet:"2-56 名",
     cuisine:"French / Okinawan", hotel:"Hotel Resonex Nago（徒步5分鐘）", ocean:false,
     desc:"名護市的庭園型教堂，宴會廳容量彈性大（2–56人），提供法式或沖繩料理。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0001.avif","https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0002.avif","https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0007.avif","https://www.japanweddingchapel.com/wp-content/uploads/2026/01/20260126_EinesVilla_JWC_0009.avif"]
   },
   {
     slug:"kouri-island-celeste-chapel", name_en:"Kouri Island Celeste", name_zh:"古宇利島天空教堂",
@@ -954,7 +955,7 @@ var CHAPELS = [
     capacity:40, capacityDisplay:"40 名", aisle:"9m", banquet:"7個宴會廳／最大44 名",
     cuisine:"BBQ / French", hotel:"One Suite THE TERRACE（車程3分鐘）", ocean:true,
     desc:"位於戀愛之島古宇利島，七個宴會廳選擇多元，適合BBQ或精緻法式風格的海島婚禮。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0012.avif","https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0001.avif","https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0008.avif","https://www.japanweddingchapel.com/wp-content/uploads/2025/08/Kouri_Island_Website-0014.avif"]
   },
   {
     slug:"centlegenda-chapel", name_en:"Centlegenda Chapel", name_zh:"聖陶芮塔教堂",
@@ -962,7 +963,7 @@ var CHAPELS = [
     capacity:95, capacityDisplay:"95 名", aisle:"9m", banquet:"24 ／ 29 ／ 90 名",
     cuisine:"French", hotel:"Hilton Okinawa Chatan Resort（徒步3分鐘）", ocean:false,
     desc:"位於北谷町美浜鬧區，鄰近Hilton Okinawa Chatan Resort，交通生活機能最方便。",
-    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg"]
+    images:["https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_2.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0001.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/Centlegenda-Okinawa_7.jpg","https://www.japanweddingchapel.com/wp-content/uploads/2025/05/centlegenda-0003.jpg"]
   }
 ];
 
@@ -1153,7 +1154,7 @@ function toggleSave(slug){
 
 function renderSavedPill(){
   var pill = document.getElementById("saved-pill");
-  document.getElementById("saved-count-label").textContent = "已收藏 " + saved.size;
+  document.getElementById("saved-count-label").textContent = saved.size;
   pill.classList.toggle("has-items", saved.size>0);
 }
 
