@@ -14,72 +14,94 @@
       "items": []
     },
     {
-      "title": { "zh": "LSR 宴會", "ja": "LSR 披露宴", "en": "LSR Banquet" },
+      "title": { "zh": "Fiore 宴會", "ja": "Fiore 披露宴", "en": "Fiore Banquet" },
       "venue": { "name": "Lazor Sea Resort · Banquet Hall Fiore", "map": "https://maps.app.goo.gl/VdEExZuY7R6P1V1w5" },
       "scope": "full",
       "people": [
         { "role": { "zh": "宴會 MC", "ja": "披露宴 司会", "en": "Banquet MC" }, "name": "MC 1" },
-        { "role": { "zh": "佈置組", "ja": "装飾担当", "en": "Decoration" }, "name": "佈置 1" }
+        { "role": { "zh": "佈置組", "ja": "装飾担当", "en": "Decoration" }, "name": "佈置 1" },
+        { "role": { "zh": "統籌", "ja": "進行統括", "en": "Coordinator" }, "name": "統籌 S" }
       ],
+      "note": { "zh": "19:15 起統籌和 After Party MC 先去 After Party，之後由 Fiore 接手人員跟進", "ja": "19:15以降、進行統括とアフターパーティー司会は先に移動。以降はFioreの引継ぎ担当が対応", "en": "From 19:15 the coordinator and After Party MC leave for the After Party; Fiore's handover staff take over" },
       "items": [
+        { "start": "16:30", "type": "meeting",
+          "title": { "zh": "同宴會 MC＋場地對流程", "ja": "司会・会場スタッフと進行の最終確認", "en": "Run through the rundown with the MC and venue" },
+          "cues": [
+            { "zh": "確認音樂", "ja": "音楽を確認", "en": "Check music" },
+            { "zh": "確認 Video", "ja": "映像を確認", "en": "Check videos" },
+            { "zh": "確認投影幕（Screen）", "ja": "スクリーンを確認", "en": "Check the screen" },
+            { "zh": "確認燈光", "ja": "照明を確認", "en": "Check lighting" }
+          ] },
         { "start": "17:15", "end": "18:00", "type": "dress",
           "title": { "zh": "新人補妝、轉造型及換衫", "ja": "新郎新婦 お色直し・ヘアメイク直し", "en": "Couple touch-up, restyle & outfit change" },
           "look": "3rd dress",
           "note": { "zh": "完成後化妝師會離開", "ja": "完了後、ヘアメイクは退出", "en": "Make-up artist leaves after this" } },
         { "start": "17:40", "type": "guest",
           "title": { "zh": "嘉賓簽到", "ja": "ゲスト受付", "en": "Guest check-in" } },
-        { "start": "18:00", "end": "18:15", "type": "party",
-          "title": { "zh": "新人進場＋新郎、新娘致辭", "ja": "新郎新婦 入場＋新郎・新婦スピーチ", "en": "Couple march-in + groom & bride speeches" },
+        { "start": "17:50", "type": "guest",
+          "title": { "zh": "提醒場地幫嘉賓點飲品，確認嘉賓到場情況", "ja": "会場にゲストのドリンクオーダーを依頼、ゲストの到着状況を確認", "en": "Ask the venue to take guests' drink orders; check who has arrived" } },
+        { "start": "17:55", "type": "prep",
+          "title": { "zh": "確認全部 Ready，準備 Opening", "ja": "全員スタンバイ確認、オープニング準備", "en": "Confirm everyone is ready for the opening" },
           "cues": [
-            { "zh": "進場曲：Beautiful in White", "ja": "入場曲：Beautiful in White", "en": "March-in song: Beautiful in White" },
-            { "zh": "致辭前 MC 示意 operator 關音樂", "ja": "スピーチ前に司会がオペレーターへ合図し音楽オフ", "en": "Before speeches, MC signals operator: music off" }
+            { "zh": "新人 Ready", "ja": "新郎新婦 OK", "en": "Couple ready" },
+            { "zh": "MC Ready", "ja": "司会 OK", "en": "MC ready" },
+            { "zh": "音樂 Ready", "ja": "音楽 OK", "en": "Music ready" }
+          ] },
+        { "start": "18:00", "end": "18:15", "type": "party",
+          "title": { "zh": "新人進場＋新人 Speech", "ja": "新郎新婦 入場＋スピーチ", "en": "Couple march-in + speeches" },
+          "alert": { "zh": "新人準備好 → 先通知宴會 MC", "ja": "新郎新婦の準備ができたら、まず司会へ連絡", "en": "When the couple is ready, tell the MC first" },
+          "cues": [
+            { "zh": "通知宴會 MC", "ja": "司会へ連絡", "en": "Notify the MC" },
+            { "zh": "Music Start（進場曲：Beautiful in White）", "ja": "音楽スタート（入場曲：Beautiful in White）", "en": "Music start (march-in: Beautiful in White)" },
+            { "zh": "開門", "ja": "扉を開ける", "en": "Open the doors" },
+            { "zh": "新人進場 → 鞠躬 → 繞場一周", "ja": "新郎新婦入場 → お辞儀 → 会場を一周", "en": "Couple enters → bows → walks a lap of the room" },
+            { "zh": "新人 Speech（Speech 前 MC 示意關音樂）", "ja": "新郎新婦スピーチ（前に司会の合図で音楽オフ）", "en": "Couple's speech (MC signals music off first)" }
           ] },
         { "start": "18:15", "type": "party",
-          "title": { "zh": "Toasting 祝酒", "ja": "乾杯", "en": "Toasting" },
+          "title": { "zh": "Toast 祝酒", "ja": "乾杯", "en": "Toast" },
           "cues": [
-            { "zh": "MC 喊「cheers!」→ 音樂開", "ja": "司会「cheers!」→ 音楽オン", "en": "MC says \"cheers!\" → music on" },
-            { "zh": "歌曲：Wedding Medley", "ja": "曲：Wedding Medley", "en": "Song: Wedding Medley" }
+            { "zh": "宴會 MC 講「Cheers!」", "ja": "司会「Cheers!」", "en": "MC says \"Cheers!\"" },
+            { "zh": "Music Start（Wedding Medley）", "ja": "音楽スタート（Wedding Medley）", "en": "Music start (Wedding Medley)" }
           ] },
-        { "start": "18:20", "type": "party",
-          "title": { "zh": "開始上菜", "ja": "お料理サーブ開始", "en": "Start serving dishes" } },
+        { "start": "18:20", "type": "media",
+          "title": { "zh": "上第一道料理，準備 Video 1", "ja": "1品目サーブ、ビデオ1の準備", "en": "First course served; prep Video 1" },
+          "cues": [
+            { "zh": "跟 MC 確認準備 Video 1", "ja": "司会とビデオ1の準備を確認", "en": "Confirm Video 1 prep with the MC" },
+            { "zh": "放低投影幕", "ja": "スクリーンを下ろす", "en": "Lower the screen" },
+            { "zh": "關窗簾", "ja": "カーテンを閉める", "en": "Close the curtains" }
+          ] },
         { "start": "18:30", "type": "media",
-          "title": { "zh": "Video 1（2 分鐘）", "ja": "ビデオ1（2分）", "en": "Video 1 (2 min)" },
+          "title": { "zh": "播 Video 1（2 分鐘）", "ja": "ビデオ1 上映（2分）", "en": "Play Video 1 (2 min)" },
           "cues": [
-            { "zh": "MC 示意 operator 放下投影幕", "ja": "司会の合図でスクリーンを下ろす", "en": "MC signals operator to drop the screen" },
-            { "zh": "MC 簡介影片", "ja": "司会がビデオを簡単に紹介", "en": "MC briefly introduces the video" },
-            { "zh": "MC 示意播放", "ja": "司会の合図で再生", "en": "MC signals operator to play" },
-            { "zh": "播完 operator 收起投影幕", "ja": "再生後スクリーンを上げる", "en": "Operator rolls the screen back up after" }
+            { "zh": "Video 1 Ready", "ja": "ビデオ1 スタンバイ", "en": "Video 1 ready" },
+            { "zh": "通知 MC 請大家留意", "ja": "司会からゲストへ注目を促す", "en": "MC asks everyone's attention" },
+            { "zh": "關燈", "ja": "消灯", "en": "Lights off" },
+            { "zh": "MC Intro", "ja": "司会が紹介", "en": "MC intro" },
+            { "zh": "Play Video", "ja": "再生", "en": "Play video" }
           ] },
-        { "start": "18:35", "type": "shoot",
-          "title": { "zh": "Free flow photo taking 自由拍照", "ja": "フリー写真撮影タイム", "en": "Free-flow photo taking" },
+        { "start": "18:45", "type": "party",
+          "title": { "zh": "伴娘＋兄弟 Speech", "ja": "ブライズメイド＋グルームズマン スピーチ", "en": "Bridesmaid + groomsmen speech" },
           "cues": [
-            { "zh": "MC 請各組出來拍照", "ja": "司会が各グループを順に呼ぶ", "en": "MC invites each group to come up" }
-          ] },
-        { "start": "18:45", "type": "party", "tbd": true,
-          "title": { "zh": "伴娘＋兄弟致辭", "ja": "ブライズメイド＋グルームズマン スピーチ", "en": "Bridesmaid + groomsmen speech" },
-          "cues": [
-            { "zh": "MC 示意 operator 停音樂", "ja": "司会の合図で音楽を止める", "en": "MC signals operator to stop music" }
+            { "zh": "Music Stop", "ja": "音楽ストップ", "en": "Music stop" }
           ] },
         { "start": "19:00", "type": "party",
           "title": { "zh": "遊戲：9 問 9 答（沖繩手信）", "ja": "ゲーム：9問9答（沖縄のお土産）", "en": "Game: 9 Q&A (Okinawa souvenirs)" } },
         { "start": "19:15", "type": "party",
-          "title": { "zh": "一齊開盲盒", "ja": "みんなでブラインドボックス開封", "en": "Open blind boxes together" } },
+          "title": { "zh": "一齊開盲盒", "ja": "みんなでブラインドボックス開封", "en": "Open blind boxes together" },
+          "alert": { "zh": "統籌和 After Party MC 出發去 After Party", "ja": "進行統括とアフターパーティー司会はアフターパーティー会場へ移動", "en": "Coordinator and After Party MC head to the After Party" } },
         { "start": "19:25", "type": "media",
           "title": { "zh": "Video 2（8 分鐘）", "ja": "ビデオ2（8分）", "en": "Video 2 (8 min)" },
+          "alert": { "zh": "提醒 Fiore 接手人員準備 Video 2", "ja": "Fioreの引継ぎ担当にビデオ2の準備を依頼", "en": "Remind Fiore's handover staff to prep Video 2" },
           "cues": [
-            { "zh": "MC 示意 operator 放下投影幕", "ja": "司会の合図でスクリーンを下ろす", "en": "MC signals operator to drop the screen" },
-            { "zh": "MC 簡介影片", "ja": "司会がビデオを簡単に紹介", "en": "MC briefly introduces the video" },
-            { "zh": "MC 示意播放", "ja": "司会の合図で再生", "en": "MC signals operator to play" },
-            { "zh": "播完 operator 收起投影幕", "ja": "再生後スクリーンを上げる", "en": "Operator rolls the screen back up after" }
+            { "zh": "放低投影幕、關窗簾、關燈", "ja": "スクリーンを下ろす・カーテン・消灯", "en": "Lower screen, close curtains, lights off" },
+            { "zh": "MC Intro → Play Video", "ja": "司会紹介 → 再生", "en": "MC intro → play video" },
+            { "zh": "播完收起投影幕", "ja": "上映後スクリーンを上げる", "en": "Roll the screen back up after" }
           ] },
         { "start": "19:30", "end": "19:50", "type": "party",
           "title": { "zh": "逐桌敬酒", "ja": "テーブルラウンド（各卓で乾杯）", "en": "Toasting at each table" } },
         { "start": "20:00", "type": "wrap",
-          "title": { "zh": "送客", "ja": "ゲストお見送り", "en": "Send off guests" },
-          "alert": { "zh": "送客時通知 After Party MC 和佈置組", "ja": "お見送り開始時にアフターパーティー司会と装飾担当へ連絡", "en": "Let the After Party MC and decoration team know when sending off guests" },
-          "cues": [
-            { "zh": "MC 請賓客盡快上接駁車", "ja": "司会がゲストへ送迎バスへの早めの乗車を案内", "en": "MC asks guests to get on the shuttle asap" }
-          ] }
+          "title": { "zh": "送客 Guest Send-off", "ja": "ゲストお見送り", "en": "Guest send-off" },
+          "alert": { "zh": "提醒嘉賓盡快上接駁車", "ja": "ゲストに送迎バスへの早めの乗車を案内", "en": "Ask guests to board the shuttle asap" } }
       ]
     },
     {
@@ -99,25 +121,54 @@
       "venue": { "name": { "zh": "Beach After Party 會場", "ja": "ビーチ アフターパーティー会場", "en": "Beach After Party venue" }, "map": "https://maps.app.goo.gl/xPCkitFTuKPcK6Pt5" },
       "scope": "full",
       "people": [
-        { "role": { "zh": "After Party MC", "ja": "アフターパーティー 司会", "en": "After Party MC" }, "name": "MC 2" }
+        { "role": { "zh": "After Party MC", "ja": "アフターパーティー 司会", "en": "After Party MC" }, "name": "MC 2" },
+        { "role": { "zh": "攝影師", "ja": "カメラマン", "en": "Photographer" }, "name": "攝影師 B" }
       ],
       "note": { "zh": "攝影只跟 1 小時：20:30–21:30", "ja": "撮影は1時間のみ：20:30–21:30", "en": "Photography covers 1 hour only: 20:30–21:30" },
       "items": [
+        { "start": "20:15", "type": "guest",
+          "title": { "zh": "嘉賓到場 Guest Arrival", "ja": "ゲスト到着", "en": "Guest arrival" },
+          "cues": [
+            { "zh": "開 BGM（Spotify 歌單）", "ja": "BGMスタート（Spotifyプレイリスト）", "en": "Start BGM (Spotify playlist)" }
+          ] },
+        { "start": "20:25", "type": "prep",
+          "title": { "zh": "嘉賓排兩列，準備迎接新人", "ja": "ゲストが2列に並び、入場を待つ", "en": "Guests line up in two rows for the entrance" },
+          "cues": [
+            { "zh": "嘉賓排兩列", "ja": "ゲスト2列に整列", "en": "Guests form two lines" },
+            { "zh": "手機燈 Ready", "ja": "スマホライト準備", "en": "Phone lights ready" },
+            { "zh": "確認攝影師拍攝 Ready", "ja": "カメラマンの準備を確認", "en": "Confirm photographer is ready" }
+          ] },
         { "start": "20:30", "type": "party",
-          "title": { "zh": "新人入場，Groom Speech＋Dance", "ja": "新郎新婦 入場、新郎スピーチ＋ダンス", "en": "Couple entrance, groom speech + dance" } },
+          "title": { "zh": "新人進場 Couple March-in", "ja": "新郎新婦 入場", "en": "Couple march-in" },
+          "cues": [
+            { "zh": "After Party MC Ready", "ja": "アフターパーティー司会 スタンバイ", "en": "After Party MC ready" },
+            { "zh": "Music Start（March-in 音樂）", "ja": "音楽スタート（入場曲）", "en": "Music start (march-in track)" },
+            { "zh": "新人進場", "ja": "新郎新婦入場", "en": "Couple enters" }
+          ] },
+        { "start": "20:40", "type": "party",
+          "title": { "zh": "Groom Dance", "ja": "新郎ダンス", "en": "Groom dance" } },
+        { "start": "20:55", "type": "prep",
+          "title": { "zh": "嘉賓去沙灘階梯排兩列，準備仙女棒", "ja": "ゲストをビーチの階段へ誘導し2列に、スパークラー準備", "en": "Guests to the beach steps in two rows; prep sparklers" } },
         { "start": "21:00", "end": "21:30", "type": "shoot",
-          "title": { "zh": "Sparkler Shooting 仙女棒拍攝", "ja": "スパークラー撮影", "en": "Sparkler shooting" } },
+          "title": { "zh": "Sparkler Shooting 仙女棒拍攝", "ja": "スパークラー撮影", "en": "Sparkler shooting" },
+          "alert": { "zh": "先確認攝影師 Ready 才點火", "ja": "カメラマンの準備を確認してから点火", "en": "Only light up once the photographer is ready" } },
+        { "start": "21:30", "end": "22:45", "type": "party",
+          "title": { "zh": "自由活動 Free Program", "ja": "フリータイム", "en": "Free program" } },
         { "start": "22:45", "type": "wrap",
-          "title": { "zh": "Thank you speech，送新人離場", "ja": "サンキュースピーチ、新郎新婦お見送り", "en": "Thank-you speech and escort the couple out" } }
+          "title": { "zh": "Thank You Speech，嘉賓離場", "ja": "サンキュースピーチ、ゲスト退場", "en": "Thank-you speech, guests leave" } }
       ]
     }
   ],
   "materials": [
-    { "kind": "music", "label": { "zh": "進場曲", "ja": "入場曲", "en": "March-in" }, "value": "Beautiful in White" },
-    { "kind": "music", "label": { "zh": "祝酒", "ja": "乾杯", "en": "Toasting" }, "value": "Wedding Medley" },
+    { "kind": "music", "label": { "zh": "宴會進場曲", "ja": "披露宴 入場曲", "en": "Banquet march-in" }, "value": "Beautiful in White" },
+    { "kind": "music", "label": { "zh": "祝酒", "ja": "乾杯", "en": "Toast" }, "value": "Wedding Medley" },
+    { "kind": "music", "label": { "zh": "After Party 進場＋跳舞音樂", "ja": "アフターパーティー 入場・ダンス曲", "en": "After Party march-in & dance" }, "value": { "zh": "Google Drive（連結在 WhatsApp 群組）", "ja": "Google ドライブ（リンクはWhatsAppグループ）", "en": "Google Drive (link in the WhatsApp group)" } },
+    { "kind": "music", "label": { "zh": "After Party BGM", "ja": "アフターパーティー BGM", "en": "After Party BGM" }, "value": { "zh": "Spotify 歌單（連結在 WhatsApp 群組）", "ja": "Spotify プレイリスト（リンクはWhatsAppグループ）", "en": "Spotify playlist (link in the WhatsApp group)" } },
     { "kind": "video", "label": "Video 1", "value": { "zh": "2 分鐘 · 18:30 播", "ja": "2分・18:30 上映", "en": "2 min · plays 18:30" } },
-    { "kind": "video", "label": "Video 2", "value": { "zh": "8 分鐘 · 19:25 播", "ja": "8分・19:25 上映", "en": "8 min · plays 19:25" } },
+    { "kind": "video", "label": "Video 2", "value": { "zh": "8 分鐘 · 19:25 播（Fiore 接手人員）", "ja": "8分・19:25 上映（Fiore引継ぎ担当）", "en": "8 min · plays 19:25 (Fiore handover staff)" } },
+    { "kind": "item", "label": { "zh": "場地設備", "ja": "会場設備", "en": "Venue setup" }, "value": { "zh": "投影幕、窗簾、燈光", "ja": "スクリーン・カーテン・照明", "en": "Screen, curtains, lighting" } },
     { "kind": "item", "label": { "zh": "遊戲道具", "ja": "ゲーム用品", "en": "Game props" }, "value": { "zh": "9 問 9 答沖繩手信、盲盒", "ja": "9問9答の沖縄土産、ブラインドボックス", "en": "Okinawa souvenirs for 9 Q&A, blind boxes" } },
+    { "kind": "item", "label": { "zh": "After Party", "ja": "アフターパーティー", "en": "After Party" }, "value": { "zh": "仙女棒、嘉賓手機燈", "ja": "スパークラー、ゲストのスマホライト", "en": "Sparklers, guests' phone lights" } },
     { "kind": "item", "label": { "zh": "接駁", "ja": "送迎", "en": "Transport" }, "value": { "zh": "20:00 賓客上接駁車；新人由兄弟開車", "ja": "20:00 ゲストは送迎バス／新郎新婦はグルームズマンの車", "en": "20:00 guests take the shuttle; groomsmen drive the couple" } }
   ]
 }
