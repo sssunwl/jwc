@@ -279,6 +279,11 @@
               "zh": "Play Video",
               "ja": "再生",
               "en": "Play video"
+            },
+            {
+              "zh": "播完立即升返投影幕",
+              "ja": "上映後すぐスクリーンを上げる",
+              "en": "Raise the screen right after the video"
             }
           ]
         },
@@ -316,9 +321,9 @@
             "en": "Open blind boxes together"
           },
           "alert": {
-            "zh": "協助人員和 After Party MC 出發去 After Party",
-            "ja": "サポート担当とアフターパーティー司会はアフターパーティー会場へ移動",
-            "en": "Support staff and After Party MC head to the After Party"
+            "zh": "協助人員和 After Party MC 出發去 After Party，帶新人的 LED name tag ×2 交給佈置組",
+            "ja": "サポート担当とアフターパーティー司会は移動。新郎新婦のLEDネームタグ×2を装飾チームへ持参",
+            "en": "Support staff and After Party MC head to the After Party — bring the couple's 2 LED name tags to the deco team"
           }
         },
         {
@@ -346,9 +351,9 @@
               "en": "MC intro → play video"
             },
             {
-              "zh": "播完收起投影幕",
-              "ja": "上映後スクリーンを上げる",
-              "en": "Roll the screen back up after"
+              "zh": "播完立即升返投影幕",
+              "ja": "上映後すぐスクリーンを上げる",
+              "en": "Raise the screen right after the video"
             }
           ]
         },
@@ -685,6 +690,19 @@
         "zh": "20:00 賓客上接駁車；新人由兄弟開車",
         "ja": "20:00 ゲストは送迎バス／新郎新婦はグルームズマンの車",
         "en": "20:00 guests take the shuttle; groomsmen drive the couple"
+      }
+    },
+    {
+      "kind": "item",
+      "label": {
+        "zh": "LED name tag",
+        "ja": "LEDネームタグ",
+        "en": "LED name tags"
+      },
+      "value": {
+        "zh": "新人 ×2，19:15 由協助人員帶去 After Party 交佈置組",
+        "ja": "新郎新婦用×2、19:15にサポート担当がアフターパーティーの装飾チームへ",
+        "en": "×2 for the couple; support staff bring them to the After Party deco team at 19:15"
       }
     }
   ]
