@@ -44,7 +44,7 @@ Demo 在 sssunwl.github.io/jwc → 頁尾「CMS 預覽」→ Rundown 分頁。
 - KV `jwc-rundown`：`ch:<id>` 變更紀錄、`sub:<id>:<hash>` 推播訂閱（30 天過期）、`sent:*` 已發提醒去重、`fail:<ip>` PIN 錯誤次數
 - 排程提醒用 **Durable Object 鬧鐘**（`Scheduler`），不是 cron——帳號免費方案 5 個 cron 名額已用完。鬧鐘設在下一個「開始前 5 分鐘／開始時」，有變更或新訂閱會重排
 - Secrets：`VAPID_PRIVATE_JWK`、`ADMIN_PIN`（`npx wrangler secret put`）；VAPID 公鑰在 `wrangler.toml`
-- 推播加密是自己用 WebCrypto 寫的（RFC 8291 aes128gcm＋VAPID ES256），2026-10-02 已在本機驗過解密和驗簽
+- 推播加密是自己用 WebCrypto 寫的（RFC 8291 aes128gcm＋VAPID ES256），2026-10-02 本機驗過解密和驗簽，同日 SS 的 iPhone（主畫面版）實機收到通知 ✅
 
 ## 新增一場
 1. 複製 `_template.json` → `YYYY-MM-DD-代號.json`
