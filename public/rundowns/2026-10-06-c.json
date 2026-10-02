@@ -1,37 +1,40 @@
 {
   "id": "2026-10-06-c",
   "date": "2026-10-06",
-  "couple": "新人 C",
+  "couple": { "zh": "新人 C", "ja": "新郎新婦 C", "en": "Couple C" },
   "guests": null,
   "notes": [],
   "segments": [
     {
-      "title": "Resort 準備",
+      "title": { "zh": "Resort 準備", "ja": "リゾートで準備", "en": "Resort prep" },
       "venue": { "name": "Resort" },
       "scope": "full",
       "items": [
-        { "start": "10:15", "title": "攝影師到達，紅裙拍攝", "type": "shoot", "look": "紅裙", "who": ["攝影師"] },
-        { "start": "10:30", "title": "敬茶儀式及合照", "type": "ceremony", "note": "共 16 組" },
-        { "start": "12:00", "title": "紅裙轉婚紗", "type": "dress", "look": "婚紗" },
-        { "start": "12:30", "title": "婚紗拍攝", "type": "shoot" },
-        { "start": "13:00", "title": "出發教堂", "type": "move", "note": "車程約 20 分鐘" }
+        { "start": "10:15", "type": "shoot", "title": { "zh": "攝影師到達，紅裙拍攝", "ja": "カメラマン到着、赤いドレスで撮影", "en": "Photographer arrives, red dress shoot" }, "look": { "zh": "紅裙", "ja": "赤いドレス", "en": "Red dress" }, "who": [{ "zh": "攝影師", "ja": "カメラマン", "en": "Photographer" }] },
+        { "start": "10:30", "type": "ceremony", "title": { "zh": "敬茶儀式及合照", "ja": "ティーセレモニー（敬茶）と記念撮影", "en": "Tea ceremony & photos" }, "note": { "zh": "共 16 組", "ja": "全16組", "en": "16 groups" } },
+        { "start": "12:00", "type": "dress", "title": { "zh": "紅裙轉婚紗", "ja": "赤いドレスからウェディングドレスへ", "en": "Change from red dress to wedding gown" }, "look": { "zh": "婚紗", "ja": "ウェディングドレス", "en": "Wedding gown" } },
+        { "start": "12:30", "type": "shoot", "title": { "zh": "婚紗拍攝", "ja": "ウェディングドレス撮影", "en": "Wedding gown shoot" } },
+        { "start": "13:00", "type": "move", "title": { "zh": "出發教堂", "ja": "教会へ出発", "en": "Leave for the chapel" }, "note": { "zh": "車程約 20 分鐘", "ja": "車で約20分", "en": "About 20 min drive" } }
       ]
     },
     {
-      "title": "教堂儀式",
-      "venue": { "name": "教堂" },
+      "title": { "zh": "教堂儀式", "ja": "挙式", "en": "Ceremony" },
+      "venue": { "name": { "zh": "教堂", "ja": "教会", "en": "Chapel" } },
       "scope": "full",
       "items": [
-        { "start": "13:40", "title": "入館", "type": "meeting" },
-        { "start": "13:45", "title": "與教堂職員會議", "type": "meeting" },
-        { "start": "13:45", "end": "14:15", "title": "親友到達貴賓室等候", "type": "guest", "note": "14:15 前到齊" },
-        { "start": "14:00", "title": "儀式前彩排", "type": "rehearsal", "who": ["新人", "新娘舅父", "姨丈", "伴娘 ×2"], "alert": "舅父、姨丈、2 位伴娘要一起彩排，請提早 13:50 到達" },
-        { "start": "14:20", "title": "安排親友入座", "type": "guest" },
-        { "start": "14:30", "title": "儀式正式開始", "type": "ceremony" },
-        { "start": "15:00", "title": "儀式完成，教堂外拍攝", "type": "shoot", "cues": ["敲鐘儀式", "大合照"] },
-        { "start": "15:30", "title": "教堂部份拍攝完成", "type": "wrap", "alert": "請所有親友離開教堂" },
-        { "start": "15:30", "end": "16:00", "title": "附近沙灘拍照", "type": "shoot", "note": "新人為主，親友也可一起" },
-        { "start": "16:00", "title": "回 Resort", "type": "move" }
+        { "start": "13:40", "type": "meeting", "title": { "zh": "入館", "ja": "入館", "en": "Arrive at chapel" } },
+        { "start": "13:45", "type": "meeting", "title": { "zh": "與教堂職員會議", "ja": "教会スタッフと打ち合わせ", "en": "Meeting with chapel staff" } },
+        { "start": "13:45", "end": "14:15", "type": "guest", "title": { "zh": "親友到達貴賓室等候", "ja": "ゲスト 控室に到着・待機", "en": "Guests arrive and wait in the lounge" }, "note": { "zh": "14:15 前到齊", "ja": "14:15までに全員集合", "en": "All present by 14:15" } },
+        { "start": "14:00", "type": "rehearsal", "title": { "zh": "儀式前彩排", "ja": "挙式リハーサル", "en": "Ceremony rehearsal" },
+          "who": [{ "zh": "新人", "ja": "新郎新婦", "en": "Couple" }, { "zh": "新娘舅父", "ja": "新婦の伯父（叔父）", "en": "Bride's uncle" }, { "zh": "姨丈", "ja": "新婦の叔母の夫", "en": "Bride's uncle (aunt's husband)" }, { "zh": "伴娘 ×2", "ja": "ブライズメイド ×2", "en": "Bridesmaids ×2" }],
+          "alert": { "zh": "舅父、姨丈、2 位伴娘要一起彩排，請提早 13:50 到達", "ja": "伯父・叔父・ブライズメイド2名もリハーサル参加、13:50までに到着", "en": "Uncles and 2 bridesmaids join rehearsal — arrive early by 13:50" } },
+        { "start": "14:20", "type": "guest", "title": { "zh": "安排親友入座", "ja": "ゲスト着席のご案内", "en": "Seat the guests" } },
+        { "start": "14:30", "type": "ceremony", "title": { "zh": "儀式正式開始", "ja": "挙式開始", "en": "Ceremony begins" } },
+        { "start": "15:00", "type": "shoot", "title": { "zh": "儀式完成，教堂外拍攝", "ja": "挙式終了、教会外で撮影", "en": "Ceremony ends, photos outside the chapel" },
+          "cues": [{ "zh": "敲鐘儀式", "ja": "ベルセレモニー", "en": "Bell ringing" }, { "zh": "大合照", "ja": "集合写真", "en": "Group photo" }] },
+        { "start": "15:30", "type": "wrap", "title": { "zh": "教堂部份拍攝完成", "ja": "教会での撮影終了", "en": "Chapel photos done" }, "alert": { "zh": "請所有親友離開教堂", "ja": "ゲスト全員に教会から退出いただく", "en": "All guests to leave the chapel" } },
+        { "start": "15:30", "end": "16:00", "type": "shoot", "title": { "zh": "附近沙灘拍照", "ja": "近くのビーチで撮影", "en": "Photos at a nearby beach" }, "note": { "zh": "新人為主，親友也可一起", "ja": "新郎新婦中心、ゲストも参加可", "en": "Mainly the couple; guests may join" } },
+        { "start": "16:00", "type": "move", "title": { "zh": "回 Resort", "ja": "リゾートへ戻る", "en": "Back to the resort" } }
       ]
     },
     {
@@ -39,14 +42,14 @@
       "venue": { "name": "Resort" },
       "scope": "full",
       "items": [
-        { "start": "16:45", "end": "17:30", "title": "補妝轉造型", "type": "dress", "look": "Party 造型", "note": "在 Lacasa" },
-        { "start": "17:30", "end": "20:00", "title": "Party", "type": "party" },
-        { "start": "20:00", "end": "20:30", "title": "煙火拍攝", "type": "shoot" },
-        { "start": "20:30", "title": "完成", "type": "wrap" }
+        { "start": "16:45", "end": "17:30", "type": "dress", "title": { "zh": "補妝轉造型", "ja": "お色直し・ヘアメイク直し", "en": "Touch-up & restyle" }, "look": { "zh": "Party 造型", "ja": "パーティースタイル", "en": "Party look" }, "note": { "zh": "在 Lacasa", "ja": "Lacasa にて", "en": "At Lacasa" } },
+        { "start": "17:30", "end": "20:00", "type": "party", "title": "Party" },
+        { "start": "20:00", "end": "20:30", "type": "shoot", "title": { "zh": "煙火拍攝", "ja": "花火撮影", "en": "Fireworks shoot" } },
+        { "start": "20:30", "type": "wrap", "title": { "zh": "完成", "ja": "終了", "en": "Done" } }
       ]
     }
   ],
   "materials": [
-    { "kind": "item", "label": "敬茶", "value": "共 16 組親友敬茶＋合照" }
+    { "kind": "item", "label": { "zh": "敬茶", "ja": "敬茶", "en": "Tea ceremony" }, "value": { "zh": "共 16 組親友敬茶＋合照", "ja": "16組の敬茶と記念撮影", "en": "16 groups, tea + photos" } }
   ]
 }

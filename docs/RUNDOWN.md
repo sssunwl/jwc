@@ -14,7 +14,37 @@ Demo 在 sssunwl.github.io/jwc → 頁尾「CMS 預覽」→ Rundown 分頁。
 | `public/rundowns/_template.json` | 新增一場時複製這份 | 是 |
 | `private/rundowns/*.json` | 真實版，含真名 | **否**（`.gitignore`） |
 
-**新人姓名、賓客、工作人員真名絕不放 `public/`**。
+**新人姓名、賓客、工作人員真名絕不放 `public/`**（2026-10-02 SS 決定現場版也先用代號）。
+
+## 入口
+- **現場版**（給負責人用，iPhone 可加到主畫面）：https://sssunwl.github.io/jwc/day/ → `public/day/`
+  - 指定場次＋語言：`day/?w=2026-10-03-b&lang=ja`（右上「分享」會自動帶）
+  - 模擬時間測試：`day/?w=2026-10-03-b&t=18:25`（設定後照真實速度往前走）
+- **CMS Demo** 的手機框用 iframe 嵌 `day/?embed=1`（同一份程式；滑桿／貼上轉換用 postMessage 控制）
+- **後端** `worker/`（Cloudflare Worker `jwc-rundown`，https://jwc-rundown.sssunjp.workers.dev）
+
+## 現場版行為
+- 時間一律**沖繩時間（Asia/Tokyo）**，不跟手機時區走（香港手機慢一小時也不會錯）
+- 當天頂部即時卡：進行中「剩 mm:ss」＋進度條（攝影師看還能拍多久）、下一項倒數，每秒更新，剩 5 分鐘變色
+- 過了時間只變淡、不隱藏；過去的日子永遠點得進去；自動捲到「進行中」只在打開時做一次
+- 中／日／EN，「對照」同時顯示另外兩種語言
+- 🔊 響鈴（頁面開著時）、☀ 常亮（Wake Lock）
+- 🔔 通知（Web Push，鎖屏也會到）：每項開始前 5 分鐘＋開始時、現場延後／改時間／取消、公告。**iPhone 一定要先「加入主畫面」再從主畫面打開才能開**
+- 每 30 秒同步現場更改、每 5 分鐘重抓原稿；斷網時用上次的版本（service worker＋localStorage）
+
+## 現場更改（管理模式）
+- 頁面最底「管理模式」→ 輸入 PIN（Worker secret `ADMIN_PIN`，本機備份 `~/.config/jwc/rundown.json`）→ 填名字
+- 可以：還沒開始的流程全部 −5／+5／+10／+15／自訂、單項改時間、取消／恢復單項、發公告、看紀錄並撤銷
+- **原稿 JSON 不動**，變更是一條條紀錄（KV `ch:<id>`），前端和 Worker 用同一套邏輯照順序套用；撤銷＝標記 `undone`，紀錄保留
+- 單項用「原始開始時間|中文標題」當 key：**當天有變更後就不要再改原稿那一項的時間或中文標題**，不然變更會對不上
+- 同一 IP 一小時 PIN 錯 10 次會鎖
+
+## 後端（worker/）
+- 部署：`cd worker && npx wrangler deploy`
+- KV `jwc-rundown`：`ch:<id>` 變更紀錄、`sub:<id>:<hash>` 推播訂閱（30 天過期）、`sent:*` 已發提醒去重、`fail:<ip>` PIN 錯誤次數
+- 排程提醒用 **Durable Object 鬧鐘**（`Scheduler`），不是 cron——帳號免費方案 5 個 cron 名額已用完。鬧鐘設在下一個「開始前 5 分鐘／開始時」，有變更或新訂閱會重排
+- Secrets：`VAPID_PRIVATE_JWK`、`ADMIN_PIN`（`npx wrangler secret put`）；VAPID 公鑰在 `wrangler.toml`
+- 推播加密是自己用 WebCrypto 寫的（RFC 8291 aes128gcm＋VAPID ES256），2026-10-02 已在本機驗過解密和驗簽
 
 ## 新增一場
 1. 複製 `_template.json` → `YYYY-MM-DD-代號.json`
@@ -44,6 +74,9 @@ Demo 在 sssunwl.github.io/jwc → 頁尾「CMS 預覽」→ Rundown 分頁。
 | `note` | 段落備註（如「攝影只跟 1 小時：20:30–21:30」） |
 | `pending` | `true` = 這段還沒收到資料（例：10-03 只收到宴會＋After Party，儀式待補） |
 | `items` | 時間點陣列 |
+
+## 三語
+任何文字欄位都可以是字串，或 `{ "zh": "", "ja": "", "en": "" }`；缺的語言退回中文。人名、歌名不用翻的直接寫字串。
 
 ### 時間點 `items[]`
 | 欄位 | 說明 |

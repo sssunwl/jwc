@@ -20,7 +20,7 @@
   - 改 `public/index.html` 後 push 到 main 會自動重新部署(`.github/workflows/deploy-pages.yml`)
 - claude.ai 上原本的 Design 版 Demo(私人連結,備用):https://claude.ai/artifact/3w2hqc2Nqv1D8YCuRyYE5d
 
-- **Big Day Rundown**(2026-10-02 加):CMS 預覽裡的手機版當天流程,資料在 `public/rundowns/*.json`(已去識別),真名版在 `private/rundowns/`(gitignore,絕不進 public repo)。欄位與新增流程見 `docs/RUNDOWN.md`
+- **Big Day Rundown**(2026-10-02 加):現場版 https://sssunwl.github.io/jwc/day/ (`public/day/`,PWA 可加主畫面,中日英,沖繩時區倒數,Web Push 通知,PIN 管理模式可現場延後/改時間/取消/公告);CMS Demo 手機框 iframe 嵌同一頁。後端 `worker/`(CF Worker `jwc-rundown` + KV + Durable Object 鬧鐘,帳號 cron 名額已滿所以不用 cron)。資料 `public/rundowns/*.json` 用代號,真名版在 `private/rundowns/`(gitignore,絕不進 public repo)。PIN/VAPID 在 `~/.config/jwc/rundown.json`。全部細節見 `docs/RUNDOWN.md`。10/03 儀式部份還沒拿到原稿
 
 ## 待辦
 - [ ] 客戶確認方向後 → 補完整 `docs/SPEC.md`(CPT/ACF欄位表、Elementor Theme Builder結構、Finder+Compare custom plugin規格)

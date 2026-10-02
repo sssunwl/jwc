@@ -1,0 +1,26 @@
+# Big Day Rundown 後端（現場延後／公告／推播）。說明見 ../docs/RUNDOWN.md
+# Secrets（不在這裡）：VAPID_PRIVATE_JWK、ADMIN_PIN → 本機備份 ~/.config/jwc/rundown.json
+name = "jwc-rundown"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+[vars]
+SITE = "https://sssunwl.github.io/jwc"
+VAPID_PUBLIC = "BDbK8AJryS4O9s-CAmvopusxgUA8aTIUNWPejSN7_7OqwklfNQiUuWEqooA6h8GZrJPdHROnIgc9C0dsOfG66rk"
+VAPID_SUBJECT = "https://sssunwl.github.io/jwc/"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "bceff22876ba4238b7e818358e24d50a"
+
+# 排程提醒用 Durable Object 鬧鐘（帳號免費方案的 5 個 cron 名額已用完）
+[[durable_objects.bindings]]
+name = "SCHED"
+class_name = "Scheduler"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Scheduler"]
+
+[triggers]
+crons = []

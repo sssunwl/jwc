@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JWC Rundown</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-title" content="Rundown">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F5F0; --ink:#232323; --ink-soft:#5B5650; --sand:#D8CABC; --ocean:#46697A;
+    --champagne:#EFE3D0; --line:rgba(35,35,35,0.12); --white:#FFFFFF; --heart:#B45D4C;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{background:var(--ivory);color:var(--ink);font-family:'Noto Sans TC','Noto Sans JP',sans-serif;-webkit-text-size-adjust:100%;}
+  body[data-lang="ja"]{font-family:'Noto Sans JP','Noto Sans TC',sans-serif;}
+  button{font-family:inherit;cursor:pointer;color:inherit;}
+  a{color:inherit;}
+  .app{max-width:560px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;}
+  .head{position:sticky;top:0;z-index:5;padding:calc(12px + env(safe-area-inset-top)) 16px 0;background:linear-gradient(160deg,var(--white) 0%,var(--champagne) 100%);box-shadow:0 1px 0 var(--line);}
+  body.embed .head{padding-top:30px;}
+  .bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .brand{font-family:'Marcellus',serif;font-size:12px;letter-spacing:0.16em;color:var(--ink-soft);margin-right:auto;}
+  .seg{display:inline-flex;background:rgba(255,255,255,0.7);border:1px solid var(--line);border-radius:999px;padding:2px;}
+  .seg button{white-space:nowrap;border:none;background:none;font-size:11px;padding:4px 9px;border-radius:999px;color:var(--ink-soft);}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:#fff;}
+  .icon-btn{white-space:nowrap;border:1px solid var(--line);background:rgba(255,255,255,0.7);border-radius:999px;font-size:11px;padding:5px 10px;color:var(--ink-soft);}
+  .icon-btn[aria-pressed="true"]{border-color:var(--ocean);color:var(--ocean);background:#fff;}
+  .days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px;}
+  .days::-webkit-scrollbar{display:none;}
+  .day{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,0.7);border-radius:12px;padding:6px 11px;text-align:left;color:var(--ink-soft);font-size:10px;line-height:1.3;}
+  .day b{display:block;font-family:'Marcellus',serif;font-size:15px;color:var(--ink);font-weight:400;}
+  .day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:rgba(255,255,255,0.75);}
+  .day[aria-pressed="true"] b{color:#fff;}
+  .title{font-family:'Marcellus','Noto Sans TC',serif;font-size:22px;letter-spacing:0.03em;line-height:1.2;}
+  .sub{font-size:11px;color:var(--ink-soft);margin-top:3px;display:flex;gap:6px;flex-wrap:wrap;}
+  .live{margin-top:10px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 12px 11px;font-size:12px;line-height:1.45;}
+  .live[hidden]{display:none;}
+  .live.sim{background:var(--ocean);}
+  .live-top{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;opacity:0.7;margin-bottom:6px;gap:8px;}
+  .live-top b{font-family:'Marcellus',serif;font-size:13px;font-weight:400;opacity:1;letter-spacing:0.04em;}
+  .live-tools{display:flex;gap:6px;}
+  .live-tools button{border:1px solid rgba(255,255,255,0.3);background:none;color:#fff;border-radius:999px;font-size:10px;padding:3px 8px;opacity:0.85;}
+  .live-tools button[aria-pressed="true"]{background:#fff;color:var(--ink);opacity:1;}
+  .live-cur{background:rgba(255,255,255,0.1);border-radius:10px;padding:7px 9px;margin-bottom:8px;}
+  .live-cur-row{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+  .live-cur-row span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .live-left{font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto;}
+  .bar-track{height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin-top:6px;overflow:hidden;}
+  .bar-fill{height:100%;background:#fff;border-radius:2px;}
+  .live-next{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;}
+  .live-next .lbl{font-size:10.5px;opacity:0.65;display:block;}
+  .live-next .what{min-width:0;}
+  .cd{font-family:'Marcellus',serif;font-size:30px;line-height:1;letter-spacing:0.02em;font-variant-numeric:tabular-nums;flex:0 0 auto;}
+  .live.soon .cd{color:#F3C5B9;}
+  .remind{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:8;max-width:536px;margin:0 auto;background:var(--heart);color:#fff;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.5;box-shadow:0 10px 30px rgba(0,0,0,0.25);display:flex;gap:10px;align-items:flex-start;}
+  .remind[hidden]{display:none;}
+  .remind button{margin-left:auto;background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;flex:0 0 auto;}
+  .tabs{display:flex;gap:20px;margin-top:8px;}
+  .tabs button{background:none;border:none;padding:9px 0 10px;font-size:13px;color:var(--ink-soft);border-bottom:2px solid transparent;}
+  .tabs button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink);font-weight:500;}
+  main{flex:1;padding:14px 14px calc(90px + env(safe-area-inset-bottom));}
+  .banner{background:rgba(70,105,122,0.1);color:var(--ocean);border-radius:10px;padding:9px 12px;font-size:12px;line-height:1.5;margin-bottom:12px;}
+  .banner.warn{background:rgba(180,93,76,0.1);color:var(--heart);}
+  .sgm{margin-bottom:18px;}
+  .sgm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:2px 2px 8px;}
+  .sgm-title{font-size:14px;font-weight:600;}
+  .sgm-meta{font-size:11px;color:var(--ink-soft);margin-top:3px;line-height:1.6;}
+  .map{flex:0 0 auto;font-size:11px;border:1px solid var(--ocean);color:var(--ocean);border-radius:999px;padding:5px 10px;background:var(--white);text-decoration:none;}
+  .tag{display:inline-block;font-size:10px;border-radius:999px;padding:2px 7px;background:var(--champagne);color:var(--ink);margin-left:6px;vertical-align:1px;font-weight:500;}
+  .tag.assist{background:#E7ECEE;color:var(--ocean);}
+  .pending{border:1px dashed var(--sand);border-radius:12px;padding:12px;font-size:12px;color:var(--ink-soft);background:rgba(255,255,255,0.5);line-height:1.6;}
+  .items{background:var(--white);border-radius:14px;padding:4px 0;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .sgm.assist .items{opacity:0.7;}
+  .item{display:grid;grid-template-columns:48px 12px 1fr;gap:8px;padding:10px 12px 10px 10px;scroll-margin:220px;}
+  .item+.item{border-top:1px solid rgba(35,35,35,0.06);}
+  .time{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;}
+  .time small{display:block;font-size:10px;font-weight:400;color:var(--ink-soft);}
+  .dot{width:10px;height:10px;border-radius:50%;margin-top:4px;}
+  .t{font-size:14px;line-height:1.45;}
+  .alt{display:block;font-size:11px;color:var(--ink-soft);line-height:1.45;margin-top:1px;}
+  .who{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+  .who span{font-size:10.5px;background:var(--ivory);border-radius:999px;padding:2px 8px;color:var(--ink-soft);}
+  .note{font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;}
+  .alert{font-size:12px;color:var(--heart);background:rgba(180,93,76,0.08);border-radius:6px;padding:5px 8px;margin-top:6px;line-height:1.5;}
+  .cues{margin-top:6px;font-size:12px;color:var(--ink-soft);}
+  .cues summary{cursor:pointer;color:var(--ocean);list-style:none;}
+  .cues summary::-webkit-details-marker{display:none;}
+  .cues ol{margin:5px 0 0;padding-left:18px;line-height:1.65;}
+  .item.past{opacity:0.5;}
+  .item.now{background:rgba(70,105,122,0.09);box-shadow:inset 3px 0 0 var(--ocean);}
+  .item.now .time::after,.item.next .time::after{display:inline-block;margin-top:4px;font-size:8.5px;letter-spacing:0.08em;color:#fff;border-radius:3px;padding:1px 5px;font-weight:600;}
+  .item.now .time::after{content:var(--now-label,"NOW");background:var(--ocean);}
+  .item.next .time::after{content:var(--next-label,"NEXT");background:var(--ink);}
+  .mat{background:var(--white);border-radius:14px;padding:12px 14px;margin-bottom:10px;}
+  .mat h4{margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ocean);font-weight:600;}
+  .row{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:8px 0;border-top:1px solid rgba(35,35,35,0.06);}
+  .row:first-of-type{border-top:none;}
+  .row > span:first-child{color:var(--ink-soft);flex:0 0 auto;max-width:45%;}
+  .row > span:last-child{text-align:right;}
+  .row a{color:var(--ocean);}
+  .fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom));z-index:6;background:var(--ocean);color:#fff;border:none;border-radius:999px;padding:11px 20px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+  .fab[hidden]{display:none;}
+  .foot{font-size:10.5px;color:var(--ink-soft);text-align:center;margin-top:24px;line-height:1.7;}
+  .notice{background:#FFF8EC;border:1px solid #EBD7B0;border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:13px;line-height:1.55;}
+  .notice small{display:block;font-size:10.5px;color:var(--ink-soft);margin-bottom:2px;}
+  .notice.old{opacity:0.7;}
+  .more{background:none;border:none;color:var(--ocean);font-size:12px;padding:0 0 10px;}
+  .time s{display:block;font-size:10px;font-weight:400;color:var(--ink-soft);}
+  .tag.chg{background:#FFF0D6;color:#8A5A12;}
+  .tag.cxl{background:rgba(180,93,76,0.12);color:var(--heart);}
+  .item.cancelled .t{text-decoration:line-through;color:var(--ink-soft);}
+  .item.cancelled{opacity:0.55;}
+  .admin{background:var(--ink);color:#fff;border-radius:14px;padding:12px;margin-bottom:14px;font-size:12px;}
+  .admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;}
+  .admin-head b{font-size:13px;}
+  .admin-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;}
+  .admin-row span{opacity:0.7;margin-right:2px;}
+  .admin button{border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.08);color:#fff;border-radius:999px;padding:6px 11px;font-size:12px;}
+  .admin button.solid{background:#fff;color:var(--ink);border-color:#fff;}
+  .admin .log{margin-top:10px;border-top:1px solid rgba(255,255,255,0.15);padding-top:8px;}
+  .admin .log div{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:5px 0;line-height:1.45;}
+  .admin .log div.undone span{text-decoration:line-through;opacity:0.5;}
+  .admin .log button{padding:3px 9px;font-size:11px;flex:0 0 auto;}
+  .edit-btn{border:1px solid var(--line);background:var(--white);border-radius:999px;font-size:11px;padding:3px 9px;color:var(--ocean);margin-top:6px;margin-right:6px;}
+  .admin-link{background:none;border:none;color:var(--ink-soft);font-size:11px;text-decoration:underline;padding:6px;}
+  .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:7;}
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="head">
+    <div class="bar">
+      <div class="brand">JWC</div>
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" onclick="setLang('zh')">中</button>
+        <button type="button" data-lang="ja" onclick="setLang('ja')">日</button>
+        <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+      <button type="button" class="icon-btn" id="cmp-btn" aria-pressed="false" onclick="toggleCompare()"></button>
+      <button type="button" class="icon-btn" id="push-btn" aria-pressed="false" onclick="togglePush()"></button>
+      <button type="button" class="icon-btn" id="share-btn" onclick="shareLink()"></button>
+    </div>
+    <div class="days" id="days" role="group"></div>
+    <div class="title" id="title">…</div>
+    <div class="sub" id="sub"></div>
+    <div class="live" id="live" hidden></div>
+    <div class="tabs" role="group">
+      <button type="button" data-tab="flow" aria-pressed="true" onclick="setTab('flow')"></button>
+      <button type="button" data-tab="mat" aria-pressed="false" onclick="setTab('mat')"></button>
+    </div>
+  </header>
+  <main id="body"></main>
+</div>
+<button type="button" class="fab" id="fab" hidden onclick="scrollToNow(true)"></button>
+<div class="toast" id="toast"></div>
+<div class="remind" id="remind" hidden role="alert"></div>
+
+<script>
+/* 現場版 Rundown。資料：../rundowns/*.json（欄位見 docs/RUNDOWN.md）。
+   時間一律用沖繩當地時間（Asia/Tokyo），不跟手機時區走 —— 香港同事的手機慢一小時。
+   過了時間的項目只會變淡，不會隱藏；過去的日子也一直點得進去。 */
+var TZ = "Asia/Tokyo";
+var API = "https://jwc-rundown.sssunjp.workers.dev";   // worker/（現場更改、推播）
+var UI = {
+  zh: { compare:"對照", notify:"🔔 通知", notifyOn:"已開啟鎖屏通知：每項開始前 5 分鐘、開始時、還有現場更改都會通知你", notifyOff:"已關閉這場的通知", iosHint:"iPhone 要先加到主畫面才收得到通知：\n1. 按 Safari 下方的「分享」\n2. 選「加入主畫面」\n3. 從主畫面的 Rundown 圖示打開，再按一次 🔔", pushNo:"這個瀏覽器不支援通知", pushDenied:"通知被拒絕了，請到 設定 → 通知 → Rundown 打開", pushFail:"開啟通知失敗，請稍後再試", sound:"🔊 響鈴", admin:"管理模式", pinAsk:"輸入管理 PIN", nameAsk:"你的名字（記在更改紀錄上）", pinBad:"PIN 不對", locked:"錯太多次，一小時後再試", logout:"登出", shift:"還沒開始的流程：", shiftAll:"全部流程：", noticeBtn:"📣 發公告", noticeAsk:"公告內容（會推播給所有開了通知的人）", logBtn:"紀錄", undo:"撤銷", redo:"恢復", confirmDelay:"把 {t} 之後的流程全部{d}？\n會推播通知所有人", later:"延後 {n} 分鐘", earlier:"提前 {n} 分鐘", editBtn:"✎ 改時間", cxlBtn:"取消這項", rstBtn:"恢復這項", startAsk:"新的開始時間（HH:MM）", endAsk:"新的結束時間（HH:MM，留空＝沒有結束時間）", badTime:"時間格式要像 18:30", delayedTag:"延後 {n} 分", earlierTag:"提前 {n} 分", movedTag:"時間更改", cxlTag:"取消", noticeLbl:"公告", more:"看更早的公告（{n}）", syncFail:"同步現場更改失敗，顯示的可能不是最新", saved:"已更新，所有人 30 秒內會看到", logDelay:"{t} 後{d}", logEdit:"{t}：{s}", logCxl:"取消 {t}", logRst:"恢復 {t}", by:"by {t}", pendTag:"待補", curLbl:"進行中", left:"剩 {t}", nextLbl2:"下一項", startsIn:"後開始", bell:"🔔 提醒", awake:"☀ 常亮", remind5:"5 分鐘後：{t}", remindNow:"現在開始：{t}", ok:"知道了", bellOn:"已開啟：開始前 5 分鐘和開始時會響鈴＋震動（畫面要開著）", awakeOn:"螢幕會保持常亮", awakeNo:"這支手機不支援常亮，請到設定調長自動鎖定時間", share:"分享", flow:"流程", mat:"要用的資料", done:"已完成", today:"今天", tomorrow:"明天", inDays:"{n} 天後",
+        people:"{n} 人", points:"{n} 個時間點", now:"現在", nowLbl:"進行中", nextLbl:"下一項", nextIn:"下一項 · {n} 分鐘後", nextNow:"下一項 · 即將開始",
+        allDone:"今天的流程都完成了", before:"今天 {t} 開始", backNow:"回到現在", sim:"模擬時間", pending:"這段還沒有資料，收到後會補進來，所有人打開的都是同一份。",
+        assist:"只協助", tbd:"待確認", cues:"MC／工作人員提示", look:"造型", alerts:"今天要注意", places:"地點", staff:"人員", looks:"造型",
+        maps:"地圖連結", music:"歌曲", video:"影片", items:"道具／其他", open:"開啟", mapBtn:"地圖", noMat:"這場還沒有附加資料。",
+        offline:"目前離線，顯示上次載入的版本", loadFail:"載入失敗，請檢查網路後重新整理", updated:"資料更新於 {t}（每 5 分鐘自動更新）",
+        copied:"連結已複製", tbdAlert:"待確認：", untitled:"未命名婚禮", imported:"新匯入", tz:"沖繩時間" },
+  ja: { compare:"対訳", notify:"🔔 通知", notifyOn:"ロック画面通知をオンにしました：各項目の5分前・開始時・当日の変更をお知らせします", notifyOff:"この日の通知をオフにしました", iosHint:"iPhoneはホーム画面に追加すると通知を受け取れます：\n1. Safari下部の「共有」\n2.「ホーム画面に追加」\n3. ホーム画面のRundownから開いて、もう一度🔔", pushNo:"このブラウザは通知に対応していません", pushDenied:"通知が拒否されています。設定 → 通知 → Rundown でオンにしてください", pushFail:"通知をオンにできませんでした。後でもう一度お試しください", sound:"🔊 サウンド", admin:"管理モード", pinAsk:"管理PINを入力", nameAsk:"お名前（変更履歴に記録）", pinBad:"PINが違います", locked:"試行回数が多すぎます。1時間後に再試行してください", logout:"ログアウト", shift:"未開始の予定：", shiftAll:"すべての予定：", noticeBtn:"📣 お知らせ", noticeAsk:"お知らせ内容（通知オンの全員に送信）", logBtn:"履歴", undo:"取り消し", redo:"元に戻す", confirmDelay:"{t}以降の予定をすべて{d}しますか？\n全員に通知されます", later:"{n}分繰り下げ", earlier:"{n}分繰り上げ", editBtn:"✎ 時間変更", cxlBtn:"中止にする", rstBtn:"再開する", startAsk:"新しい開始時間（HH:MM）", endAsk:"新しい終了時間（HH:MM、空欄＝なし）", badTime:"18:30 の形式で入力してください", delayedTag:"{n}分遅れ", earlierTag:"{n}分早まり", movedTag:"時間変更", cxlTag:"中止", noticeLbl:"お知らせ", more:"以前のお知らせ（{n}）", syncFail:"当日の変更を同期できません。最新でない可能性があります", saved:"更新しました。30秒以内に全員に反映されます", logDelay:"{t}以降 {d}", logEdit:"{t}：{s}", logCxl:"中止 {t}", logRst:"再開 {t}", by:"by {t}", pendTag:"未入力", curLbl:"進行中", left:"残り {t}", nextLbl2:"次", startsIn:"後に開始", bell:"🔔 通知", awake:"☀ 常時点灯", remind5:"5分後：{t}", remindNow:"開始：{t}", ok:"OK", bellOn:"開始5分前と開始時に音とバイブでお知らせします（画面を開いたまま）", awakeOn:"画面を点灯したままにします", awakeNo:"この端末は常時点灯に非対応です。自動ロック時間を延ばしてください", share:"共有", flow:"タイムテーブル", mat:"資料", done:"終了", today:"本日", tomorrow:"明日", inDays:"{n}日後",
+        people:"{n}名", points:"{n}項目", now:"現在", nowLbl:"進行中", nextLbl:"次", nextIn:"次の予定・{n}分後", nextNow:"次の予定・まもなく",
+        allDone:"本日の進行はすべて終了しました", before:"本日 {t} 開始", backNow:"現在地に戻る", sim:"シミュレーション", pending:"このパートは未入力です。届き次第追加し、全員が同じ最新版を見られます。",
+        assist:"サポートのみ", tbd:"要確認", cues:"司会・スタッフへの指示", look:"衣装", alerts:"本日の注意事項", places:"場所", staff:"担当者", looks:"衣装",
+        maps:"地図リンク", music:"曲", video:"映像", items:"小道具・その他", open:"開く", mapBtn:"地図", noMat:"追加資料はまだありません。",
+        offline:"オフラインのため前回の内容を表示中", loadFail:"読み込みに失敗しました。通信状況を確認して再読み込みしてください", updated:"{t} 更新（5分ごとに自動更新）",
+        copied:"リンクをコピーしました", tbdAlert:"要確認：", untitled:"名称未設定", imported:"新規取込", tz:"沖縄時間" },
+  en: { compare:"Compare", notify:"🔔 Notify", notifyOn:"Lock-screen notifications on: 5 min before and at the start of each item, plus live changes", notifyOff:"Notifications off for this day", iosHint:"On iPhone, add this page to your Home Screen first:\n1. Tap Share in Safari\n2. Choose \"Add to Home Screen\"\n3. Open Rundown from the Home Screen and tap 🔔 again", pushNo:"This browser doesn't support notifications", pushDenied:"Notifications are blocked. Turn them on in Settings → Notifications → Rundown", pushFail:"Couldn't turn on notifications, please try again", sound:"🔊 Sound", admin:"Admin", pinAsk:"Admin PIN", nameAsk:"Your name (for the change log)", pinBad:"Wrong PIN", locked:"Too many tries, wait an hour", logout:"Log out", shift:"Not started yet:", shiftAll:"Everything:", noticeBtn:"📣 Announce", noticeAsk:"Announcement (pushed to everyone with notifications on)", logBtn:"Log", undo:"Undo", redo:"Redo", confirmDelay:"{d} everything from {t}?\nEveryone will be notified", later:"Delay {n} min", earlier:"Move {n} min earlier", editBtn:"✎ Change time", cxlBtn:"Cancel item", rstBtn:"Restore item", startAsk:"New start time (HH:MM)", endAsk:"New end time (HH:MM, blank = none)", badTime:"Use a time like 18:30", delayedTag:"+{n} min", earlierTag:"−{n} min", movedTag:"Time changed", cxlTag:"Cancelled", noticeLbl:"Announcement", more:"Earlier announcements ({n})", syncFail:"Couldn't sync live changes; this may be out of date", saved:"Updated — everyone sees it within 30 s", logDelay:"From {t}: {d}", logEdit:"{t}: {s}", logCxl:"Cancelled {t}", logRst:"Restored {t}", by:"by {t}", pendTag:"Pending", curLbl:"Now", left:"{t} left", nextLbl2:"Next", startsIn:"to go", bell:"🔔 Alerts", awake:"☀ Keep on", remind5:"In 5 min: {t}", remindNow:"Starting now: {t}", ok:"OK", bellOn:"Alerts on: chime + vibrate 5 min before and at start (keep this page open)", awakeOn:"Screen will stay on", awakeNo:"Keep-awake not supported; extend auto-lock in settings", share:"Share", flow:"Rundown", mat:"Materials", done:"Done", today:"Today", tomorrow:"Tomorrow", inDays:"In {n} days",
+        people:"{n} guests", points:"{n} items", now:"Now", nowLbl:"NOW", nextLbl:"NEXT", nextIn:"Next · in {n} min", nextNow:"Next · starting now",
+        allDone:"All done for today", before:"Starts today at {t}", backNow:"Back to now", sim:"Simulated", pending:"No details yet for this part. It will be added here — everyone sees the same live version.",
+        assist:"Assist only", tbd:"TBC", cues:"MC / staff cues", look:"Look", alerts:"Watch out today", places:"Places", staff:"Staff", looks:"Looks",
+        maps:"Map links", music:"Music", video:"Video", items:"Props / other", open:"Open", mapBtn:"Map", noMat:"No materials yet.",
+        offline:"Offline — showing the last loaded version", loadFail:"Couldn't load. Check your connection and refresh", updated:"Updated {t} (auto-refresh every 5 min)",
+        copied:"Link copied", tbdAlert:"TBC: ", untitled:"Untitled wedding", imported:"Imported", tz:"Okinawa time" }
+};
+var TYPES = {
+  shoot:"#46697A", move:"#D8CABC", prep:"#D8CABC", meeting:"#8A8F93", rehearsal:"#D9A69A", ceremony:"#B45D4C",
+  guest:"#C9B48A", dress:"#B98FA6", party:"#7E8F6A", media:"#5E7FA0", wrap:"#232323"
+};
+var LANGS = ["zh","ja","en"];
+var params = new URLSearchParams(location.search);
+var S = {
+  list: [], idx: 0, tab: "flow",
+  lang: params.get("lang") || store("jwc-rd-lang") || "zh",
+  compare: store("jwc-rd-compare") === "1",
+  sim: params.get("t") || null,          // ?t=HH:MM 模擬時間（Demo／測試用），設定後照真實速度往前走
+  simAt: Date.now(),
+  embed: params.get("embed") === "1",
+  updatedAt: null, offline: false, scrolledOnce: false,
+  bell: false, wake: null, fired: {},
+  changes: {}, seenNotices: null, noticeAll: false, logOpen: false, syncFail: false,
+  pin: store("jwc-rd-pin") || "", by: store("jwc-rd-by") || ""
+};
+if(LANGS.indexOf(S.lang) < 0) S.lang = "zh";
+if(S.embed) document.body.classList.add("embed");
+
+function store(k, v){ try{ if(v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+function esc(v){ return String(v == null ? "" : v).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function u(key, n, vars){
+  var s = UI[S.lang][key] || UI.zh[key] || key;
+  if(n != null) s = s.replace("{n}", n).replace("{t}", n);
+  Object.keys(vars || {}).forEach(function(k){ s = s.replace("{" + k + "}", vars[k]); });
+  return s;
+}
+function tx(v, lang){
+  if(v == null) return "";
+  if(typeof v !== "object") return String(v);
+  lang = lang || S.lang;
+  return v[lang] || v.zh || v.en || v.ja || "";
+}
+/* 主語言＋（對照模式時）其他兩種語言小字 */
+function txh(v){
+  var main = esc(tx(v));
+  if(!S.compare || !v || typeof v !== "object") return main;
+  var seen = [tx(v)], alts = [];
+  LANGS.forEach(function(l){ if(l === S.lang) return; var s = tx(v, l); if(s && seen.indexOf(s) < 0){ seen.push(s); alts.push(esc(s)); } });
+  return main + alts.map(function(a){ return '<span class="alt">'+a+'</span>'; }).join("");
+}
+function mins(t){ var m = /^(\d{1,2}):(\d{2})$/.exec(t || ""); return m ? (+m[1])*60 + (+m[2]) : null; }
+function hhmm(n){ return String(Math.floor(n/60)).padStart(2,"0") + ":" + String(n%60).padStart(2,"0"); }
+function okinawaNow(){
+  var p = {}; new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", second:"2-digit", hourCycle:"h23" })
+    .formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; });
+  return { date: p.year+"-"+p.month+"-"+p.day, min: (+p.hour)*60 + (+p.minute), sec: (+p.hour)*3600 + (+p.minute)*60 + (+p.second) };
+}
+function dayDiff(date){ return Math.round((Date.parse(date+"T00:00:00Z") - Date.parse(okinawaNow().date+"T00:00:00Z")) / 86400000); }
+function status(w){
+  if(w._imported) return u("imported");
+  var d = dayDiff(w.date);
+  return d < 0 ? u("done") : d === 0 ? u("today") : d === 1 ? u("tomorrow") : u("inDays", d);
+}
+function allItems(w){ var out = []; (w.segments||[]).forEach(function(s){ (s.items||[]).forEach(function(it){ out.push(it); }); }); return out; }
+/* 這場婚禮「現在」是幾點：模擬時間 > 當天的沖繩時間 > 不是當天就 null */
+function simSec(){ var m = mins(S.sim); return m == null ? null : m * 60 + Math.floor((Date.now() - S.simAt) / 1000); }
+function nowFor(w){
+  if(S.sim){ var x = simSec(); if(x != null) return Math.floor(x / 60); }
+  var n = okinawaNow();
+  return n.date === w.date ? n.min : null;
+}
+
+/* ---------- 載入（離線時用上次的版本） ---------- */
+function load(){
+  var base = "../rundowns/";
+  fetch(base + "index.json", { cache: "no-cache" }).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(idx){
+    return Promise.all(idx.weddings.map(function(f){ return fetch(base + f, { cache: "no-cache" }).then(function(r){ if(!r.ok) throw 0; return r.json(); }); }));
+  }).then(function(list){
+    store("jwc-rd-cache", JSON.stringify(list));
+    S.offline = false; S.updatedAt = okinawaNow().min;
+    setList(list);
+  }).catch(function(){
+    var cached = null; try{ cached = JSON.parse(store("jwc-rd-cache") || "null"); }catch(e){}
+    S.offline = true;
+    if(cached && !S.list.length) setList(cached); else render();
+  });
+}
+function setList(list){
+  var imported = S.list.filter(function(w){ return w._imported; });
+  var keep = S.list[S.idx] && S.list[S.idx].id;
+  S.list = list.slice().sort(function(a, b){ return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).concat(imported);
+  var i = -1;
+  if(keep) i = S.list.findIndex(function(w){ return w.id === keep; });
+  if(i < 0 && params.get("w")) i = S.list.findIndex(function(w){ return w.id === params.get("w") || w.date === params.get("w"); });
+  if(i < 0) i = S.list.findIndex(function(w){ return dayDiff(w.date) >= 0; });
+  if(i < 0) i = S.list.length - 1;
+  S.idx = Math.max(0, i);
+  render();
+  fetchState();
+}
+
+/* ---------- 操作 ---------- */
+function setLang(l){ S.lang = l; store("jwc-rd-lang", l); syncUrl(); render(); }
+function toggleCompare(){ S.compare = !S.compare; store("jwc-rd-compare", S.compare ? "1" : "0"); render(); }
+function setTab(t){ S.tab = t; render(); window.scrollTo(0, 0); }
+function selectDay(i){ S.idx = i; S.scrolledOnce = false; S.seenNotices = null; S.noticeAll = false; syncUrl(); render(); window.scrollTo(0, 0); fetchState(); }
+function syncUrl(){
+  if(S.embed) return;
+  var w = S.list[S.idx]; var p = new URLSearchParams(location.search);
+  p.set("lang", S.lang); if(w && !w._imported) p.set("w", w.id);
+  history.replaceState(null, "", "?" + p.toString());
+}
+function shareLink(){
+  var w = S.list[S.idx];
+  var url = location.origin + location.pathname + "?w=" + encodeURIComponent(w ? w.id : "") + "&lang=" + S.lang;
+  var title = "Rundown · " + (w ? tx(w.couple) + " · " + w.date : "");
+  if(navigator.share){ navigator.share({ title: title, url: url }).catch(function(){}); return; }
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function(){ toast(u("copied")); }, function(){ prompt("URL", url); });
+}
+function toast(msg){ var t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function(){ t.classList.remove("show"); }, 1800); }
+function scrollToNow(smooth){
+  var el = document.querySelector(".item.now") || document.querySelector(".item.next");
+  if(!el) return;
+  var cur = document.querySelector(".item.now");
+  if(cur) el = cur;
+  var top = el.getBoundingClientRect().top + window.scrollY - document.querySelector(".head").offsetHeight - 12;
+  window.scrollTo({ top: Math.max(0, top), behavior: smooth ? "smooth" : "auto" });
+}
+
+/* ---------- 畫面 ---------- */
+function render(){
+  document.documentElement.lang = S.lang === "zh" ? "zh-Hant" : S.lang;
+  document.body.dataset.lang = S.lang;
+  document.querySelectorAll("[data-lang]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.lang === S.lang); });
+  document.querySelectorAll("[data-tab]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.tab === S.tab); b.textContent = u(b.dataset.tab); });
+  var cmp = document.getElementById("cmp-btn"); cmp.textContent = u("compare"); cmp.setAttribute("aria-pressed", S.compare);
+  document.getElementById("share-btn").textContent = u("share") + " ↗";
+  var pb = document.getElementById("push-btn"); pb.textContent = u("notify"); pb.setAttribute("aria-pressed", isPushed());
+  document.getElementById("fab").textContent = "↓ " + u("backNow");
+  document.documentElement.style.setProperty("--now-label", '"' + u("nowLbl") + '"');
+  document.documentElement.style.setProperty("--next-label", '"' + u("nextLbl") + '"');
+
+  var w = cur();
+  var body = document.getElementById("body");
+  if(!w){
+    document.getElementById("title").textContent = S.offline ? "—" : "…";
+    body.innerHTML = S.offline ? '<div class="banner warn">'+esc(u("loadFail"))+'</div>' : "";
+    return;
+  }
+  document.getElementById("days").innerHTML = S.list.map(function(x, i){
+    return '<button type="button" class="day" aria-pressed="'+(i === S.idx)+'" onclick="selectDay('+i+')"><b>'+esc(x.date.slice(5).replace("-", "/"))+'</b>'+esc(status(x))+'</button>';
+  }).join("");
+  document.getElementById("title").innerHTML = txh(w.couple) || esc(u("untitled"));
+  var sub = [w.date.replace(/-/g, "/")];
+  if(w.guests) sub.push(u("people", w.guests));
+  sub.push(u("points", allItems(w).length));
+  document.getElementById("sub").innerHTML = sub.map(function(t){ return "<span>"+esc(t)+"</span>"; }).join("<span>·</span>");
+
+  var now = nowFor(w);
+  renderLive(w);
+  body.innerHTML = (S.offline ? '<div class="banner warn">'+esc(u("offline"))+'</div>' : "") +
+    (S.syncFail && !w._imported ? '<div class="banner warn">'+esc(u("syncFail"))+'</div>' : "") +
+    (S.pin && !w._imported && !S.embed ? adminHTML(w) : "") +
+    (S.tab === "flow" ? noticesHTML(w) + flowHTML(w, now) : matHTML(w)) +
+    '<div class="foot">' + (S.updatedAt != null ? esc(u("updated", hhmm(S.updatedAt)))+' · '+esc(u("tz")) : "") +
+    (!S.pin && !S.embed && !w._imported ? '<br><button type="button" class="admin-link" onclick="enterAdmin()">'+esc(u("admin"))+'</button>' : "") + '</div>';
+
+  var hasNow = now != null && document.querySelector(".item.now, .item.next");
+  if(S.tab === "flow" && hasNow && !S.scrolledOnce){ S.scrolledOnce = true; setTimeout(function(){ scrollToNow(false); }, 30); }
+  updateFab();
+}
+
+/* 最上方的即時卡：進行中還剩多久（攝影師看這個）＋下一項倒數，每秒更新 */
+function nowSecFor(w){
+  if(S.sim){ var x = simSec(); if(x != null) return x; }
+  var n = okinawaNow();
+  return n.date === w.date ? n.sec : null;
+}
+function dur(sec){
+  sec = Math.max(0, Math.floor(sec));
+  var h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+  return (h ? h + ":" + String(m).padStart(2, "0") : String(m)) + ":" + String(s).padStart(2, "0");
+}
+function liveState(w, nowSec){
+  var items = allItems(w).filter(function(it){ return mins(it.start) != null && !it._cancelled; });
+  var cur = [], next = null;
+  items.forEach(function(it){
+    var s = mins(it.start) * 60, e = mins(it.end) != null ? mins(it.end) * 60 : null;
+    if(e != null && s <= nowSec && nowSec < e) cur.push(it);
+    if(s > nowSec && (!next || s < mins(next.start) * 60)) next = it;
+  });
+  var last = null;
+  if(!cur.length) items.forEach(function(it){ if(mins(it.start) * 60 <= nowSec && (!last || mins(it.start) >= mins(last.start))) last = it; });
+  return { cur: cur, next: next, last: last };
+}
+function renderLive(w){
+  var el = document.getElementById("live");
+  var nowSec = nowSecFor(w);
+  if(nowSec == null){ el.hidden = true; return; }
+  var st = liveState(w, nowSec);
+  var html = '<div class="live-top"><span><b>'+hhmm(Math.floor(nowSec / 60))+'</b> '+esc(S.sim ? u("sim") : u("tz"))+'</span><span class="live-tools">'+
+    '<button type="button" aria-pressed="'+S.bell+'" onclick="toggleBell()">'+esc(u("sound"))+'</button>'+
+    '<button type="button" aria-pressed="'+!!S.wake+'" onclick="toggleWake()">'+esc(u("awake"))+'</button></span></div>';
+  st.cur.forEach(function(it){
+    var s = mins(it.start) * 60, e = mins(it.end) * 60, pct = Math.min(100, Math.max(0, (nowSec - s) / (e - s) * 100));
+    html += '<div class="live-cur"><div class="live-cur-row"><span>'+esc(u("curLbl"))+' · '+esc(tx(it.title))+'</span><span class="live-left">'+esc(u("left", dur(e - nowSec)))+'</span></div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+pct.toFixed(1)+'%"></div></div></div>';
+  });
+  if(!st.cur.length && st.last && st.next) html += '<div class="live-cur"><div class="live-cur-row"><span>'+esc(u("curLbl"))+' · '+esc(st.last.start)+' '+esc(tx(st.last.title))+'</span></div></div>';
+  if(st.next){
+    var left = mins(st.next.start) * 60 - nowSec;
+    el.classList.toggle("soon", left <= 300);
+    html += '<div class="live-next"><div class="what"><span class="lbl">'+esc(u("nextLbl2"))+' · '+esc(st.next.start)+'</span>'+esc(tx(st.next.title))+'</div><div class="cd">'+dur(left)+'</div></div>';
+  } else {
+    el.classList.remove("soon");
+    if(!st.cur.length) html += '<div>'+esc(u("allDone"))+'</div>';
+  }
+  el.hidden = false;
+  el.classList.toggle("sim", !!S.sim);
+  el.innerHTML = html;
+  checkReminders(w, nowSec);
+}
+
+/* 提醒：開始前 5 分鐘＋開始時，響鈴＋震動＋頂部橫幅（只在頁面開著時有效） */
+var audioCtx = null;
+function chime(){
+  try{
+    if(!audioCtx) return;
+    [0, 0.25].forEach(function(t){
+      var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.frequency.value = 880; o.connect(g); g.connect(audioCtx.destination);
+      g.gain.setValueAtTime(0.0001, audioCtx.currentTime + t);
+      g.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + t + 0.22);
+      o.start(audioCtx.currentTime + t); o.stop(audioCtx.currentTime + t + 0.25);
+    });
+  }catch(e){}
+  if(navigator.vibrate) navigator.vibrate([200, 100, 200]);
+}
+function toggleBell(){
+  S.bell = !S.bell;
+  if(S.bell){
+    try{ audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); audioCtx.resume(); }catch(e){}
+    chime(); toast(u("bellOn"));
+    var w = cur(), n = w && nowSecFor(w);
+    if(n != null) allItems(w).forEach(function(it){ var s = mins(it.start); if(s != null && s * 60 <= n + 300){ S.fired[w.id + it.start + "5"] = 1; if(s * 60 <= n) S.fired[w.id + it.start + "0"] = 1; } });
+  }
+  render();
+}
+function checkReminders(w, nowSec){
+  if(!S.bell) return;
+  allItems(w).forEach(function(it){
+    var s = mins(it.start); if(s == null || it._cancelled) return;
+    var d = s * 60 - nowSec;
+    [[300, "5", "remind5"], [0, "0", "remindNow"]].forEach(function(r){
+      var key = w.id + it.start + r[1];
+      if(d <= r[0] && d > r[0] - 60 && !S.fired[key]){ S.fired[key] = 1; showRemind(it.start + " " + u(r[2], tx(it.title))); }
+    });
+  });
+}
+function showRemind(text){
+  var el = document.getElementById("remind");
+  el.innerHTML = '<span>⏰ '+esc(text)+'</span><button type="button" onclick="this.parentNode.hidden=true">'+esc(u("ok"))+'</button>';
+  el.hidden = false; chime();
+}
+function toggleWake(){
+  if(S.wake){ S.wakeWanted = false; S.wake.release().catch(function(){}); S.wake = null; render(); return; }
+  if(!("wakeLock" in navigator)){ toast(u("awakeNo")); return; }
+  navigator.wakeLock.request("screen").then(function(l){
+    S.wake = l; S.wakeWanted = true; l.addEventListener("release", function(){ if(S.wake === l){ S.wake = null; render(); } });
+    toast(u("awakeOn")); render();
+  }).catch(function(){ toast(u("awakeNo")); });
+}
+
+/* ---------- 現場更改：原稿不動，套用 worker 上的變更紀錄（worker/src/index.js 有同一套邏輯） ---------- */
+function itemKey(it){ return it.start + "|" + tx(it.title, "zh"); }
+function applyLive(w){
+  if(!w) return w;
+  var ch = (S.changes[w.id] || []).filter(function(c){ return !c.undone; });
+  if(!ch.length) { allItems(w).forEach(function(it){ if(!it._key){ it._key = itemKey(it); it._orig = { start: it.start, end: it.end || "" }; } }); w._notices = []; return w; }
+  var copy = JSON.parse(JSON.stringify(w)), items = allItems(copy);
+  items.forEach(function(it){ it._key = itemKey(it); it._orig = { start: it.start, end: it.end || "" }; });
+  ch.forEach(function(c){
+    if(c.kind === "delay"){
+      var from = mins(c.from);
+      items.forEach(function(it){ var s = mins(it.start); if(s != null && s >= from){ it.start = hhmm(s + c.minutes); if(mins(it.end) != null) it.end = hhmm(mins(it.end) + c.minutes); } });
+    } else if(c.kind === "edit"){
+      var it = items.find(function(x){ return x._key === c.key; }); if(!it) return;
+      if(typeof c.cancelled === "boolean") it._cancelled = c.cancelled;
+      if(c.start){ it.start = c.start; it._edited = true; }
+      if(c.end !== undefined){ it.end = c.end || ""; it._edited = true; }
+    }
+  });
+  copy._notices = ch.filter(function(c){ return c.kind === "notice"; }).reverse();
+  return copy;
+}
+function cur(){ return applyLive(S.list[S.idx]); }
+function jstHHMM(ms){ return new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(ms)); }
+
+function fetchState(){
+  var w = S.list[S.idx];
+  if(!w || w._imported) return;
+  var id = w.id;
+  fetch(API + "/api/w/" + encodeURIComponent(id) + "/state", { cache: "no-store" }).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(d){
+    var before = JSON.stringify(S.changes[id] || []);
+    S.changes[id] = d.changes || [];
+    S.syncFail = false;
+    // 新公告跳橫幅（第一次載入不跳）
+    var notices = S.changes[id].filter(function(c){ return c.kind === "notice" && !c.undone; });
+    if(S.seenNotices === null) S.seenNotices = {};
+    var fresh = notices.filter(function(c){ return !S.seenNotices[c.id]; });
+    if(S.seenNotices._init && fresh.length) showRemind("📣 " + fresh[fresh.length - 1].text);
+    notices.forEach(function(c){ S.seenNotices[c.id] = 1; }); S.seenNotices._init = 1;
+    try{ localStorage.setItem("jwc-rd-ch-" + id, JSON.stringify(S.changes[id])); }catch(e){}
+    if(JSON.stringify(S.changes[id]) !== before) render();
+  }).catch(function(){
+    if(!S.changes[id]){ try{ S.changes[id] = JSON.parse(localStorage.getItem("jwc-rd-ch-" + id) || "[]"); }catch(e){} }
+    if(!S.syncFail){ S.syncFail = true; render(); }
+  });
+}
+
+function noticesHTML(w){
+  var list = w._notices || [];
+  if(!list.length) return "";
+  var shown = S.noticeAll ? list : list.slice(0, 2);
+  return shown.map(function(c, i){
+    return '<div class="notice'+(i ? " old" : "")+'"><small>📣 '+esc(u("noticeLbl"))+' · '+jstHHMM(c.at)+(c.by ? ' · '+esc(c.by) : "")+'</small>'+esc(c.text).replace(/\n/g, "<br>")+'</div>';
+  }).join("") + (list.length > 2 && !S.noticeAll ? '<button type="button" class="more" onclick="S.noticeAll=true;render()">'+esc(u("more", list.length - 2))+'</button>' : "");
+}
+
+/* ---------- 管理模式（PIN 驗證在 worker） ---------- */
+function apiPost(path, body){
+  return fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json", "X-PIN": S.pin }, body: JSON.stringify(Object.assign({ by: S.by }, body || {})) })
+    .then(function(r){ return r.json().then(function(d){ d._status = r.status; return d; }); });
+}
+function enterAdmin(){
+  var pin = prompt(u("pinAsk")); if(!pin) return;
+  fetch(API + "/api/auth", { method: "POST", headers: { "X-PIN": pin.trim() } }).then(function(r){
+    if(r.status === 429){ alert(u("locked")); return; }
+    if(!r.ok){ alert(u("pinBad")); return; }
+    var by = prompt(u("nameAsk"), S.by || "") || "";
+    S.pin = pin.trim(); S.by = by.trim().slice(0, 30);
+    store("jwc-rd-pin", S.pin); store("jwc-rd-by", S.by);
+    render(); window.scrollTo(0, 0);
+  }).catch(function(){ alert(u("pushFail")); });
+}
+function exitAdmin(){ S.pin = ""; try{ localStorage.removeItem("jwc-rd-pin"); }catch(e){} render(); }
+function adminDone(d){
+  if(d._status === 401 || d._status === 429){ alert(u(d._status === 429 ? "locked" : "pinBad")); exitAdmin(); return; }
+  if(!d.ok){ alert((d.error || "error")); return; }
+  var w = S.list[S.idx]; S.changes[w.id] = d.changes; render(); toast(u("saved"));
+}
+function shiftAll(n){
+  var w = cur(), now = okinawaNow();
+  var from = now.date === w.date ? hhmm(now.min) : "00:00";
+  var d = u(n > 0 ? "later" : "earlier", Math.abs(n));
+  if(!confirm(u("confirmDelay", null, { t: from, d: d }))) return;
+  apiPost("/api/w/" + w.id + "/change", { kind: "delay", from: from, minutes: n }).then(adminDone, function(){ alert(u("pushFail")); });
+}
+function shiftCustom(){
+  var v = prompt("± min（+20 / -10）", "+20"); if(!v) return;
+  var n = parseInt(v, 10); if(!n || Math.abs(n) > 240) return;
+  shiftAll(n);
+}
+function postNotice(){
+  var text = prompt(u("noticeAsk")); if(!text || !text.trim()) return;
+  apiPost("/api/w/" + cur().id + "/change", { kind: "notice", text: text.trim() }).then(adminDone, function(){ alert(u("pushFail")); });
+}
+function findItem(ix){ return allItems(cur())[ix]; }
+function editItem(ix){
+  var it = findItem(ix); if(!it) return; var key = it._key;
+  var st = prompt(u("startAsk") + "\n" + tx(it.title), it.start); if(st === null) return;
+  st = st.trim(); if(mins(st) == null){ alert(u("badTime")); return; }
+  var en = prompt(u("endAsk"), it.end || ""); if(en === null) return;
+  en = en.trim(); if(en && mins(en) == null){ alert(u("badTime")); return; }
+  apiPost("/api/w/" + cur().id + "/change", { kind: "edit", key: key, start: st.padStart(5, "0"), end: en ? en.padStart(5, "0") : "" }).then(adminDone, function(){ alert(u("pushFail")); });
+}
+function cancelItem(ix, cancel){
+  var it = findItem(ix); if(!it) return; var key = it._key;
+  if(!confirm(u(cancel ? "cxlBtn" : "rstBtn") + "：" + tx(it.title) + "？")) return;
+  apiPost("/api/w/" + cur().id + "/change", { kind: "edit", key: key, cancelled: cancel }).then(adminDone, function(){ alert(u("pushFail")); });
+}
+function undoChange(id){ apiPost("/api/w/" + cur().id + "/undo", { changeId: id }).then(adminDone, function(){ alert(u("pushFail")); }); }
+function logLine(c, w){
+  if(c.kind === "notice") return "📣 " + c.text;
+  if(c.kind === "delay") return u("logDelay", null, { t: c.from, d: u(c.minutes > 0 ? "later" : "earlier", Math.abs(c.minutes)) });
+  var title = c.key.split("|").slice(1).join("|");
+  var it = allItems(S.list[S.idx]).find(function(x){ return itemKey(x) === c.key; });
+  if(it) title = tx(it.title);
+  if(c.cancelled === true) return u("logCxl", title);
+  if(c.cancelled === false) return u("logRst", title);
+  return u("logEdit", null, { t: title, s: (c.start || "") + (c.end ? "–" + c.end : "") });
+}
+function adminHTML(w){
+  var list = (S.changes[w.id] || []).slice().reverse();
+  var today = okinawaNow().date === w.date;
+  return '<div class="admin"><div class="admin-head"><b>🔑 '+esc(u("admin"))+(S.by ? ' · '+esc(S.by) : "")+'</b><button type="button" onclick="exitAdmin()">'+esc(u("logout"))+'</button></div>'+
+    '<div class="admin-row"><span>'+esc(u(today ? "shift" : "shiftAll"))+'</span>'+
+      '<button type="button" onclick="shiftAll(-5)">−5</button><button type="button" onclick="shiftAll(5)">+5</button><button type="button" onclick="shiftAll(10)">+10</button><button type="button" onclick="shiftAll(15)">+15</button><button type="button" onclick="shiftCustom()">±…</button></div>'+
+    '<div class="admin-row"><button type="button" class="solid" onclick="postNotice()">'+esc(u("noticeBtn"))+'</button>'+
+      '<button type="button" onclick="S.logOpen=!S.logOpen;render()">'+esc(u("logBtn"))+'（'+list.length+'）</button></div>'+
+    (S.logOpen && list.length ? '<div class="log">'+list.map(function(c){
+      return '<div class="'+(c.undone ? "undone" : "")+'"><span>'+jstHHMM(c.at)+' · '+esc(logLine(c, w))+(c.by ? ' · '+esc(c.by) : "")+'</span><button type="button" onclick="undoChange(\''+esc(c.id)+'\')">'+esc(u(c.undone ? "redo" : "undo"))+'</button></div>';
+    }).join("")+'</div>' : "")+
+  '</div>';
+}
+
+/* ---------- 鎖屏通知（Web Push）。iPhone 要從主畫面打開才有 ---------- */
+function isStandalone(){ return window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches); }
+function pushedIds(){ try{ return JSON.parse(store("jwc-rd-push") || "{}"); }catch(e){ return {}; } }
+function isPushed(){ var w = S.list[S.idx]; return !!(w && pushedIds()[w.id]); }
+function b64uToBytes(s){ var b = atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)); return Uint8Array.from(b, function(c){ return c.charCodeAt(0); }); }
+function togglePush(){
+  var w = S.list[S.idx]; if(!w || w._imported) return;
+  var ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  if(!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)){
+    alert(ios && !isStandalone() ? u("iosHint") : u("pushNo")); return;
+  }
+  var ids = pushedIds();
+  if(ids[w.id]){
+    navigator.serviceWorker.ready.then(function(reg){ return reg.pushManager.getSubscription(); }).then(function(sub){
+      if(sub) fetch(API + "/api/w/" + w.id + "/unsubscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) });
+    });
+    delete ids[w.id]; store("jwc-rd-push", JSON.stringify(ids)); toast(u("notifyOff")); render(); return;
+  }
+  Notification.requestPermission().then(function(perm){
+    if(perm !== "granted"){ alert(u("pushDenied")); throw "denied"; }
+    return Promise.all([navigator.serviceWorker.ready, fetch(API + "/api/config").then(function(r){ return r.json(); })]);
+  }).then(function(res){
+    var reg = res[0], key = res[1].vapidPublicKey;
+    return reg.pushManager.getSubscription().then(function(sub){
+      return sub || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uToBytes(key) });
+    });
+  }).then(function(sub){
+    return fetch(API + "/api/w/" + w.id + "/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subscription: sub.toJSON(), lang: S.lang, test: true }) }).then(function(r){ return r.json(); });
+  }).then(function(d){
+    if(!d.ok) throw d;
+    ids[w.id] = Date.now(); store("jwc-rd-push", JSON.stringify(ids));
+    toast(u("notifyOn")); render();
+  }).catch(function(e){ if(e !== "denied") alert(u("pushFail") + (e && e.error ? " (" + e.error + ")" : "")); });
+}
+if("serviceWorker" in navigator && !S.embed) navigator.serviceWorker.register("sw.js").catch(function(){});
+
+function flowHTML(w, now){
+  var html = (w.notes||[]).map(function(n){ return '<div class="banner">'+txh(n)+'</div>'; }).join("");
+  var nextMarked = false;
+  (w.segments||[]).forEach(function(sg){
+    var tag = sg.pending ? '<span class="tag">'+esc(u("pendTag"))+'</span>' : sg.scope === "assist" ? '<span class="tag assist">'+esc(u("assist"))+'</span>' : "";
+    var meta = [];
+    if(sg.venue && sg.venue.name) meta.push(txh(sg.venue.name));
+    (sg.people||[]).forEach(function(p){ meta.push(esc(tx(p.role))+"："+esc(tx(p.name))); });
+    if(sg.note) meta.push(txh(sg.note));
+    html += '<section class="sgm'+(sg.scope === "assist" ? " assist" : "")+'"><div class="sgm-head"><div><div class="sgm-title">'+txh(sg.title)+tag+'</div>'+
+      (meta.length ? '<div class="sgm-meta">'+meta.join("<br>")+'</div>' : "")+'</div>'+
+      (sg.venue && sg.venue.map ? '<a class="map" href="'+esc(sg.venue.map)+'" target="_blank" rel="noopener">'+esc(u("mapBtn"))+' ↗</a>' : "")+'</div>';
+    if(sg.pending || !(sg.items||[]).length){ html += '<div class="pending">'+esc(u("pending"))+'</div></section>'; return; }
+    html += '<div class="items">' + sg.items.map(function(it){
+      var s = mins(it.start), e = mins(it.end), st = "";
+      if(it._cancelled) st = " cancelled";
+      else if(now != null && s != null){
+        var end = e != null ? e : s + 15;
+        if(end <= now) st = " past";
+        else if(s <= now) st = " now";
+        else if(!nextMarked){ st = " next"; nextMarked = true; }
+      }
+      var x = "";
+      var moved = it._orig && it.start !== it._orig.start, chgTag = "";
+      if(it._cancelled) chgTag = '<span class="tag cxl">'+esc(u("cxlTag"))+'</span>';
+      else if(moved){
+        var dm = mins(it.start) - mins(it._orig.start);
+        chgTag = '<span class="tag chg">'+esc(it._edited ? u("movedTag") : u(dm > 0 ? "delayedTag" : "earlierTag", Math.abs(dm)))+'</span>';
+      }
+      if(it.who && it.who.length) x += '<div class="who">'+it.who.map(function(p){ return "<span>"+esc(tx(p))+"</span>"; }).join("")+'</div>';
+      if(it.look) x += '<div class="note">'+esc(u("look"))+'：'+txh(it.look)+'</div>';
+      if(it.note) x += '<div class="note">'+txh(it.note)+'</div>';
+      if(it.alert) x += '<div class="alert">⚠ '+txh(it.alert)+'</div>';
+      if(S.pin && !w._imported && !S.embed){
+        var ix = allItems(w).indexOf(it);
+        x += '<div><button type="button" class="edit-btn" onclick="editItem('+ix+')">'+esc(u("editBtn"))+'</button>'+
+          '<button type="button" class="edit-btn" onclick="cancelItem('+ix+', '+!it._cancelled+')">'+esc(u(it._cancelled ? "rstBtn" : "cxlBtn"))+'</button></div>';
+      }
+      if(it.cues && it.cues.length) x += '<details class="cues"'+(st === " now" ? " open" : "")+'><summary>'+esc(u("cues"))+'（'+it.cues.length+'）▾</summary><ol>'+it.cues.map(function(c){ return "<li>"+txh(c)+"</li>"; }).join("")+'</ol></details>';
+      return '<div class="item'+st+'"><div class="time">'+esc(it.start)+(it.end ? '<small>–'+esc(it.end)+'</small>' : "")+(moved ? '<s>'+esc(it._orig.start)+'</s>' : "")+'</div>'+
+        '<div class="dot" style="background:'+(TYPES[it.type] || "#D8CABC")+'"></div>'+
+        '<div><div class="t">'+txh(it.title)+(it.tbd ? '<span class="tag">'+esc(u("tbd"))+'</span>' : "")+chgTag+'</div>'+x+'</div></div>';
+    }).join("") + '</div></section>';
+  });
+  return html;
+}
+
+function matHTML(w){
+  function block(title, rows){
+    if(!rows.length) return "";
+    return '<div class="mat"><h4>'+esc(title)+'</h4>'+rows.map(function(r){ return '<div class="row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'; }).join("")+'</div>';
+  }
+  function link(url, label){ return '<a href="'+esc(url)+'" target="_blank" rel="noopener">'+label+' ↗</a>'; }
+  var places = [], staff = [], looks = [], alerts = [];
+  (w.segments||[]).forEach(function(sg){
+    if(sg.venue && sg.venue.name) places.push([txh(sg.title), sg.venue.map ? link(sg.venue.map, txh(sg.venue.name)) : txh(sg.venue.name)]);
+    (sg.people||[]).forEach(function(p){ staff.push([txh(p.role), esc(tx(p.name))]); });
+    (sg.items||[]).forEach(function(it){
+      if(it.look) looks.push([esc(it.start), txh(it.look)]);
+      if(it.alert) alerts.push([esc(it.start), txh(it.alert)]);
+      if(it.tbd) alerts.push([esc(it.start), esc(u("tbdAlert")) + txh(it.title)]);
+    });
+  });
+  var kinds = ["map","music","video","item"], labels = { map:"maps", music:"music", video:"video", item:"items" }, mats = {};
+  (w.materials||[]).forEach(function(m){
+    var k = kinds.indexOf(m.kind) >= 0 ? m.kind : "item";
+    var val = tx(m.value);
+    (mats[k] = mats[k] || []).push([txh(m.label), /^https?:\/\//.test(val) ? link(val, esc(u("open"))) : txh(m.value)]);
+  });
+  (w._notices || []).forEach(function(c){ alerts.unshift([jstHHMM(c.at), "📣 " + esc(c.text)]); });
+  var html = block(u("alerts"), alerts) + block(u("places"), places) + block(u("staff"), staff) + block(u("looks"), looks) +
+    kinds.map(function(k){ return block(u(labels[k]), mats[k] || []); }).join("");
+  return html || '<div class="pending">'+esc(u("noMat"))+'</div>';
+}
+
+function updateFab(){
+  var fab = document.getElementById("fab");
+  var el = S.tab === "flow" && (document.querySelector(".item.now") || document.querySelector(".item.next"));
+  if(!el){ fab.hidden = true; return; }
+  var r = el.getBoundingClientRect();
+  fab.hidden = r.top > document.querySelector(".head").offsetHeight && r.bottom < window.innerHeight - 40;
+}
+window.addEventListener("scroll", updateFab, { passive: true });
+
+/* Demo（CMS 預覽裡的手機框）透過 postMessage 控制：模擬時間、貼上匯入 */
+window.addEventListener("message", function(e){
+  if(e.origin !== location.origin || !e.data) return;
+  if(e.data.type === "rd-sim"){ S.sim = e.data.t || null; S.simAt = Date.now(); S.scrolledOnce = false; render(); }
+  if(e.data.type === "rd-import" && e.data.wedding){
+    var w = e.data.wedding; w._imported = true; S.list.push(w); S.idx = S.list.length - 1; S.tab = "flow"; render(); window.scrollTo(0, 0);
+  }
+  if(e.data.type === "rd-select"){ var i = S.list.findIndex(function(w){ return w.id === e.data.id; }); if(i >= 0) selectDay(i); }
+});
+
+load();
+setInterval(render, 30000);        // 每 30 秒重畫流程（NOW/NEXT），不會強制捲動
+setInterval(function(){ var w = cur(); if(w) renderLive(w); }, 1000);  // 倒數每秒更新
+setInterval(load, 5 * 60000);      // 每 5 分鐘抓最新版原稿
+setInterval(fetchState, 30000);    // 每 30 秒同步現場更改
+document.addEventListener("visibilitychange", function(){ if(!document.hidden){ if(S.wakeWanted && !S.wake) toggleWake(); render(); load(); fetchState(); } });
+</script>
+</body>
+</html>
