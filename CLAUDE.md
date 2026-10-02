@@ -20,7 +20,10 @@
   - 改 `public/index.html` 後 push 到 main 會自動重新部署(`.github/workflows/deploy-pages.yml`)
 - claude.ai 上原本的 Design 版 Demo(私人連結,備用):https://claude.ai/artifact/3w2hqc2Nqv1D8YCuRyYE5d
 
+- **Big Day Rundown**(2026-10-02 加):CMS 預覽裡的手機版當天流程,資料在 `public/rundowns/*.json`(已去識別),真名版在 `private/rundowns/`(gitignore,絕不進 public repo)。欄位與新增流程見 `docs/RUNDOWN.md`
+
 ## 待辦
 - [ ] 客戶確認方向後 → 補完整 `docs/SPEC.md`(CPT/ACF欄位表、Elementor Theme Builder結構、Finder+Compare custom plugin規格)
 - [ ] 跟客戶核對 Monterey / Renaissance Ribera 正確地址
 - [ ] 客戶正式簽約後,實際改版工程要不要另開 repo 或沿用這個,到時再決定
+- [ ] **構想(2026-09-26,先記著,還沒驗證要不要做)**:Big Day 當天協調問題——WhatsApp 諮詢→開單→有異動時,同事跟日文教堂同事溝通可能不完整,如何確保大家到 Big Day 手上都是最新資訊?SS 提的方向是官網做每組新人專屬 sublink,依身分(賓客/新人親屬/教堂同事)顯示不同內容,加集中 Announcement Corner + 賓客照片影片上傳。Claude 的建議(見對話紀錄):核心該解的是「同一筆結構化紀錄,各身分讀唯讀篩選版」,不要分開維護多份內容;賓客上傳直接用 Google Drive/Photos 共享相簿,不要自己做儲存。**但也覺得這對現階段規模可能是多此一舉**——先低成本驗證(一份共用文件/表格 + Google Photos 相簿,實際跑一兩場婚禮)看是否真的不夠用,再決定要不要真的建置。

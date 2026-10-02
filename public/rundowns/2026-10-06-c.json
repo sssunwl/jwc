@@ -1,0 +1,52 @@
+{
+  "id": "2026-10-06-c",
+  "date": "2026-10-06",
+  "couple": "新人 C",
+  "guests": null,
+  "notes": [],
+  "segments": [
+    {
+      "title": "Resort 準備",
+      "venue": { "name": "Resort" },
+      "scope": "full",
+      "items": [
+        { "start": "10:15", "title": "攝影師到達，紅裙拍攝", "type": "shoot", "look": "紅裙", "who": ["攝影師"] },
+        { "start": "10:30", "title": "敬茶儀式及合照", "type": "ceremony", "note": "共 16 組" },
+        { "start": "12:00", "title": "紅裙轉婚紗", "type": "dress", "look": "婚紗" },
+        { "start": "12:30", "title": "婚紗拍攝", "type": "shoot" },
+        { "start": "13:00", "title": "出發教堂", "type": "move", "note": "車程約 20 分鐘" }
+      ]
+    },
+    {
+      "title": "教堂儀式",
+      "venue": { "name": "教堂" },
+      "scope": "full",
+      "items": [
+        { "start": "13:40", "title": "入館", "type": "meeting" },
+        { "start": "13:45", "title": "與教堂職員會議", "type": "meeting" },
+        { "start": "13:45", "end": "14:15", "title": "親友到達貴賓室等候", "type": "guest", "note": "14:15 前到齊" },
+        { "start": "14:00", "title": "儀式前彩排", "type": "rehearsal", "who": ["新人", "新娘舅父", "姨丈", "伴娘 ×2"], "alert": "舅父、姨丈、2 位伴娘要一起彩排，請提早 13:50 到達" },
+        { "start": "14:20", "title": "安排親友入座", "type": "guest" },
+        { "start": "14:30", "title": "儀式正式開始", "type": "ceremony" },
+        { "start": "15:00", "title": "儀式完成，教堂外拍攝", "type": "shoot", "cues": ["敲鐘儀式", "大合照"] },
+        { "start": "15:30", "title": "教堂部份拍攝完成", "type": "wrap", "alert": "請所有親友離開教堂" },
+        { "start": "15:30", "end": "16:00", "title": "附近沙灘拍照", "type": "shoot", "note": "新人為主，親友也可一起" },
+        { "start": "16:00", "title": "回 Resort", "type": "move" }
+      ]
+    },
+    {
+      "title": "Party",
+      "venue": { "name": "Resort" },
+      "scope": "full",
+      "items": [
+        { "start": "16:45", "end": "17:30", "title": "補妝轉造型", "type": "dress", "look": "Party 造型", "note": "在 Lacasa" },
+        { "start": "17:30", "end": "20:00", "title": "Party", "type": "party" },
+        { "start": "20:00", "end": "20:30", "title": "煙火拍攝", "type": "shoot" },
+        { "start": "20:30", "title": "完成", "type": "wrap" }
+      ]
+    }
+  ],
+  "materials": [
+    { "kind": "item", "label": "敬茶", "value": "共 16 組親友敬茶＋合照" }
+  ]
+}

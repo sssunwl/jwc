@@ -1,0 +1,32 @@
+{
+  "id": "YYYY-MM-DD-x",
+  "date": "YYYY-MM-DD",
+  "couple": "新人稱呼",
+  "guests": null,
+  "notes": ["整場共通的提醒，例如：時間僅供參考，教堂可能會調整"],
+  "segments": [
+    {
+      "title": "段落名稱（如：酒店準備／教堂儀式／宴會／After Party）",
+      "venue": { "name": "地點", "map": "Google Maps 連結" },
+      "scope": "full",
+      "people": [{ "role": "MC", "name": "姓名" }],
+      "note": "",
+      "items": [
+        {
+          "start": "10:00",
+          "end": "10:30",
+          "title": "做什麼",
+          "type": "shoot",
+          "who": ["攝影師"],
+          "note": "",
+          "alert": "",
+          "tbd": false,
+          "cues": ["給 MC／工作人員的逐步提示"]
+        }
+      ]
+    }
+  ],
+  "materials": [
+    { "kind": "music", "label": "用途", "value": "歌名" }
+  ]
+}

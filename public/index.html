@@ -305,11 +305,86 @@
   .client-tabs{position:sticky;top:0;z-index:3;display:flex;justify-content:center;gap:8px;padding:16px 24px;background:rgba(237,234,226,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-bottom:20px;}
   .client-tabs a{font-size:12px;letter-spacing:0.05em;color:var(--ink-soft);padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--white);}
   .client-tabs a:hover{color:var(--ink);border-color:var(--ink);}
+  .client-tabs a{white-space:nowrap;flex:0 0 auto;}
+  @media (max-width:560px){ .client-tabs{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding:12px 16px;} .client-tabs a{padding:7px 14px;} }
   /* CMS menu mockup */
   .cms-menu{display:flex;flex-direction:column;gap:6px;}
   .cms-menu div{font-size:12px;padding:8px 12px;border-radius:4px;color:var(--ink-soft);}
   .cms-menu-before div{background:var(--ivory);}
   .cms-menu-after div{background:rgba(70,105,122,0.08);color:var(--ink);font-weight:500;}
+  /* Rundown app mockup */
+  .rd-layout{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start;}
+  .rd-phone{width:360px;background:#111;border-radius:44px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,0.30);position:relative;}
+  .rd-screen{background:var(--ivory);border-radius:34px;height:700px;overflow:hidden;display:flex;flex-direction:column;}
+  .rd-head{padding:34px 18px 0;background:linear-gradient(160deg,var(--white) 0%,var(--champagne) 100%);}
+  .rd-days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:12px;}
+  .rd-days::-webkit-scrollbar{display:none;}
+  .rd-day{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,0.7);border-radius:12px;padding:7px 11px;text-align:left;color:var(--ink-soft);font-size:10px;line-height:1.3;}
+  .rd-day b{display:block;font-family:'Marcellus',serif;font-size:15px;color:var(--ink);font-weight:400;}
+  .rd-day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:rgba(255,255,255,0.75);}
+  .rd-day[aria-pressed="true"] b{color:#fff;}
+  .rd-title{font-family:'Marcellus',serif;font-size:21px;letter-spacing:0.04em;}
+  .rd-sub{font-size:11px;color:var(--ink-soft);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;}
+  .rd-tabs{display:flex;gap:18px;margin-top:12px;}
+  .rd-tabs button{background:none;border:none;padding:8px 0 10px;font-size:12px;color:var(--ink-soft);border-bottom:2px solid transparent;}
+  .rd-tabs button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink);font-weight:500;}
+  .rd-body{flex:1;overflow-y:auto;padding:14px 14px 28px;scrollbar-width:thin;}
+  .rd-banner{background:rgba(70,105,122,0.1);color:var(--ocean);border-radius:10px;padding:9px 12px;font-size:11px;line-height:1.5;margin-bottom:12px;}
+  .rd-seg{margin-bottom:16px;}
+  .rd-seg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:2px 2px 8px;}
+  .rd-seg-title{font-size:13px;font-weight:600;letter-spacing:0.02em;}
+  .rd-seg-meta{font-size:10.5px;color:var(--ink-soft);margin-top:2px;line-height:1.5;}
+  .rd-map{flex:0 0 auto;font-size:10px;border:1px solid var(--ocean);color:var(--ocean);border-radius:999px;padding:4px 9px;background:var(--white);}
+  .rd-tag{display:inline-block;font-size:9.5px;border-radius:999px;padding:2px 7px;background:var(--champagne);color:var(--ink);margin-left:6px;vertical-align:1px;font-weight:500;}
+  .rd-tag-assist{background:#E7ECEE;color:var(--ocean);}
+  .rd-pending{border:1px dashed var(--sand);border-radius:12px;padding:12px;font-size:11px;color:var(--ink-soft);background:rgba(255,255,255,0.5);}
+  .rd-items{background:var(--white);border-radius:14px;padding:4px 0;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .rd-seg.is-assist .rd-items{opacity:0.62;}
+  .rd-item{display:grid;grid-template-columns:44px 12px 1fr;gap:8px;padding:9px 12px 9px 10px;position:relative;}
+  .rd-item+.rd-item{border-top:1px solid rgba(35,35,35,0.06);}
+  .rd-time{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;}
+  .rd-time small{display:block;font-size:9.5px;font-weight:400;color:var(--ink-soft);}
+  .rd-dot{width:9px;height:9px;border-radius:50%;margin-top:4px;background:var(--sand);}
+  .rd-t{font-size:12.5px;line-height:1.45;}
+  .rd-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+  .rd-who span{font-size:9.5px;background:var(--ivory);border-radius:999px;padding:2px 7px;color:var(--ink-soft);}
+  .rd-note{font-size:10.5px;color:var(--ink-soft);margin-top:3px;line-height:1.5;}
+  .rd-alert{font-size:10.5px;color:var(--heart);background:rgba(180,93,76,0.08);border-radius:6px;padding:4px 7px;margin-top:5px;line-height:1.45;}
+  .rd-cues{margin-top:5px;font-size:10.5px;color:var(--ink-soft);}
+  .rd-cues summary{cursor:pointer;color:var(--ocean);list-style:none;}
+  .rd-cues summary::-webkit-details-marker{display:none;}
+  .rd-cues ol{margin:4px 0 0;padding-left:16px;line-height:1.6;}
+  .rd-item.is-past{opacity:0.4;}
+  .rd-item.is-now{background:rgba(70,105,122,0.08);}
+  .rd-item.is-now .rd-time::after,.rd-item.is-next .rd-time::after{display:inline-block;margin-top:4px;font-size:8px;letter-spacing:0.1em;color:#fff;border-radius:3px;padding:1px 4px;font-weight:600;}
+  .rd-item.is-now .rd-time::after{content:"NOW";background:var(--ocean);}
+  .rd-item.is-next .rd-time::after{content:"NEXT";background:var(--ink);}
+  .rd-mat{background:var(--white);border-radius:14px;padding:12px 14px;margin-bottom:10px;}
+  .rd-mat h4{margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ocean);font-weight:600;}
+  .rd-mat-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-top:1px solid rgba(35,35,35,0.06);}
+  .rd-mat-row:first-of-type{border-top:none;}
+  .rd-mat-row span:first-child{color:var(--ink-soft);flex:0 0 auto;}
+  .rd-mat-row span:last-child{text-align:right;}
+  .rd-mat-row a{color:var(--ocean);text-decoration:underline;}
+  .rd-sim{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:11px;color:var(--ink-soft);width:360px;}
+  .rd-sim input{flex:1;accent-color:var(--ocean);}
+  .rd-side h3{font-size:24px;margin-bottom:10px;}
+  .rd-side p{font-size:13px;color:var(--ink-soft);line-height:1.85;margin:0 0 14px;}
+  .rd-steps{display:flex;flex-direction:column;gap:10px;margin:18px 0 26px;}
+  .rd-steps div{background:var(--white);border-radius:6px;padding:14px 16px;font-size:13px;line-height:1.7;color:var(--ink-soft);}
+  .rd-steps b{color:var(--ink);font-weight:600;margin-right:6px;}
+  .rd-paste textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:4px;padding:12px;font-family:inherit;font-size:12px;line-height:1.6;background:var(--white);color:var(--ink);resize:vertical;}
+  .rd-paste-actions{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap;}
+  .rd-paste-actions .btn{padding:10px 18px;font-size:11px;}
+  .rd-paste-msg{font-size:11px;color:var(--ink-soft);}
+  @media (max-width:900px){
+    .rd-layout{grid-template-columns:1fr;justify-items:center;}
+    .rd-side{max-width:520px;}
+  }
+  @media (max-width:420px){
+    .rd-phone,.rd-sim{width:min(360px,calc(100vw - 32px));}
+    .rd-screen{height:640px;}
+  }
   /* Brand audit list */
   .brand-audit-list{display:flex;flex-direction:column;gap:14px;}
   .brand-audit-list div{font-size:13px;color:var(--ink-soft);line-height:1.6;padding-bottom:14px;border-bottom:1px solid var(--line);}
@@ -654,6 +729,7 @@
   <button type="button" class="presentation-close" onclick="closeClientMaterials()" aria-label="關閉">✕</button>
   <div class="client-tabs">
     <a href="#cm-cms" onclick="return scrollClientTab(event,'cm-cms')">CMS 後台</a>
+    <a href="#cm-rundown" onclick="return scrollClientTab(event,'cm-rundown')">Rundown</a>
     <a href="#cm-branding" onclick="return scrollClientTab(event,'cm-branding')">品牌分析</a>
     <a href="#cm-deck" onclick="return scrollClientTab(event,'cm-deck')">簡報大綱</a>
   </div>
@@ -673,7 +749,7 @@
       <div class="card" style="padding:26px;border:1px solid var(--ocean);">
         <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:16px;">之後：JAPAN WEDDING CMS</div>
         <div class="cms-menu cms-menu-after">
-          <div>Chapels</div><div>Real Weddings</div><div>Journal</div><div>網站設定</div>
+          <div>Chapels</div><div>Real Weddings</div><div>Journal</div><div>Rundown（Big Day）</div><div>網站設定</div>
         </div>
       </div>
     </div>
@@ -681,7 +757,7 @@
     <div class="wrap-narrow" style="padding:0;">
       <div style="padding:24px;border:1px solid var(--line);border-radius:4px;background:var(--white);">
         <div style="font-size:12px;color:var(--ink-soft);margin-bottom:16px;letter-spacing:0.05em;">JAPAN WEDDING CMS — Dashboard</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;">
           <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">11</div><div class="stat-label">Chapels</div></div>
           <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">84</div><div class="stat-label">Real Weddings</div></div>
           <div style="background:var(--ivory);border-radius:4px;padding:16px;"><div class="stat-num" style="font-size:22px;">32</div><div class="stat-label">Journal Posts</div></div>
@@ -689,6 +765,52 @@
         </div>
       </div>
       <div style="color:var(--ink-soft);font-size:13px;line-height:1.85;margin-top:24px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto;">新增教堂＝填資料、按 Publish，Finder／Compare／教堂頁／Wedding Media Options 全部自動更新。</div>
+    </div>
+  </div>
+
+  <div class="wrap" id="cm-rundown" style="padding-top:120px;">
+    <div style="text-align:center;margin-bottom:16px;"><div class="eyebrow">Big Day Rundown</div></div>
+    <h2 style="text-align:center;font-size:34px;margin-bottom:10px;">當天流程，一支手機看完</h2>
+    <div style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;">每場婚禮一份結構化 Rundown，同事、攝影師、MC 打開同一個連結，看到的永遠是最新版本</div>
+
+    <div class="wrap-narrow rd-layout" style="padding:0;">
+      <div>
+        <div class="rd-phone">
+          <div class="pass-phone-notch" style="top:12px;"></div>
+          <div class="rd-screen">
+            <div class="rd-head">
+              <div class="rd-days" id="rd-days" role="group" aria-label="選擇婚禮日期"></div>
+              <div class="rd-title" id="rd-title">載入中…</div>
+              <div class="rd-sub" id="rd-sub"></div>
+              <div class="rd-tabs" role="group" aria-label="切換內容">
+                <button type="button" data-rd-tab="flow" aria-pressed="true" onclick="setRdTab('flow')">流程</button>
+                <button type="button" data-rd-tab="mat" aria-pressed="false" onclick="setRdTab('mat')">要用的資料</button>
+              </div>
+            </div>
+            <div class="rd-body" id="rd-body"></div>
+          </div>
+        </div>
+        <label class="rd-sim"><span>模擬當天時間</span><input type="range" id="rd-sim" min="0" max="100" value="0" oninput="renderRd()"><span id="rd-sim-label" style="width:40px;text-align:right;font-variant-numeric:tabular-nums;">—</span></label>
+      </div>
+
+      <div class="rd-side">
+        <h3>以後加新的一場，怎麼做？</h3>
+        <p>三份 Rundown 格式都不一樣（有的只有時間＋事項、有的分段落、宴會那份還附 MC 逐步提示），所以先定一個<strong style="color:var(--ink);font-weight:500;">固定結構</strong>，不管收到什麼格式都整理成同一種，App 才不用每次重做。</p>
+        <div class="rd-steps">
+          <div><b>婚禮</b>日期、新人稱呼、人數、整場提醒</div>
+          <div><b>段落</b>酒店準備／教堂／宴會／After Party，各自帶地點＋地圖、MC 與負責人，並標明「全程跟」還是「只協助」</div>
+          <div><b>時間點</b>開始–結束、事項、類型（拍攝／移動／換造型…）、誰要到、提醒、MC 逐步提示</div>
+          <div><b>資料</b>歌曲、影片、道具、接駁；地圖和造型清單從流程自動整理，不用重打</div>
+        </div>
+        <div class="rd-paste">
+          <div class="eyebrow" style="margin-bottom:10px;">試試看：貼上一份新 Rundown</div>
+          <textarea id="rd-paste" placeholder="直接貼 WhatsApp 收到的文字，例如：&#10;&#10;20261020 Rundown&#10;09:30 攝影師到達&#10;10:00-10:30 新人換婚紗&#10;10:45 出發教堂 (車程15分鐘)"></textarea>
+          <div class="rd-paste-actions">
+            <button type="button" class="btn btn-solid" onclick="importRdPaste()">轉成 Rundown</button>
+            <span class="rd-paste-msg" id="rd-paste-msg">時間行自動拆開、自動判斷類型；正式版會在後台再讓同事逐項確認</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2073,6 +2195,191 @@ startHeroRotation();
   targets.forEach(function(el){ io.observe(el); });
 })();
 
+/* ============ Big Day Rundown（資料在 rundowns/*.json，欄位說明見 docs/RUNDOWN.md） ============ */
+var RD = { list: [], idx: 0, tab: "flow" };
+var RD_TYPES = {
+  shoot:     { label: "拍攝",   color: "#46697A" },
+  move:      { label: "移動",   color: "#D8CABC" },
+  prep:      { label: "準備",   color: "#D8CABC" },
+  meeting:   { label: "會議",   color: "#8A8F93" },
+  rehearsal: { label: "彩排",   color: "#D9A69A" },
+  ceremony:  { label: "儀式",   color: "#B45D4C" },
+  guest:     { label: "賓客",   color: "#C9B48A" },
+  dress:     { label: "換造型", color: "#B98FA6" },
+  party:     { label: "宴會",   color: "#7E8F6A" },
+  media:     { label: "影片",   color: "#5E7FA0" },
+  wrap:      { label: "收尾",   color: "#232323" }
+};
+function rdEsc(v){ return String(v == null ? "" : v).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function rdMin(t){ if(!t) return null; var m = /^(\d{1,2}):(\d{2})$/.exec(t); return m ? (+m[1])*60 + (+m[2]) : null; }
+function rdHHMM(n){ return String(Math.floor(n/60)).padStart(2,"0") + ":" + String(n%60).padStart(2,"0"); }
+function rdToday(){ var d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function rdDayDiff(date){ return Math.round((new Date(date+"T00:00:00") - new Date(rdToday()+"T00:00:00")) / 86400000); }
+function rdStatus(date){
+  var d = rdDayDiff(date);
+  if(d < 0) return "已完成"; if(d === 0) return "今天"; if(d === 1) return "明天"; return d + " 天後";
+}
+function rdAllItems(w){ var out = []; (w.segments||[]).forEach(function(seg){ (seg.items||[]).forEach(function(it){ out.push(it); }); }); return out; }
+function rdSpan(w){
+  var mins = []; rdAllItems(w).forEach(function(it){ [rdMin(it.start), rdMin(it.end)].forEach(function(m){ if(m != null) mins.push(m); }); });
+  return mins.length ? [Math.min.apply(null, mins), Math.max.apply(null, mins)] : [0, 0];
+}
+function rdNow(w){
+  var sim = +document.getElementById("rd-sim").value;
+  var span = rdSpan(w);
+  if(sim > 0) return Math.round(span[0] + (span[1] - span[0]) * sim / 100);
+  if(w.date === rdToday()){ var d = new Date(); return d.getHours()*60 + d.getMinutes(); }
+  return null;
+}
+
+function loadRundowns(){
+  fetch("rundowns/index.json").then(function(r){ return r.json(); }).then(function(idx){
+    return Promise.all(idx.weddings.map(function(f){ return fetch("rundowns/" + f).then(function(r){ return r.json(); }); }));
+  }).then(function(list){
+    RD.list = list.sort(function(a, b){ return a.date < b.date ? -1 : 1; });
+    var up = RD.list.findIndex(function(w){ return rdDayDiff(w.date) >= 0; });
+    RD.idx = up < 0 ? RD.list.length - 1 : up;
+    renderRd();
+  }).catch(function(){
+    document.getElementById("rd-title").textContent = "Rundown 載入失敗";
+  });
+}
+
+function selectRd(i){ RD.idx = i; document.getElementById("rd-sim").value = 0; renderRd(); document.getElementById("rd-body").scrollTop = 0; }
+function setRdTab(t){
+  RD.tab = t;
+  document.querySelectorAll("[data-rd-tab]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-rd-tab") === t ? "true" : "false"); });
+  renderRd(); document.getElementById("rd-body").scrollTop = 0;
+}
+
+function renderRd(){
+  var w = RD.list[RD.idx]; if(!w) return;
+  document.getElementById("rd-days").innerHTML = RD.list.map(function(x, i){
+    var md = x.date.slice(5).replace("-", "/");
+    return '<button type="button" class="rd-day" aria-pressed="'+(i === RD.idx)+'" onclick="selectRd('+i+')"><b>'+md+'</b>'+rdEsc(x._imported ? "新匯入" : rdStatus(x.date))+'</button>';
+  }).join("");
+  document.getElementById("rd-title").textContent = w.couple || "未命名婚禮";
+  var sub = [w.date.replace(/-/g, "/")];
+  if(w.guests) sub.push(w.guests + " 人");
+  sub.push(rdAllItems(w).length + " 個時間點");
+  document.getElementById("rd-sub").innerHTML = sub.map(function(t){ return "<span>"+rdEsc(t)+"</span>"; }).join("<span>·</span>");
+
+  var now = rdNow(w);
+  var simEl = document.getElementById("rd-sim");
+  document.getElementById("rd-sim-label").textContent = (+simEl.value > 0 && now != null) ? rdHHMM(now) : "—";
+
+  document.getElementById("rd-body").innerHTML = RD.tab === "flow" ? rdFlowHTML(w, now) : rdMaterialsHTML(w);
+}
+
+function rdFlowHTML(w, now){
+  var html = (w.notes||[]).map(function(n){ return '<div class="rd-banner">'+rdEsc(n)+'</div>'; }).join("");
+  var nextMarked = false;
+  (w.segments||[]).forEach(function(seg){
+    var tag = seg.pending ? '<span class="rd-tag">待補</span>' : seg.scope === "assist" ? '<span class="rd-tag rd-tag-assist">只協助</span>' : '';
+    var meta = [];
+    if(seg.venue && seg.venue.name) meta.push(rdEsc(seg.venue.name));
+    (seg.people||[]).forEach(function(p){ meta.push(rdEsc(p.role)+"："+rdEsc(p.name)); });
+    if(seg.note) meta.push(rdEsc(seg.note));
+    html += '<div class="rd-seg'+(seg.scope === "assist" ? " is-assist" : "")+'"><div class="rd-seg-head"><div><div class="rd-seg-title">'+rdEsc(seg.title)+tag+'</div>'+
+      (meta.length ? '<div class="rd-seg-meta">'+meta.join("<br>")+'</div>' : '')+'</div>'+
+      (seg.venue && seg.venue.map ? '<a class="rd-map" href="'+rdEsc(seg.venue.map)+'" target="_blank" rel="noopener">地圖 ↗</a>' : '')+'</div>';
+    if(seg.pending || !(seg.items||[]).length){
+      html += '<div class="rd-pending">這段還沒有資料，收到後補進同一份 Rundown，所有人手上的版本會一起更新。</div></div>';
+      return;
+    }
+    html += '<div class="rd-items">' + seg.items.map(function(it){
+      var s = rdMin(it.start), e = rdMin(it.end), state = "";
+      if(now != null && s != null){
+        var effEnd = e != null ? e : s + 15;
+        if(effEnd <= now) state = " is-past";
+        else if(s <= now) state = " is-now";
+        else if(!nextMarked){ state = " is-next"; nextMarked = true; }
+      }
+      var type = RD_TYPES[it.type] || { label: "", color: "#D8CABC" };
+      var extra = "";
+      if(it.who && it.who.length) extra += '<div class="rd-who">'+it.who.map(function(x){ return "<span>"+rdEsc(x)+"</span>"; }).join("")+'</div>';
+      if(it.look) extra += '<div class="rd-note">造型：'+rdEsc(it.look)+'</div>';
+      if(it.note) extra += '<div class="rd-note">'+rdEsc(it.note)+'</div>';
+      if(it.alert) extra += '<div class="rd-alert">⚠ '+rdEsc(it.alert)+'</div>';
+      if(it.cues && it.cues.length) extra += '<details class="rd-cues"><summary>MC／工作人員提示（'+it.cues.length+'）▾</summary><ol>'+it.cues.map(function(c){ return "<li>"+rdEsc(c)+"</li>"; }).join("")+'</ol></details>';
+      return '<div class="rd-item'+state+'"><div class="rd-time">'+rdEsc(it.start)+(it.end ? '<small>–'+rdEsc(it.end)+'</small>' : '')+'</div>'+
+        '<div class="rd-dot" style="background:'+type.color+'" title="'+rdEsc(type.label)+'"></div>'+
+        '<div><div class="rd-t">'+rdEsc(it.title)+(it.tbd ? '<span class="rd-tag">待確認</span>' : '')+'</div>'+extra+'</div></div>';
+    }).join("") + '</div></div>';
+  });
+  return html;
+}
+
+function rdMaterialsHTML(w){
+  function block(title, rows){
+    if(!rows.length) return "";
+    return '<div class="rd-mat"><h4>'+title+'</h4>'+rows.map(function(r){ return '<div class="rd-mat-row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'; }).join("")+'</div>';
+  }
+  var places = [], people = [], looks = [], alerts = [];
+  (w.segments||[]).forEach(function(seg){
+    if(seg.venue && seg.venue.name) places.push([rdEsc(seg.title), seg.venue.map ? '<a href="'+rdEsc(seg.venue.map)+'" target="_blank" rel="noopener">'+rdEsc(seg.venue.name)+' ↗</a>' : rdEsc(seg.venue.name)]);
+    (seg.people||[]).forEach(function(p){ people.push([rdEsc(p.role), rdEsc(p.name)]); });
+    (seg.items||[]).forEach(function(it){
+      if(it.look) looks.push([rdEsc(it.start), rdEsc(it.look)]);
+      if(it.alert) alerts.push([rdEsc(it.start), rdEsc(it.alert)]);
+      if(it.tbd) alerts.push([rdEsc(it.start), "待確認：" + rdEsc(it.title)]);
+    });
+  });
+  var kinds = { map: "地圖連結", music: "歌曲", video: "影片", item: "道具／其他" }, mats = {};
+  (w.materials||[]).forEach(function(m){ var k = kinds[m.kind] ? m.kind : "item"; (mats[k] = mats[k] || []).push([rdEsc(m.label), /^https?:\/\//.test(m.value) ? '<a href="'+rdEsc(m.value)+'" target="_blank" rel="noopener">開啟 ↗</a>' : rdEsc(m.value)]); });
+  var html = block("今天要注意", alerts) + block("地點", places) + block("人員", people) + block("造型", looks) +
+    Object.keys(kinds).map(function(k){ return block(kinds[k], mats[k] || []); }).join("");
+  return html || '<div class="rd-pending">這場還沒有附加資料。</div>';
+}
+
+/* 貼上 WhatsApp 文字 → 轉成同一種結構（示範用的簡易規則；正式版會讓同事在後台逐項確認） */
+var RD_GUESS = [
+  [/拍攝|拍照|shooting|攝影/i, "shoot"], [/[出岀]發|車程|回.*resort|移動/i, "move"], [/會議/, "meeting"],
+  [/彩排/, "rehearsal"], [/儀式|敲鐘|敬茶/, "ceremony"], [/補妝|換衫|轉造型|轉婚紗|dress/i, "dress"],
+  [/親友|賓客|嘉賓|入座|簽到/, "guest"], [/video|影片/i, "media"], [/party|宴會|banquet|toast|敬酒/i, "party"],
+  [/完成|送客|收拾|離開/, "wrap"]
+];
+function importRdPaste(){
+  var text = document.getElementById("rd-paste").value.trim();
+  var msg = document.getElementById("rd-paste-msg");
+  if(!text){ msg.textContent = "先貼上一份 Rundown 文字"; return; }
+  var w = { id: "imported-" + Date.now(), date: rdToday(), couple: "新匯入的 Rundown", notes: [], segments: [], materials: [], _imported: true };
+  var seg = null;
+  function newSeg(title){ seg = { title: title, scope: "full", items: [], people: [] }; w.segments.push(seg); }
+  text.split(/\n/).forEach(function(raw){
+    var line = raw.trim(); if(!line) return;
+    var date = /(20\d{2})[\/\-.]?(\d{2})[\/\-.]?(\d{2})/.exec(line);
+    var url = /(https?:\/\/\S+)/.exec(line);
+    var m = /^(\d{1,2}:\d{2})\s*(?:[-–—~至]\s*(\d{1,2}:\d{2}))?\s*(.*)$/.exec(line);
+    if(m){
+      if(!seg) newSeg("流程");
+      var title = m[3], note = "";
+      var paren = /[（(]([^）)]*)[）)]\s*$/.exec(title);
+      if(paren){ note = paren[1].trim(); title = title.slice(0, paren.index).trim(); }
+      var type = "prep"; RD_GUESS.some(function(g){ if(g[0].test(title)){ type = g[1]; return true; } });
+      seg.items.push({ start: m[1].padStart(5, "0"), end: m[2] ? m[2].padStart(5, "0") : "", title: title || "（未命名）", type: type, note: note });
+    } else if(url){
+      var label = line.slice(0, url.index).replace(/[:：]\s*$/, "").trim() || "地圖";
+      w.materials.push({ kind: "map", label: label, value: url[1] });
+    } else if(date && w.segments.length === 0 && !seg){
+      w.date = date[1] + "-" + date[2] + "-" + date[3];
+    } else if(/[:：]/.test(line) && line.length < 40){
+      if(!seg) newSeg("流程");
+      var kv = line.split(/[:：]/); seg.people.push({ role: kv[0].trim(), name: kv.slice(1).join(":").trim() });
+    } else if(line.length <= 24){
+      newSeg(line);
+    } else {
+      w.notes.push(line);
+    }
+  });
+  w.segments = w.segments.filter(function(s){ return s.items.length || s.people.length; });
+  var count = rdAllItems(w).length;
+  if(!count){ msg.textContent = "找不到「09:30 事項」這種時間行，檢查一下格式"; return; }
+  RD.list.push(w); RD.idx = RD.list.length - 1; RD.tab = "flow";
+  setRdTab("flow");
+  msg.textContent = "已拆出 " + count + " 個時間點、" + w.segments.length + " 個段落 → 看左邊手機";
+}
+
 renderChips();
 renderGrid();
 renderCompare();
@@ -2080,6 +2387,7 @@ renderRealWeddings();
 renderGuideGrid();
 renderIgFeed();
 renderSavedPill();
+loadRundowns();
 </script>
 
 </body>

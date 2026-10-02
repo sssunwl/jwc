@@ -1,0 +1,64 @@
+{
+  "id": "2026-10-03-b",
+  "date": "2026-10-03",
+  "couple": "新人 B",
+  "guests": 80,
+  "notes": ["賓客時間僅供參考，教堂可能會調整"],
+  "segments": [
+    {
+      "title": "教堂儀式",
+      "pending": true,
+      "note": "目前只收到宴會＋After Party 部份，儀式 Rundown 待補",
+      "items": []
+    },
+    {
+      "title": "LSR 宴會",
+      "venue": { "name": "Lazor Sea Resort · Banquet Hall Fiore", "map": "https://maps.app.goo.gl/VdEExZuY7R6P1V1w5" },
+      "scope": "full",
+      "people": [{ "role": "宴會 MC", "name": "MC 1" }, { "role": "佈置組", "name": "佈置 1" }],
+      "items": [
+        { "start": "17:15", "end": "18:00", "title": "新人補妝、轉造型及換衫", "type": "dress", "look": "3rd dress", "note": "完成後化妝師會離開" },
+        { "start": "17:40", "title": "嘉賓簽到", "type": "guest" },
+        { "start": "18:00", "end": "18:15", "title": "新人進場＋新郎、新娘致辭", "type": "party", "cues": ["進場曲：Beautiful in White", "致辭前 MC 示意 operator 關音樂"] },
+        { "start": "18:15", "title": "Toasting", "type": "party", "cues": ["MC 喊「cheers!」→ 音樂開", "歌曲：Wedding Medley"] },
+        { "start": "18:20", "title": "開始上菜", "type": "party" },
+        { "start": "18:30", "title": "Video 1（2 分鐘）", "type": "media", "cues": ["MC 示意 operator 放下投影幕", "MC 簡介影片", "MC 示意播放", "播完 operator 收起投影幕"] },
+        { "start": "18:35", "title": "Free flow photo taking", "type": "shoot", "cues": ["MC 請各組出來拍照"] },
+        { "start": "18:45", "title": "伴娘＋兄弟致辭", "type": "party", "tbd": true, "cues": ["MC 示意 operator 停音樂"] },
+        { "start": "19:00", "title": "遊戲：9 問 9 答（沖繩手信）", "type": "party" },
+        { "start": "19:15", "title": "一齊開盲盒", "type": "party" },
+        { "start": "19:25", "title": "Video 2（8 分鐘）", "type": "media", "cues": ["MC 示意 operator 放下投影幕", "MC 簡介影片", "MC 示意播放", "播完 operator 收起投影幕"] },
+        { "start": "19:30", "end": "19:50", "title": "逐桌敬酒", "type": "party" },
+        { "start": "20:00", "title": "送客", "type": "wrap", "alert": "送客時通知 After Party MC 和佈置組", "cues": ["MC 請賓客盡快上接駁車"] }
+      ]
+    },
+    {
+      "title": "移動",
+      "scope": "full",
+      "items": [
+        { "start": "20:00", "end": "20:20", "title": "新人回 Lazor Sea Resort 換輕便服裝", "type": "dress", "look": "4th dress" },
+        { "start": "20:00", "end": "20:30", "title": "新人前往 Beach", "type": "move", "note": "兄弟負責車" }
+      ]
+    },
+    {
+      "title": "After Party",
+      "venue": { "name": "Beach After Party", "map": "https://maps.app.goo.gl/xPCkitFTuKPcK6Pt5" },
+      "scope": "full",
+      "people": [{ "role": "After Party MC", "name": "MC 2" }],
+      "note": "攝影只跟 1 小時：20:30–21:30",
+      "items": [
+        { "start": "20:30", "title": "新人入場，Groom Speech＋Dance", "type": "party" },
+        { "start": "21:00", "end": "21:30", "title": "Sparkler Shooting", "type": "shoot" },
+        { "start": "22:45", "title": "Thank you speech，送新人離場", "type": "wrap" }
+      ]
+    }
+  ],
+  "materials": [
+    { "kind": "music", "label": "進場曲", "value": "Beautiful in White" },
+    { "kind": "music", "label": "Toasting", "value": "Wedding Medley" },
+    { "kind": "video", "label": "Video 1", "value": "2 分鐘 · 18:30 播" },
+    { "kind": "video", "label": "Video 2", "value": "8 分鐘 · 19:25 播" },
+    { "kind": "item", "label": "遊戲道具", "value": "9 問 9 答沖繩手信、盲盒" },
+    { "kind": "item", "label": "接駁", "value": "20:00 賓客上接駁車；新人由兄弟開車" }
+  ]
+}

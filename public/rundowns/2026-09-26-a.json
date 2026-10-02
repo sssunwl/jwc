@@ -1,0 +1,45 @@
+{
+  "id": "2026-09-26-a",
+  "date": "2026-09-26",
+  "couple": "新人 A",
+  "guests": null,
+  "notes": [],
+  "segments": [
+    {
+      "title": "酒店準備",
+      "venue": { "name": "新人酒店房間" },
+      "scope": "full",
+      "items": [
+        { "start": "09:55", "title": "攝影師酒店房內開始拍攝", "type": "shoot", "who": ["攝影師"] },
+        { "start": "10:10", "title": "收拾物資", "type": "prep" },
+        { "start": "10:15", "title": "出發教堂", "type": "move", "note": "車程約 5 分鐘" }
+      ]
+    },
+    {
+      "title": "教堂儀式",
+      "venue": { "name": "教堂" },
+      "scope": "full",
+      "items": [
+        { "start": "10:30", "title": "入館，與教堂職員會議", "type": "meeting" },
+        { "start": "10:50", "title": "新娘父母到達，預備彩排", "type": "guest", "who": ["新娘父母"] },
+        { "start": "11:00", "title": "儀式前彩排", "type": "rehearsal", "who": ["新人"] },
+        { "start": "11:00", "end": "11:15", "title": "親友到達貴賓室", "type": "guest", "note": "11:15 前到齊" },
+        { "start": "11:20", "title": "安排親友入座", "type": "guest" },
+        { "start": "11:30", "title": "儀式正式開始", "type": "ceremony" },
+        { "start": "12:00", "title": "儀式完成，教堂外拍攝", "type": "shoot", "cues": ["花瓣雨", "拋花球", "大合照"] },
+        { "start": "12:30", "title": "教堂部份拍攝完成", "type": "wrap", "alert": "請所有賓客離開教堂" },
+        { "start": "12:30", "end": "12:55", "title": "新人沙灘拍攝", "type": "shoot", "tbd": true, "note": "新人表示不想拍沙灘，當天再確認" }
+      ]
+    },
+    {
+      "title": "宴會",
+      "venue": { "name": "宴會場地" },
+      "scope": "assist",
+      "note": "不用跟足，只需協助新人完成進場前溝通",
+      "items": [
+        { "start": "13:30", "end": "15:30", "title": "宴會", "type": "party" }
+      ]
+    }
+  ],
+  "materials": []
+}
