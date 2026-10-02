@@ -10,7 +10,7 @@
 ## 現狀
 - 官網:WordPress + Elementor + WPML,不打算換平台,目標是把「很多文章」升級成「教堂 CMS」(CPT + ACF + Elementor Theme Builder),客戶維持用後台改資料,不再碰 Elementor 拖版
 - 這資料夾本身**不是可部署的代碼庫**,實作最終落在客戶的 WordPress。這裡放規格、資料、視覺 Demo/Prototype
-- 已知資料錯誤:`data/chapels.json` 裡 Monterey Lumer 和 Renaissance Ribera 的地址有 `address_flag` 標記,網站內部本身資料就有矛盾(部分文章寫恩納村、教堂頁寫読谷村),重做CMS前務必跟客戶核實,不要照抄現有任一方
+- 已知資料錯誤:`data/chapels.json` 裡 Renaissance Ribera 的地址有 `address_flag` 標記,網站內部本身資料就有矛盾(部分文章寫恩納村、教堂頁寫読谷村),重做CMS前務必跟客戶核實,不要照抄現有任一方。Monterey Lumer 已於 2026-10-02 用 Google 地圖核實=恩納村(原網站教堂頁寫読谷村是錯的,data/wedding/Demo 三處已改)
 
 ## Repo / Demo 網址
 - repo:https://github.com/sssunwl/jwc(public,GitHub Actions 部署 Pages,來源資料夾 `public/`。原名 VisionWedding,2026-09-23 改名 jwc,資料夾與 repo 同步改)
@@ -24,6 +24,6 @@
 
 ## 待辦
 - [ ] 客戶確認方向後 → 補完整 `docs/SPEC.md`(CPT/ACF欄位表、Elementor Theme Builder結構、Finder+Compare custom plugin規格)
-- [ ] 跟客戶核對 Monterey / Renaissance Ribera 正確地址
+- [ ] 跟客戶核對 Renaissance Ribera 正確地址(Monterey 已核實=恩納村;客戶現有官網教堂頁也要改)
 - [ ] 客戶正式簽約後,實際改版工程要不要另開 repo 或沿用這個,到時再決定
 - [ ] **構想(2026-09-26,先記著,還沒驗證要不要做)**:Big Day 當天協調問題——WhatsApp 諮詢→開單→有異動時,同事跟日文教堂同事溝通可能不完整,如何確保大家到 Big Day 手上都是最新資訊?SS 提的方向是官網做每組新人專屬 sublink,依身分(賓客/新人親屬/教堂同事)顯示不同內容,加集中 Announcement Corner + 賓客照片影片上傳。Claude 的建議(見對話紀錄):核心該解的是「同一筆結構化紀錄,各身分讀唯讀篩選版」,不要分開維護多份內容;賓客上傳直接用 Google Drive/Photos 共享相簿,不要自己做儲存。**但也覺得這對現階段規模可能是多此一舉**——先低成本驗證(一份共用文件/表格 + Google Photos 相簿,實際跑一兩場婚禮)看是否真的不夠用,再決定要不要真的建置。
